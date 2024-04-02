@@ -1,19 +1,22 @@
-
 body {
-    background-color: rgb(244, 244, 244);
+    background-color: #FFF5C2;
 }
-.form-inline {
-    float: right;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    justify-content: center;
-    
+
+nav {
+    background-color: #3081D0 !important;
+    color: white;
+    font-weight: bolder;
 }
+
 .nav-item {
     display: flex;
     justify-content: right;
 }
-li {
-    display: flex;
-    align-items: right;
+
+#search-submit-btn {
+    background-color: #F4F27E;
+}
+
+.txt-nav-wht {
+    color: white;
 }
