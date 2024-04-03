@@ -1,4 +1,3 @@
-# Ngekost-aja
 <p align="center">
     <img src="img/ngekost-aja-logo.png" width="60%">
 </p>
