@@ -1,6 +1,6 @@
 body {
     background-color: #FFF5C2;
-    height: 10000px;
+    height: 1000px;
 }
 
 nav {
@@ -24,4 +24,10 @@ nav {
 
 main {
     margin-top: 2rem;
+}
+footer {
+    background-color: #3081D0 !important;
+    padding: 100px;
+    text-align: center;
+    color: white;
 }
