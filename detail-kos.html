@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Ngekost Aja </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="detail-kos-style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light d-flex p-2">
+            <a class="navbar-brand txt-nav-wht" href="main.html">Ngekost Aja!</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="d-flex justify-content-center w-100" role="search">
+                <input class="form-control me-2" type="search" placeholder="Cari kos di sekitarmu!" aria-label="Search">
+                <button class="btn" id="search-submit-btn" type="submit">Search</button>
+            </form>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav d-flex">
+                    <li class="nav-item d-flex justify-content-end">
+                        <a class="nav-link txt-nav-wht" href="https://youtube.com">Favorit</a>
+                    </li>
+                    <li class="nav-item d-flex justify-content-end">
+                        <a class="nav-link txt-nav-wht" href="#"> Notifikasi </a>
+                    </li>
+                    <li class="nav-item d-flex justify-content-end">
+                        <a class="nav-link txt-nav-wht" href="#">Chat</a>
+                    </li>
+                    <li class="nav-item d-flex justify-content-end">
+                        <a class="nav-link txt-nav-wht" href="#"> Profil</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container flex-column fw-100">
+        <section class="container d-flex justify-content-center" id="gallery-photo-kost">
+            <div class="" id="main-photo">
+                <img src="img/rumah-kost-tampak-depan-1.jpg" class="kost-images" alt="Foto rumah kost tampak depan">
+            </div>
+            <div class="d-block h-100" id="secondary-photos">
+                <div class="h-50" id="top-side-photo">
+                    <img src="img/foto-kamar-kost-1.jpg" class="kost-images" alt="Foto kos lainnya">
+                </div>
+                <div class="h-50" id="bottom-side-photo">
+                    <img src="img/foto-kamar-kost-2.jpg" class="kost-images" alt="Foto kos lainnya">
+                </div>
+            </div>
+        </section>
+
+        <section class="container d-flex justify-content-center">
+            <div class="card w-75" id="detail-info-kos">
+                <div class="card-body">
+                    <h5 class="card-title" id="judul-kost">Kost Graha Indah Jalan Bandung</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Kecamatan Lowokwaru, Kota Malang</h6>
+                    <div id="spesifikasi-info-kost">
+                        <p>Spesifikasi Kamar</p>
+                        <ul>
+                            <li>4 x 5 meter</li>
+                            <li>Rumah bertingkat</li>
+                        </ul>
+                    </div>
+                    <div id="fasilitas-info-kost">
+                        <p>Fasilitas</p>
+                        <ul>
+                            <li>Wi-Fi</li>
+                            <li>Listrik</li>
+                            <li>Kamar mandi dalam</li>
+                            <li>AC</li>
+                            <li>Parkir motor</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card w-25" id="pemesanan-sewa-kost">
+                <div class="card-body">
+                    <h5 class="card-title">Rp 850.000/bulan</h5>
+                    <button type="button" class="btn btn-primary w-100" id="btn-simpan-dulu">Simpan dulu</button>
+                    <button type="button" class="btn btn-primary w-100" id="btn-sewa-sekarang">Sewa sekarang!</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+    
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

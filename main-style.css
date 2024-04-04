@@ -35,6 +35,10 @@ main {
     margin: 1rem;
 }
 
+.link-to-detail-kost {
+    text-decoration: none;
+}
+
 .kost-content {
     height: 100%;
 }
