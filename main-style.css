@@ -25,6 +25,15 @@ nav {
 main {
     margin-top: 2rem;
 }
+
+#product-catalog {
+    margin: 3rem 0rem 3rem;
+}
+
+.catalog-row {
+    margin: 1rem;
+}
+
 footer {
     background-color: #3081D0 !important;
     padding: 100px;
