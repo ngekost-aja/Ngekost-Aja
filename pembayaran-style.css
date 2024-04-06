@@ -1,0 +1,62 @@
+body {
+    background-color: #FFF5C2;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    background-color: #3081D0 !important;
+    color: white;
+    font-weight: bolder;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: right;
+}
+
+#search-submit-btn {
+    background-color: #F4F27E;
+}
+
+.txt-nav-wht {
+    color: white;
+}
+
+main {
+    margin-top: 5rem;
+}
+
+.progress-bar-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+#progress-bar-payment {
+    width: 0%;
+}
+
+.form-stage {
+    margin-top: 3rem;
+    min-height: 25rem;
+}
+
+.form-content {
+    margin: 1rem;
+}
+
+.btn-nav-form {
+    margin-top: 1rem;
+    right: 0;
+}
+
+#btn-back {
+    margin-right: 1rem;
+}
+
+#btn-continue {
+    margin-left: 1rem;
+}
+
+#form-step-2 {
+    display: none;
+}
