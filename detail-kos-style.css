@@ -67,3 +67,48 @@ main {
     color: black;
     border-color: #F4F27E;
 }
+
+#product-catalog {
+    margin: 3rem 0rem 3rem;
+}
+
+.link-to-detail-kost {
+    text-decoration: none;
+}
+
+.kost-content {
+    height: 100%;
+}
+
+.judul-kost {
+    font-weight: 500;
+}
+
+.alamat-kost {
+    font-size: small;
+}
+
+.harga-kost {
+    font-weight: bolder;
+}
+
+.rating-kost {
+    display: flex;
+}
+
+.rating-text {
+    margin-left: .5rem;
+}
+
+.star-icon {
+    width: 1rem;
+    align-items: center;
+    color: #FFC400;
+}
+
+footer {
+    background-color: #3081D0 !important;
+    padding: 100px;
+    text-align: center;
+    color: white;
+}
