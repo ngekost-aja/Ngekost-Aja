@@ -5,8 +5,7 @@ body {
 }
 
 nav {
-    background-color: #3081D0 !important;
-    color: white;
+    background-color: #EDCD44 !important;
     font-weight: bolder;
 }
 
@@ -16,11 +15,16 @@ nav {
 }
 
 #search-submit-btn {
-    background-color: #F4F27E;
+    background-color: black;
+    color: white;
 }
 
 .txt-nav-wht {
     color: white;
+}
+
+#logo-on-navbar {
+    width: 10rem;
 }
 
 main {
@@ -58,14 +62,14 @@ main {
 #btn-simpan-dulu {
     background-color: white;
     color: black;
-    border-color: #3081D0;
+    border-color: #33BCEA;
     margin-bottom: .5rem;
 }
 
 #btn-sewa-sekarang {
-    background-color: #F4F27E;
+    background-color: #EDCD44;
     color: black;
-    border-color: #F4F27E;
+    border-color: #EDCD44;
 }
 
 #product-catalog {
@@ -107,7 +111,7 @@ main {
 }
 
 footer {
-    background-color: #3081D0 !important;
+    background-color: #33BCEA !important;
     padding: 100px;
     text-align: center;
     color: white;
