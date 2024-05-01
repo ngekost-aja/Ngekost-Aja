@@ -4,8 +4,7 @@ body {
 }
 
 nav {
-    background-color: #3081D0 !important;
-    color: white;
+    background-color: #EDCD44 !important;
     font-weight: bolder;
 }
 
@@ -15,18 +14,23 @@ nav {
 }
 
 #search-submit-btn {
-    background-color: #F4F27E;
+    background-color: black;
+    color: white;
 }
 
-.txt-nav-wht {
-    color: white;
+.txt-nav-blk {
+    color: black;
+}
+
+#logo-on-navbar {
+    width: 10rem;
 }
 
 main {
     margin-top: 5rem;
 }
 
-.progress-bar-icon {
+.progress-bar-node {
     width: 2rem;
     height: 2rem;
 }
