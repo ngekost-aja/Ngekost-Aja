@@ -43,6 +43,15 @@ main {
     text-decoration: none;
 }
 
+.kost-img-thumbnail-container {
+    height: 14rem;
+}
+
+.kost-img-thumbnail {
+    min-width: 100%;
+    min-height: 100%;
+}
+
 .kost-content {
     height: 100%;
 }
