@@ -1,0 +1,32 @@
+<template>
+    <nav class="navbar navbar-expand-lg d-flex p-2 fixed-top">
+        <a class="navbar-brand txt-nav-blk" href="#" id="homepage-link">
+            <img src="assets/img/ngekost-aja-long-low.png" id="logo-on-navbar" alt="Logo Ngekost-Aja!">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="d-flex justify-content-center w-100" role="search" method="get" action="pages/search.html">
+            <input class="form-control me-2" type="search" placeholder="Cari kos di sekitarmu!" aria-label="Search">
+            <button class="btn" id="search-submit-btn" type="submit"
+                onclick="window.location.href='pages/search.html'">Search</button>
+        </form>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav d-flex">
+                <li class="nav-item d-flex justify-content-end">
+                    <a class="nav-link txt-nav-blk" href="#">Favorit</a>
+                </li>
+                <li class="nav-item d-flex justify-content-end">
+                    <a class="nav-link txt-nav-blk" href="#"> Notifikasi </a>
+                </li>
+                <li class="nav-item d-flex justify-content-end">
+                    <a class="nav-link txt-nav-blk" href="#">Chat</a>
+                </li>
+                <li class="nav-item d-flex justify-content-end">
+                    <a class="nav-link txt-nav-blk" href="#"> Profil</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</template>
