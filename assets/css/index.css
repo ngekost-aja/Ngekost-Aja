@@ -35,7 +35,7 @@ main {
     margin: 3rem 0rem 3rem;
 }
 
-.catalog-row {
+.container-row {
     margin: 1rem;
 }
 
@@ -56,7 +56,7 @@ main {
     height: 100%;
 }
 
-.judul-kost {
+.nama-kost {
     font-weight: 500;
 }
 
