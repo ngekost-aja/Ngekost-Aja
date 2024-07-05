@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ]).then(([Navbar, KostItem]) => {
         // Attach navbar to the main HTML
         const header = document.querySelector('header');
-        // const cloneNavbar = document.importNode(Navbar, true);
-        header.appendChild(Navbar);
+        const cloneNavbar = document.importNode(Navbar, true);
+        cloneNavbar.querySelector('#profil-option').href = 'pages/profil.html'
+        header.appendChild(cloneNavbar);
 
 
         // Attach kostItem to the main HTML
