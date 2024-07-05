@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchTemplate('../../template/KostItem.html')
     ]).then(([Navbar, KostItem]) => {
         // Attach navbar to the main HTML
-        const header = document.querySelector('header')
-        const cloneNavbar = document.importNode(Navbar, true);
-        header.appendChild(cloneNavbar)
+        const header = document.querySelector('header');
+        // const cloneNavbar = document.importNode(Navbar, true);
+        header.appendChild(Navbar);
 
 
         // Attach kostItem to the main HTML
