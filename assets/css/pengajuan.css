@@ -18,8 +18,19 @@ nav {
     color: white;
 }
 
-.txt-nav-blk {
+.nav-option {
     color: black;
+}
+
+.side-nav-option {
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+}
+
+.side-nav-option-icon {
+    width: 100%;
+    height: 100%;
 }
 
 #logo-on-navbar {
