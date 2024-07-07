@@ -1,0 +1,152 @@
+body {
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    background-color: #EDCD44 !important;
+    font-weight: bolder;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: right;
+}
+
+#search-submit-btn {
+    background-color: black;
+    color: white;
+}
+
+.nav-option {
+    color: black;
+}
+
+.side-nav-option {
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+}
+
+.side-nav-option-icon {
+    width: 100%;
+    height: 100%;
+}
+
+#logo-on-navbar {
+    width: 10rem;
+}
+
+main {
+    margin-top: 5rem;
+}
+
+.progress-bar-node {
+    width: 2rem;
+    height: 2rem;
+}
+
+#progress-node-2 {
+    left: 33%;
+}
+
+#progress-node-3 {
+    left: 66%;
+}
+
+#progress-bar-payment {
+    width: 0%;
+}
+
+.form-stage {
+    margin-top: 3rem;
+    min-height: 25rem;
+}
+
+.form-content {
+    margin: 1rem;
+}
+
+#form-step-1 {
+    display: flex;
+}
+
+#left-content {
+    margin-right: 1rem;
+}
+
+
+#change-user-data-btn {
+    margin: 1rem 0 0 0;
+    background-color: white;
+    color: black;
+}
+
+#change-user-data-btn:hover {
+    background-color: gray;
+    color: white;
+}
+
+#text-helper {
+    font-size: 10px;
+}
+
+#right-content {
+    margin-left: 1rem;
+}
+
+.kost-container {
+    max-width: 35%;
+}
+
+.card-img {
+    width: 30%;
+}
+
+.btn-nav-form {
+    margin-top: 1rem;
+    right: 0;
+}
+
+#btn-back {
+    margin-right: 1rem;
+}
+
+#btn-continue {
+    margin-left: 1rem;
+}
+
+#form-step-2 {
+    display: none;
+}
+
+#form-step-3 {
+    display: none;
+}
+
+#status-icon {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 1rem;
+    background-color: red;
+}
+
+.payment-method {
+    border: 2px solid black;
+    height: 2rem;
+    margin: .5rem 0;
+}
+
+.payment-method:hover {
+    background-color: gray;
+    color: white;
+}
+
+.logo-bank {
+    height: 90%;
+    margin: 0 1rem;
+}
+
+#form-step-4 {
+    display: none;
+}

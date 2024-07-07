@@ -19,8 +19,19 @@ nav {
     color: white;
 }
 
-.txt-nav-blk {
+.nav-option {
     color: black;
+}
+
+.side-nav-option {
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+}
+
+.side-nav-option-icon {
+    width: 100%;
+    height: 100%;
 }
 
 #logo-on-navbar {
@@ -35,7 +46,7 @@ main {
     margin: 3rem 0rem 3rem;
 }
 
-.catalog-row {
+.container-row {
     margin: 1rem;
 }
 
@@ -43,11 +54,20 @@ main {
     text-decoration: none;
 }
 
+.kost-img-thumbnail-container {
+    height: 14rem;
+}
+
+.kost-img-thumbnail {
+    min-width: 100%;
+    min-height: 100%;
+}
+
 .kost-content {
     height: 100%;
 }
 
-.judul-kost {
+.nama-kost {
     font-weight: 500;
 }
 

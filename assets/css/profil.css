@@ -1,0 +1,80 @@
+body {
+    background-color: white;
+    height: 1000px;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    background-color: #EDCD44!important;
+    font-weight: bolder;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: right;
+}
+
+#search-submit-btn {
+    background-color: black;
+    color: white;
+}
+
+.nav-option {
+    color: black;
+}
+
+.side-nav-option {
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+}
+
+.side-nav-option-icon {
+    width: 100%;
+    height: 100%;
+}
+
+#logo-on-navbar {
+    width: 10rem;
+}
+
+main {
+    margin-top: 5rem;
+}
+
+#sidebar,
+#sidebar > .card {
+    height: 70vh;
+    width: 20%;
+}
+
+#profile-photo-container {
+    height: 100px;
+}
+
+#profile-photo {
+    width: 6rem;
+    border-radius: 50%;
+}
+
+#pengaturan-option:hover,
+#tagihan-option:hover {
+    cursor: pointer;
+}
+
+#main-content {
+    margin-left: 22rem;
+}
+
+.sidebar-option-icon {
+    width: 1.5rem;
+    margin: 0 1rem;
+}
+
+#pengaturan-section {
+    display: block;
+}
+
+#tagihan-section {
+    display: none;
+}
