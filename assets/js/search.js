@@ -11,16 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     Promise.all([
-        fetchTemplate('../../template/Navbar.html'),
         fetchTemplate('../../template/KostItem.html')
-    ]).then(([Navbar, KostItem]) => {
-        // Attach navbar to the main HTML
-        const header = document.querySelector('header')
-        const cloneNavbar = document.importNode(Navbar, true)
-        cloneNavbar.querySelector('#homepage-link').href = '../index.html'
-        cloneNavbar.querySelector('#logo-on-navbar').src = '../assets/img/ngekost-aja-long-low.png'
-        header.appendChild(cloneNavbar)
-
+    ]).then(([KostItem]) => {
         // Attach kostItem to the main HTML
         const dataKost = [
             {
