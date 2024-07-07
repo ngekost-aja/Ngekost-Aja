@@ -14,10 +14,9 @@ class NavbarTop extends HTMLElement {
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <form class="d-flex justify-content-center w-100" role="search" method="get" action="pages/search.html">
+            <form id="search-form" class="d-flex justify-content-center w-100" role="search" method="get" action="search.html">
                 <input class="form-control me-2" type="search" placeholder="Cari kos di sekitarmu!" aria-label="Search">
-                <button class="btn" id="search-submit-btn" type="submit"
-                    onclick="window.location.href='./search.html'">Search</button>
+                <button class="btn" id="search-submit-btn" type="submit">Search</button>
             </form>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <div class="navbar-nav d-flex">
@@ -95,7 +94,7 @@ class NavbarTop extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['data-homepage-link', 'data-brand-logo', 'data-profil-href']
+        return ['data-homepage-link', 'data-brand-logo', 'data-search-action', 'data-profil-href']
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -108,6 +107,11 @@ class NavbarTop extends HTMLElement {
             const brandLogo = this.shadowRoot.querySelector('#brand-logo')
             if (brandLogo) {
                 brandLogo.setAttribute('src', newValue)
+            }
+        } else if (name == 'data-search-action' && this.shadowRoot) {
+            const search = this.shadowRoot.querySelector('#search-form')
+            if (search) {
+                search.setAttribute('action', newValue)
             }
         } else if (name == 'data-profil-href' && this.shadowRoot) {
             const linkPlace = this.shadowRoot.querySelector('#profil-option')
