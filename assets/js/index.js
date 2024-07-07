@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     Promise.all([
-        fetchTemplate('../../template/Navbar.html'),
-        fetchTemplate('../../template/KostItem.html')
+        fetchTemplate('./template/Navbar.html'),
+        fetchTemplate('./template/KostItem.html')
     ]).then(([Navbar, KostItem]) => {
         // Attach navbar to the main HTML
         const header = document.querySelector('header');
