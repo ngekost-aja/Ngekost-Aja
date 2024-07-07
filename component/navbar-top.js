@@ -7,8 +7,8 @@ class NavbarTop extends HTMLElement {
         // Some HTML element for the component
         shadow.innerHTML = `
         <nav class="navbar navbar-expand-lg d-flex p-2 fixed-top">
-            <a class="nav-option navbar-brand" href="#" id="homepage-link">
-                <img src="assets/img/ngekost-aja-long-low.png" id="logo-on-navbar" alt="Logo Ngekost-Aja!">
+            <a class="nav-option navbar-brand" href="../index.html" id="homepage-link">
+                <img src="../assets/img/ngekost-aja-long-low.png" id="brand-logo" alt="Logo Ngekost-Aja!">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@ class NavbarTop extends HTMLElement {
         bootstrapLink.setAttribute('integrity', 'sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH')
         bootstrapLink.setAttribute('crossorigin', 'anonymous')
         bootstrapLink.setAttribute('href', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')
-        
+
         // Custom style CSS for this component
         const style = document.createElement('style')
         style.textContent = `
@@ -84,22 +84,32 @@ class NavbarTop extends HTMLElement {
                 height: 100%;
             }
                 
-            #logo-on-navbar {
+            #brand-logo {
                 width: 10rem;
             }
             `
-        
+
         // Attach Bootstrap and custom CSS to the component
         shadow.append(bootstrapLink)
         shadow.append(style)
     }
 
     static get observedAttributes() {
-        return ['data-profil-href']
+        return ['data-homepage-link', 'data-brand-logo', 'data-profil-href']
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'data-profil-href' && this.shadowRoot) {
+        if (name == 'data-homepage-link' && this.shadowRoot) {
+            const homepageLink = this.shadowRoot.querySelector('#homepage-link')
+            if (homepageLink) {
+                homepageLink.setAttribute('href', newValue)
+            }
+        } else if (name == 'data-brand-logo' && this.shadowRoot) {
+            const brandLogo = this.shadowRoot.querySelector('#brand-logo')
+            if (brandLogo) {
+                brandLogo.setAttribute('src', newValue)
+            }
+        } else if (name == 'data-profil-href' && this.shadowRoot) {
             const linkPlace = this.shadowRoot.querySelector('#profil-option')
             if (linkPlace) {
                 linkPlace.setAttribute('href', newValue)
