@@ -11,16 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     Promise.all([
-        fetchTemplate('./template/Navbar.html'),
         fetchTemplate('./template/KostItem.html')
-    ]).then(([Navbar, KostItem]) => {
-        // Attach navbar to the main HTML
-        const header = document.querySelector('header');
-        const cloneNavbar = document.importNode(Navbar, true);
-        cloneNavbar.querySelector('#profil-option').href = 'pages/profil.html'
-        header.appendChild(cloneNavbar);
-
-
+    ]).then(([KostItem]) => {
         // Attach kostItem to the main HTML
         const dataKost = [
             {
