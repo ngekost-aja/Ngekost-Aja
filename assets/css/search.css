@@ -4,38 +4,24 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-nav {
-    background-color: #EDCD44!important;
-    font-weight: bolder;
-}
-
-.nav-item {
-    display: flex;
-    justify-content: right;
-}
-
-#search-submit-btn {
-    background-color: black;
-    color: white;
-}
-
-.txt-nav-blk {
-    color: black;
-}
-
-#logo-on-navbar {
-    width: 10rem;
-}
-
 main {
     margin-top: 5rem;
+}
+
+#filter-search-container {
+    height: 700px;
+}
+
+#filter-search-container {
+    position: sticky;
+    top: 5rem;
 }
 
 #product-catalog {
     margin: 3rem 0rem 3rem;
 }
 
-.catalog-row {
+.container-row {
     margin: 1rem;
 }
 
@@ -43,11 +29,23 @@ main {
     text-decoration: none;
 }
 
+.kost-img-thumbnail-container {
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+}
+
+.kost-img-thumbnail {
+    /* min-width: 100%; */
+    /* min-height: 100%; */
+    width: 25%;
+}
+
 .kost-content {
     height: 100%;
 }
 
-.judul-kost {
+.nama-kost {
     font-weight: 500;
 }
 

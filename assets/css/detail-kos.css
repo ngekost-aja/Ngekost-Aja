@@ -4,29 +4,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-nav {
-    background-color: #EDCD44 !important;
-    font-weight: bolder;
-}
-
-.nav-item {
-    display: flex;
-    justify-content: right;
-}
-
-#search-submit-btn {
-    background-color: black;
-    color: white;
-}
-
-.txt-nav-wht {
-    color: white;
-}
-
-#logo-on-navbar {
-    width: 10rem;
-}
-
 main {
     margin-top: 5rem;
 }

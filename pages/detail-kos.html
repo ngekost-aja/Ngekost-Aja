@@ -1,51 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ngekost Aja!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/detail-kos-style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/detail-kos.css">
+    <script type="module" src="../component/navbar-top.js"></script>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg d-flex p-2 fixed-top">
-            <a class="navbar-brand txt-nav-blk" href="../main.html">
-                <img src="../assets/img/ngekost-aja-long-low.png" id="logo-on-navbar" alt="Logo Ngekost-Aja!">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <form class="d-flex justify-content-center w-100" role="search">
-                <input class="form-control me-2" type="search" placeholder="Cari kos di sekitarmu!" aria-label="Search">
-                <button class="btn" id="search-submit-btn" type="submit">Search</button>
-            </form>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav d-flex">
-                    <li class="nav-item d-flex justify-content-end">
-                        <a class="nav-link txt-nav-blk" href="#">Favorit</a>
-                    </li>
-                    <li class="nav-item d-flex justify-content-end">
-                        <a class="nav-link txt-nav-blk" href="#"> Notifikasi </a>
-                    </li>
-                    <li class="nav-item d-flex justify-content-end">
-                        <a class="nav-link txt-nav-blk" href="#">Chat</a>
-                    </li>
-                    <li class="nav-item d-flex justify-content-end">
-                        <a class="nav-link txt-nav-blk" href="#"> Profil</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <navbar-top></navbar-top>
 
     <main class="container flex-column fw-100">
         <section class="container d-flex justify-content-center" id="gallery-photo-kost">
             <div class="" id="main-photo">
-                <img src="../assets/img/rumah-kost-tampak-depan-1.jpg" class="kost-images" alt="Foto rumah kost tampak depan">
+                <img src="../assets/img/rumah-kost-tampak-depan-1.jpg" class="kost-images"
+                    alt="Foto rumah kost tampak depan">
             </div>
             <div class="d-block h-100" id="secondary-photos">
                 <div class="h-50" id="top-side-photo">
@@ -81,12 +59,13 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="card w-25" id="pemesanan-sewa-kost">
                 <div class="card-body">
                     <h5 class="card-title">Rp 850.000/bulan</h5>
                     <button type="button" class="btn btn-primary w-100" id="btn-simpan-dulu">Simpan dulu</button>
-                    <button type="button" class="btn btn-primary w-100" id="btn-sewa-sekarang" onclick="window.location.href='pembayaran.html'">
+                    <button type="button" class="btn btn-primary w-100" id="btn-sewa-sekarang"
+                        onclick="window.location.href='pengajuan.html'">
                         Sewa sekarang!
                     </button>
                 </div>
@@ -104,9 +83,12 @@
                             <p class="harga-kost">Rp 765.000/bulan</p>
                             <p class="alamat-kost">Kecamatan Blimbing, Kota Malang</p>
                             <div class="rating-kost">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-                                </svg>                                   
+                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24"
+                                    fill="currentColor" class="w-6 h-6">
+                                    <path fill-rule="evenodd"
+                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                        clip-rule="evenodd" />
+                                </svg>
                                 <div class="rating-text">4.6 | 34 sewa</div>
                             </div>
                         </div>
@@ -120,9 +102,12 @@
                             <p class="harga-kost">Rp 810.000/bulan</p>
                             <p class="alamat-kost">Kecamatan Blimbing, Kota Malang</p>
                             <div class="rating-kost">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-                                </svg>                                   
+                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24"
+                                    fill="currentColor" class="w-6 h-6">
+                                    <path fill-rule="evenodd"
+                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                        clip-rule="evenodd" />
+                                </svg>
                                 <div class="rating-text">4.3 | 67 sewa</div>
                             </div>
                         </div>
@@ -136,9 +121,12 @@
                             <p class="harga-kost">Rp 2.120.000/bulan</p>
                             <p class="alamat-kost">Kecamatan Blimbing, Kota Malang</p>
                             <div class="rating-kost">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-                                </svg>                                   
+                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24"
+                                    fill="currentColor" class="w-6 h-6">
+                                    <path fill-rule="evenodd"
+                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                        clip-rule="evenodd" />
+                                </svg>
                                 <div class="rating-text">4.6 | 18 sewa</div>
                             </div>
                         </div>
@@ -152,9 +140,12 @@
                             <p class="harga-kost">Rp 1.100.000/bulan</p>
                             <p class="alamat-kost">Kecamatan Blimbing, Kota Malang</p>
                             <div class="rating-kost">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-                                </svg>                                   
+                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24"
+                                    fill="currentColor" class="w-6 h-6">
+                                    <path fill-rule="evenodd"
+                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                        clip-rule="evenodd" />
+                                </svg>
                                 <div class="rating-text">4.9 | 5 sewa</div>
                             </div>
                         </div>
@@ -168,9 +159,12 @@
                             <p class="harga-kost">Rp 780.000/bulan</p>
                             <p class="alamat-kost">Kecamatan Blimbing, Kota Malang</p>
                             <div class="rating-kost">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-                                </svg>                                   
+                                <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 24 24"
+                                    fill="currentColor" class="w-6 h-6">
+                                    <path fill-rule="evenodd"
+                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                        clip-rule="evenodd" />
+                                </svg>
                                 <div class="rating-text">3.8 | 23 sewa</div>
                             </div>
                         </div>
@@ -181,10 +175,16 @@
     </main>
 
     <footer>
-    
+
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script src="../assets/js/detail-kos.js"></script>
 </body>
+
 </html>
