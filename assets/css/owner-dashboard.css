@@ -16,24 +16,13 @@ main {
     width: 100%;
 }
 
-#tambah-ruang-container {
+#tambah-aset {
     background-color: #EDCD44;
 }
 
-#btn-tambah-ruang {
+#btn-tambah-aset {
     background-color:  rgb(49, 49, 49);
     color: white;
-}
-
-#pengelola {
-    background-color: rgb(49, 49, 49);
-    color: white;
-    border-radius: 5px;
-}
-
-#ubah-pengelola-btn {
-    background-color: white;
-    color: black;
 }
 
 #aset-table {
