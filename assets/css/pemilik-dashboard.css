@@ -1,0 +1,62 @@
+body {
+    background-color: white;
+    height: 1000px;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    background-color: rgb(49, 49, 49);
+    color: white;
+    width: 250px;
+    height: 100%;
+}
+
+#user-photo-profile {
+    border-radius: 50%;
+    width: 3rem;
+    margin-bottom: 1rem;
+}
+
+.nav-option-icon,
+#btn-plus-icon {
+    width: 2rem;
+}
+
+
+/* MAIN */
+
+main {
+    margin: 2rem 3rem 0 20rem;
+    width: 100%;
+}
+
+#tambah-ruang-container {
+    background-color: #EDCD44;
+}
+
+#btn-tambah-ruang {
+    background-color:  rgb(49, 49, 49);
+    color: white;
+}
+
+#pengelola {
+    background-color: rgb(49, 49, 49);
+    color: white;
+    border-radius: 5px;
+}
+
+#ubah-pengelola-btn {
+    background-color: white;
+    color: black;
+}
+
+#aset-table {
+    overflow-y: scroll;
+    height: 70vh;
+}
+
+.aset-data:hover {
+    background-color: lightgray;
+    color: white;
+    cursor: pointer;
+}
