@@ -4,20 +4,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-nav {
-    background-color: rgb(49, 49, 49);
-    color: white;
-    width: 250px;
-    height: 100%;
-}
-
-#user-photo-profile {
-    border-radius: 50%;
-    width: 3rem;
-    margin-bottom: 1rem;
-}
-
-.nav-option-icon,
 #btn-plus-icon {
     width: 2rem;
 }
