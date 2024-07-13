@@ -1,50 +1,54 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
     background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-.login-form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 450px;
-    background: #222;
-    padding: 20px 30px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 1);
+.form-container {
+    width: 100%;
+    max-width: 400px;   
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.login-form .form-title {
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 600;
-    margin: 20px 0px 30px;
-    color: #fff;
-}
-
-.login-form .form-input {
-    margin: 10px 0px;
-}
-
-.login-form .form-input label {
-    display: block;
-    font-size: 15px;
-    color: #fff;
+.form-container .form-label {
     margin-bottom: 5px;
+    font-weight: bold;
 }
-
-.login-form .form-input input {
+.form-container .form-control {
     width: 100%;
     padding: 10px;
-    border: 1px solid #888;
-    font-size: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.form-container .form-check-input {
+    margin-right: 10px;
+}
+.form-container .form-check-label {
+    display: inline-block;
+}
+.form-container .btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.form-container .btn:hover {
+    background-color: #0056b3;
+}
+.form-container .form-text {
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #6c757d;
 }
