@@ -7,8 +7,8 @@ class NavbarTop extends HTMLElement {
         // Some HTML element for the component
         shadow.innerHTML = `
         <nav class="navbar navbar-expand-lg d-flex p-2 fixed-top">
-            <a class="nav-option navbar-brand" href="../index.html" id="homepage-link">
-                <img src="../assets/img/ngekost-aja-long-low.png" id="brand-logo" alt="Logo Ngekost-Aja!">
+            <a class="nav-option navbar-brand" href="../../index.html" id="homepage-link">
+                <img src="../../assets/img/ngekost-aja-long-low.png" id="brand-logo" alt="Logo Ngekost-Aja!">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -15,7 +15,7 @@ class OwnerSidebar extends HTMLElement {
             <hr>
             <ul class="list-unstyled p-4">
                 <li class="m-2">
-                    <a href="owner-dashboard.html" class="text-decoration-none text-white">
+                    <a href="dashboard.html" class="text-decoration-none text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="nav-option-icon size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -25,7 +25,7 @@ class OwnerSidebar extends HTMLElement {
                     </a>
                 </li>
                 <li class="m-2">
-                    <a href="owner-pengelola.html" class="text-decoration-none text-white">
+                    <a href="pengelola.html" class="text-decoration-none text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="nav-option-icon size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
