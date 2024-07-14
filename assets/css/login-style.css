@@ -6,6 +6,13 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
+    background-image: url('../img/ngekost-aja-logo-2.png'); /* Ganti dengan jalur yang benar */
+    background-size: contain; /* Mengatur ukuran gambar agar menutupi seluruh layar */
+    background-position: center; /* Menempatkan gambar di tengah */
+    background-repeat: no-repeat; /* Mencegah pengulangan gambar */
+    height: 100vh; /* Mengatur tinggi body agar 100% dari tinggi viewport */
+    margin: 0; /* Menghapus margin default dari body */
+    
 }
 
 .form-container {

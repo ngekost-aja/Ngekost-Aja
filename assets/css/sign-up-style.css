@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: 'Times New Roman', Times, serif;
 }
+
 body {
     display: flex;
     justify-content: center;
@@ -17,6 +18,7 @@ body {
     border-radius: 20px;
     border: 8px solid #007bff;
 }
+
 .container .form {
     display: flex;
     justify-content: center;
@@ -29,18 +31,22 @@ body {
 .container.signinform .form.signup {
     display: none;
 }
+
 .container.signinform .form.signin {
     display: flex;
 }
+
 .container .form h2 {
     color: white;
     font-weight: 500;
     letter-spacing: 0.1em;
 }
+
 .container .form .inputBox {
     position: relative;
     width: 300px;
 }
+
 .container .form .inputBox input {
     padding: 12px 10px 12px 48px;
     border: none;
@@ -54,6 +60,7 @@ body {
     transition: 0.5s;
     outline: none;
 }
+
 .container.form .inputBox span {
     position: absolute;
     left: 0;
@@ -82,6 +89,7 @@ body {
 .container .form .inputBox input:focus {
     border: 1px solid #00dfc4;
 }
+
 .container.form .inputBox i {
     position: absolute;
     top: 15px;
@@ -104,11 +112,13 @@ body {
         inset -5px -5px -15px rgba(255, 255, 255, 0.1),
         inset 5px 5px 15px rgba(0, 0, 0, 0.35);
 }
+
 .container.form p {
     color: rgba(225, 225, 225, 0.5);
     font-size: 0.75em;
     font-weight: 300;
 }
+
 .container.form p a {
     font-weight: 500;
     color: #fff;
