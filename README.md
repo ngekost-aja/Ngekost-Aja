@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="assets/img/ngekost-aja-logo.png" width="60%">
+    <img src="docs/img/ngekost-aja-logo.png" width="60%">
 </p>
 
 ## Made by
