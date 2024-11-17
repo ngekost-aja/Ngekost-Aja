@@ -93,6 +93,7 @@ class NavbarTop extends HTMLElement {
         shadow.append(style)
     }
 
+    // Custom attributes
     static get observedAttributes() {
         return ['data-homepage-link', 'data-brand-logo', 'data-search-action', 'data-profil-href']
     }
