@@ -1,54 +1,52 @@
 import KostItem from "../../components/KostItem.js";
 
-const kostData = [
-    {
-        namaKost: 'Kos Merdeka',
-        hargaKost: 'Rp 2.000.000/bulan',
-        kostImg: 'assets/img/kos-thumbnail.jpg',
-        alamatKost: 'Jalan Merdeka, Jakarta',
-        ratingKost: '4.7',
-        ratingCount: '23',
-        detailLink: 'pages/renter/detail-kos1.html'
-    },
-    {
-        namaKost: 'Kos Pahlawan',
-        hargaKost: 'Rp 1.500.000/bulan',
-        kostImg: 'assets/img/kos-thumbnail2.jpg',
-        alamatKost: 'Jalan Pahlawan, Jakarta',
-        ratingKost: '4.5',
-        ratingCount: '10',
-        detailLink: 'pages/renter/detail-kos2.html'
-    },
-    // More items can be added here...
-];
-
+// let kostData = [];
+const fetchKostData = async () => {
+    try {
+        const response = await fetch('http://ngekost-aja-backend.test/api/kost', {
+            method: 'GET'
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        const data = await response.json();
+        console.log('Data received:', data.data);
+        return data.data;
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+};
 
 const productCatalog = document.getElementById('product-catalog');
 
-const createNewRowContainer = (currentRow) => {
+const createNewRowContainer = () => {
     currentRow = document.createElement('div');
     currentRow.classList.add('row', 'row-cols-auto', 'g-2', 'g-lg-3');
     productCatalog.appendChild(currentRow);
 }
 
 let currentRow;
-createNewRowContainer(currentRow);
+createNewRowContainer();
 
-kostData.forEach(data => {
-    if (currentRow.children.length >= 5) {
-        createNewRowContainer(currentRow);
-    }
-
-    const kostItem = document.createElement('kost-item');
-    kostItem.setAttribute('nama-kost', data.namaKost);
-    kostItem.setAttribute('harga-kost', data.hargaKost);
-    kostItem.setAttribute('kost-img-thumbnail', data.kostImg);
-    kostItem.setAttribute('alamat-kost', data.alamatKost);
-    kostItem.setAttribute('rating-kost', data.ratingKost);
-    kostItem.setAttribute('rating-count', data.ratingCount);
-    kostItem.setAttribute('detail-link', data.detailLink);
-
-    currentRow.appendChild(kostItem);
-});
-
-document.body.appendChild(container);
+fetchKostData().then(data => {
+    data.forEach(data => {
+        if (currentRow.children.length >= 5) {
+            createNewRowContainer();
+        }
+    
+        const kostItem = document.createElement('kost-item');
+        kostItem.setAttribute('nama-kost', data.nama);
+        kostItem.setAttribute('harga-kost', data.harga);
+        kostItem.setAttribute('kost-img-thumbnail', '');
+        kostItem.setAttribute('alamat-kost', data.alamat);
+        kostItem.setAttribute('avg-rating', data.rating);
+        kostItem.setAttribute('total-rating', 23);
+        kostItem.setAttribute('detail-link', '');
+    
+        currentRow.appendChild(kostItem);
+    });
+}).catch(error => {
+    console.error('Error: ' + error)
+})

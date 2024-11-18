@@ -6,7 +6,7 @@ export default class KostItem extends HTMLElement {
 
         // Create a template for the component
         shadow.innerHTML = `
-        <div class="col col-6 kost-container">
+        <div class="col kost-container mx-auto">
             <a href="#" class="link-to-detail-kost text-decoration-none">
                 <div class="kost-content card h-100">
                     <div class="card-img-top kost-img-thumbnail-container">
@@ -22,7 +22,10 @@ export default class KostItem extends HTMLElement {
                                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <div class="rating-text"></div>
+                            <div class="rating-text">
+                                <span class="avg-rating"></span> |
+                                <span class="total-rating"></span> sewa
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,20 +68,32 @@ export default class KostItem extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['nama-kost', 'harga-kost', 'kost-img-thumbnail', 'alamat-kost', 'rating-kost', 'rating-count', 'detail-link'];
+        return ['nama-kost', 'harga-kost', 'kost-img-thumbnail', 'alamat-kost', 'avg-rating', 'total-rating', 'detail-link'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         const element = this.shadowRoot.querySelector(`.${name}`);
-        if (name === 'kost-img-thumbnail') {
-            this.shadowRoot.querySelector('.kost-img-thumbnail').src = newValue;
-        } else if (name === 'detail-link') {
-            this.shadowRoot.querySelector('.link-to-detail-kost').href = newValue;
-        } else if (name === 'rating-kost') {
-            const ratingText = `${newValue} | ${this.getAttribute('rating-count')} sewa`;
-            this.shadowRoot.querySelector('.rating-text').textContent = ratingText;
-        } else if (element) {
-            element.textContent = newValue;
+        switch (name) {
+            case 'harga-kost':
+                this.shadowRoot.querySelector('.harga-kost').textContent = new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0
+                }).format(newValue)
+                break;
+            case 'kost-img-thumbnail':
+                this.shadowRoot.querySelector('.kost-img-thumbnail').src = newValue;
+                break;
+            case 'detail-link':
+                this.shadowRoot.querySelector('.link-to-detail-kost').href = newValue;
+                break;
+            case 'avg-rating':
+                const avgRating = newValue === null || newValue === 'null' ? 0 : newValue;
+                this.shadowRoot.querySelector('.avg-rating').textContent = avgRating;
+                break;
+            default:
+                element.textContent = newValue;
+                break;
         }
     }
 }
