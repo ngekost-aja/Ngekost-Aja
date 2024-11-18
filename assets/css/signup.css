@@ -2,8 +2,8 @@ body {
     font-family: 'Poppins', sans-serif;
     height: 100vh;
     margin: 0;
-    height: 100vh; /* Mengatur tinggi body agar 100% dari tinggi viewport */
-    margin: 0; /* Menghapus margin default dari body */
+    height: 100vh;
+    margin: 0;
     
 }
 
