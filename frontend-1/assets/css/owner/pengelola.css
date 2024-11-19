@@ -1,0 +1,35 @@
+body {
+    background-color: white;
+    height: 1000px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* MAIN */
+
+main {
+    margin: 2rem 3rem 0 20rem;
+    width: 100%;
+}
+
+#btn-plus-icon {
+    width: 2rem;
+}
+
+#tambah-pengelola {
+    background-color: #EDCD44;
+}
+
+#btn-tambah-pengelola {
+    background-color:  rgb(49, 49, 49);
+    color: white;
+}
+
+.btn-phone:hover {
+    background-color: green;
+    color: white;
+}
+
+.phone-icon {
+    width: 1.5rem;
+}
