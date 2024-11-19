@@ -1,4 +1,4 @@
-import KostItem from "../../components/KostItem.js";
+import KostItem from '../components/KostItem.js';
 
 // let kostData = [];
 const fetchKostData = async () => {
@@ -12,7 +12,6 @@ const fetchKostData = async () => {
         }
         
         const data = await response.json();
-        console.log('Data received:', data.data);
         return data.data;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
