@@ -1,6 +1,6 @@
 <?php
 
-namespace NgekostAjaBackend\Core;
+namespace App\Core;
 
 use PDO;
 use PDOException;

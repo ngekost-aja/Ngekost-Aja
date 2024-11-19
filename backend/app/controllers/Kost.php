@@ -1,9 +1,9 @@
 <?php
 
-namespace NgekostAjaBackend\Controllers;
+namespace App\Controllers;
 
-use NgekostAjaBackend\Core\Controller;
-use NgekostAjaBackend\Models\KostData;
+use App\Core\Controller;
+use App\Models\KostData;
 
 class Kost extends Controller {
 

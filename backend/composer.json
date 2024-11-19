@@ -3,7 +3,7 @@
     "description": "Ngekost Aja project backend written in PHP",
     "autoload": {
         "psr-4": {
-            "NgekostAjaBackend\\": "app/"
+            "App\\": "app/"
         }
     },
     "authors": [

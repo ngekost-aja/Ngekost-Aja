@@ -1,6 +1,6 @@
 <?php
 
-namespace NgekostAjaBackend\Core;
+namespace App\Core;
 
 class Controller {
     public ?Model $model;
@@ -16,6 +16,6 @@ class Controller {
     }
 
     public function view(string $view, array $data = []): void {
-        require __DIR__ . '/../views/' . $view .'.php';
+        require __DIR__ . '/../../../frontend/pages/' . $view . '.html';
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace NgekostAjaBackend\Models;
+namespace App\Models;
 
-use NgekostAjaBackend\Core\Model;
+use App\Core\Model;
 
 
 class KostData extends Model {

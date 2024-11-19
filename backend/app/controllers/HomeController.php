@@ -2,15 +2,15 @@
 
 namespace App\Controllers;
 
-use NgekostAjaBackend\Core\Controller;
+use App\Core\Controller;
 
-class Users extends Controller {
+class HomeController extends Controller {
 
     public function __construct() {
 
     }
 
     public function index(): void {
-        $this->view('');
+        $this->view('index');
     }
 }
