@@ -1,0 +1,57 @@
+body {
+    background-color: white;
+    height: 1000px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#btn-plus-icon {
+    width: 2rem;
+}
+
+/* MAIN */
+
+main {
+    margin: 2rem 3rem 0 20rem;
+    width: 100%;
+}
+
+#tambah-ruang-container {
+    background-color: #EDCD44;
+}
+
+#btn-tambah-ruang {
+    background-color:  rgb(49, 49, 49);
+    color: white;
+}
+
+#ubah-pengelola-btn {
+    background-color: black;
+    color: white;
+}
+
+.status-digunakan {
+    background-color: green;
+    border-radius: 2rem;
+    color: white;
+}
+
+.status-tdk-digunakan {
+    background-color: gray;
+    border-radius: 2rem;
+    color: white;
+}
+
+.status-tdk-disewakan {
+    background-color: red;
+    border-radius: 2rem;
+    color: white;
+}
+
+.lihat-field:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.lihat-icon {
+    width: 1.5rem;
+}
