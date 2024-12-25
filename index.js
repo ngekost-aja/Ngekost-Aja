@@ -11,7 +11,7 @@ app.use(express.static('frontend'))
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'pages', 'index.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'pages', 'general', 'index.html'));
 })
 
 app.listen(process.env.SERVER_PORT, () => {
