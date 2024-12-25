@@ -1,4 +1,4 @@
-import KostItem from '../components/KostItem.js';
+import KostItem from '../../components/KostItem.js';
 
 // let kostData = [];
 const fetchKostData = async () => {

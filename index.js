@@ -1,10 +1,17 @@
 const express = require('express')
 const app = express()
-require('dotenv').config()
+const dotenv = require('dotenv')
+const path = require('path')
+
+
+dotenv.config()
+
+
+app.use(express.static('frontend'))
 
 
 app.get('/', (req, res) => {
-    res.send('Root')
+    res.sendFile(path.join(__dirname, 'frontend', 'pages', 'index.html'));
 })
 
 app.listen(process.env.SERVER_PORT, () => {

@@ -1,17 +1,19 @@
 {
   "name": "ngekost-aja",
   "version": "1.0.0",
-  "description": "<p align=\"center\">\r     <img src=\"docs/img/ngekost-aja-logo-long.png\" width=\"80%\">\r </p>",
+  "description": "Sebuah website marketplace kost-kostan yang ditujukan kepada mahasiswa dan pemilik kost.🏠",
   "main": "index.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon public/index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Farrel Augusta Dinata"
+  },
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.1.9"
