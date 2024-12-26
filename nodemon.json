@@ -3,7 +3,7 @@
         "frontend",
         "backend"
     ],
-    "ext": "js,html,css",
+    "ext": "js",
     "ignore": [
         "node_modules"
     ]
