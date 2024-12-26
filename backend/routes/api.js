@@ -1,7 +1,10 @@
 import express from 'express'
+import { getAllKost } from '../controllers/kost.controller.js'
 
 const router = express.Router()
 
-export default (app) => {
-    
-}
+
+router.get('/kost', getAllKost)
+
+
+export default router
