@@ -6,7 +6,7 @@ export default class KostItem extends HTMLElement {
 
         // Create a template for the component
         shadow.innerHTML = `
-        <div class="col kost-container mx-auto">
+        <div class="kost-container">
             <a href="#" class="link-to-detail-kost text-decoration-none">
                 <div class="kost-content card h-100">
                     <div class="card-img-top kost-img-thumbnail-container">
@@ -98,5 +98,4 @@ export default class KostItem extends HTMLElement {
     }
 }
 
-// Register component to valid HTML element
 customElements.define('kost-item', KostItem);
