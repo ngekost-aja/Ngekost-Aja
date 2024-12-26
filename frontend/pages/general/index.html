@@ -27,7 +27,7 @@
 
 <body>
     <navbar-top data-homepage-link="/" data-brand-logo="/assets/img/logo/ngekost-aja-long-low.png"
-        data-search-action="pages/renter/search.html" data-profil-href="pages/renter/profil.html" />
+        data-search-action="pages/renter/search.html" data-profil-href="pages/renter/profil.html"></navbar-top>
 
     <main class="d-flex flex-column fw-100 min-vh-100">
         <section class="mx-auto w-50" id="slide-promo">
@@ -66,7 +66,7 @@
             </div>
         </section>
 
-        <section id="product-catalog" class="mx-auto" style="max-width: 80%;"></section>
+        <section id="product-catalog" class="mx-auto container"></section>
     </main>
 
 
@@ -82,8 +82,8 @@
 
         const productCatalog = document.getElementById('product-catalog');
 
-        let currentRow;
-        const kostData = null;
+        let currentRow = document.createElement('div');
+        currentRow.classList.add('row', 'd-flex')
 
 
         function createNewRowContainer() {
@@ -108,15 +108,17 @@
 
                     const kostItem = document.createElement('kost-item');
                     kostItem.setAttribute('nama-kost', data.nama);
-                    kostItem.setAttribute('harga-kost', data.harga);
+                    kostItem.setAttribute('harga-kost', '699000');
                     kostItem.setAttribute('kost-img-thumbnail', '');
                     kostItem.setAttribute('alamat-kost', data.alamat);
-                    kostItem.setAttribute('avg-rating', data.rating);
+                    kostItem.setAttribute('avg-rating', 4);
                     kostItem.setAttribute('total-rating', 23);
                     kostItem.setAttribute('detail-link', '');
+                    kostItem.classList.add('col-6', 'col-lg-2')
 
                     currentRow.appendChild(kostItem);
                 });
+                productCatalog.appendChild(currentRow)
             })
             .catch(error => console.error('Error:', error));
     </script>
