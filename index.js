@@ -1,11 +1,15 @@
-const express = require('express')
-const app = express()
-const dotenv = require('dotenv')
-const path = require('path')
+import express from 'express'
+import dotenv from 'dotenv'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 
 dotenv.config()
 
+const app = express()
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 app.use(express.static('frontend'))
 
