@@ -4,15 +4,14 @@ import { getUserByEmail } from '../repository/UserRepository.js'
 
 
 const checkUserAuth = async (req, res) => {
-    try {
-        
-    } catch (error) {
-        return res.status(500)
+    if (!req.session.user) {
+        return res.status(401).json({
+            message: "user don't have the appropriate session ID"
+        })
     }
 
     res.status(200).json({
-        message: "success",
-        route: "/api/user/"
+        message: "user have valid session ID",
     })
 }
 
