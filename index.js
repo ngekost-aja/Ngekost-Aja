@@ -1,4 +1,5 @@
 import express from 'express'
+import session from 'express-session'
 import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -15,6 +16,21 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 app.use(express.static('frontend'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'not_secret_key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60,
+        secure: process.env.ENV === 'production',   
+        httpOnly: true,
+        sameSite: 'strict',
+    },
+    name: 'SESSION_ID_NGEKOST_AJA',
+    rolling: true,
+}))
 
 
 app.get('/', (req, res) => {
