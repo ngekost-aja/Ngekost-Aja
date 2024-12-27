@@ -15,6 +15,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/global.css">
     <script type="module" src="/components/NavbarTop.js"></script>
+    <script src="/components/KostItem.js"></script>
 </head>
 
 <body>
@@ -71,50 +72,49 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <script type="module">
-        import KostItem from '../../components/KostItem.js';
-
-
-        const productCatalog = document.getElementById('product-catalog');
-
-        let currentRow = document.createElement('div');
-        currentRow.classList.add('row', 'row-cols-auto', 'gx-2', 'gy-5', 'g-lg-3', 'my-3');
-
-
-        function createNewRowContainer() {
-            currentRow = document.createElement('div');
+        document.addEventListener('DOMContentLoaded', () => {
+            const productCatalog = document.getElementById('product-catalog');
+    
+            let currentRow = document.createElement('div');
             currentRow.classList.add('row', 'row-cols-auto', 'gx-2', 'gy-5', 'g-lg-3', 'my-3');
-            productCatalog.appendChild(currentRow);
-        }
-
-
-        fetch('http://localhost:8000/api/kost')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(data => {
-                    if (currentRow.children.length >= 6) {
-                        createNewRowContainer();
+    
+    
+            function createNewRowContainer() {
+                currentRow = document.createElement('div');
+                currentRow.classList.add('row', 'row-cols-auto', 'gx-2', 'gy-5', 'g-lg-3', 'my-3');
+                productCatalog.appendChild(currentRow);
+            }
+    
+    
+            fetch('http://localhost:8000/api/kost')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-
-                    const kostItem = document.createElement('kost-item');
-                    kostItem.setAttribute('nama-kost', data.nama);
-                    kostItem.setAttribute('harga-kost', '699000');
-                    kostItem.setAttribute('kost-img-thumbnail', '');
-                    kostItem.setAttribute('alamat-kost', data.alamat);
-                    kostItem.setAttribute('avg-rating', 4);
-                    kostItem.setAttribute('total-rating', 23);
-                    kostItem.setAttribute('detail-link', '');
-                    kostItem.classList.add('col-6', 'col-lg-2')
-
-                    currentRow.appendChild(kostItem);
-                });
-                productCatalog.appendChild(currentRow)
-            })
-            .catch(error => console.error('Error:', error));
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(data => {
+                        if (currentRow.children.length >= 6) {
+                            createNewRowContainer();
+                        }
+    
+                        const kostItem = document.createElement('kost-item');
+                        kostItem.setAttribute('nama-kost', data.nama);
+                        kostItem.setAttribute('harga-kost', '699000');
+                        kostItem.setAttribute('kost-img-thumbnail', '');
+                        kostItem.setAttribute('alamat-kost', data.alamat);
+                        kostItem.setAttribute('avg-rating', 4);
+                        kostItem.setAttribute('total-rating', 23);
+                        kostItem.setAttribute('detail-link', '');
+                        kostItem.classList.add('col-6', 'col-lg-2')
+    
+                        currentRow.appendChild(kostItem);
+                    });
+                    productCatalog.appendChild(currentRow)
+                })
+                .catch(error => console.error('Error:', error));
+        });
     </script>
 </body>
 
