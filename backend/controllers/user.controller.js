@@ -17,7 +17,7 @@ const checkUserAuth = async (req, res) => {
 
 const userLogin = async (req, res) => {
     const { email, password } = req.body
-    
+
     if (!email || !password) {
         return res.status(400).json({
             message: "email or password field is missing"
@@ -34,7 +34,7 @@ const userLogin = async (req, res) => {
         }
 
         const isMatch = await bcrypt.compare(password, result[0]['password'])
-        
+
         if (!isMatch) {
             return res.status(401).json({
                 message: "password is invalid"
@@ -60,10 +60,15 @@ const userLogin = async (req, res) => {
 }
 
 const userLogout = async (req, res) => {
-    res.status(200).json({
-        message: "success",
-        route: "/api/user/logout"
+    console.log(req.session)
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error logging out' })
+        }
+        res.clearCookie('SESSION_ID_NGEKOST_AJA')
+        res.status(200).json({ message: 'Logout successful' })
     })
+    console.log(req.session)
 }
 
 export {
