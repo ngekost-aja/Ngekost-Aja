@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ngekost Aja!</title>
+    <link rel="icon" href="/assets/img/favicon/ngekost-aja.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,8 +13,39 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/renter/detail-kos.css">
-    <script type="module" src="../../components/navbar-top.js"></script>
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <style>
+        .kost-images {
+            height: 100%;
+        }
+
+        .kost-content {
+            height: 100%;
+        }
+
+        .judul-kost {
+            font-weight: 500;
+        }
+
+        .alamat-kost {
+            font-size: small;
+        }
+
+        .rating-kost {
+            display: flex;
+        }
+
+        .rating-text {
+            margin-left: .5rem;
+        }
+
+        .star-icon {
+            width: 1rem;
+            align-items: center;
+            color: #FFC400;
+        }
+    </style>
+    <script type="module" src="/components/NavbarTop.js"></script>
 </head>
 
 <body>
@@ -21,24 +53,24 @@
 
     <main class="container flex-column fw-100">
         <section class="container d-flex justify-content-center" id="gallery-photo-kost">
-            <div class="" id="main-photo">
-                <img src="../../assets/img/rumah-kost-tampak-depan-1.jpg" class="kost-images"
+            <div class="me-1" id="main-photo">
+                <img src="/assets/img/kost/rumah-kost-tampak-depan-1.jpg" class="kost-images"
                     alt="Foto rumah kost tampak depan">
             </div>
             <div class="d-block h-100" id="secondary-photos">
                 <div class="h-50" id="top-side-photo">
-                    <img src="../../assets/img/foto-kamar-kost-1.jpg" class="kost-images" alt="Foto kos lainnya">
+                    <img src="/assets/img/kost/foto-kamar-kost-1.jpg" class="kost-images" alt="Foto kos lainnya">
                 </div>
                 <div class="h-50" id="bottom-side-photo">
-                    <img src="../../assets/img/foto-kamar-kost-2.jpg" class="kost-images" alt="Foto kos lainnya">
+                    <img src="/assets/img/kost/foto-kamar-kost-2.jpg" class="kost-images" alt="Foto kos lainnya">
                 </div>
             </div>
         </section>
 
         <section class="container d-flex justify-content-center">
-            <div class="card w-75" id="detail-info-kos">
+            <div class="card w-75 me-5 mt-4" id="detail-info-kos">
                 <div class="card-body">
-                    <h5 class="card-title" id="judul-kost">Kost Graha Indah Jalan Bandung</h5>
+                    <h5 class="card-title fw-bold" id="judul-kost">Kost Graha Indah Jalan Bandung</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Kecamatan Lowokwaru, Kota Malang</h6>
                     <div id="spesifikasi-info-kost">
                         <p>Spesifikasi Kamar</p>
@@ -60,11 +92,11 @@
                 </div>
             </div>
 
-            <div class="card w-25" id="pemesanan-sewa-kost">
+            <div class="card w-25 mt-4" id="pemesanan-sewa-kost">
                 <div class="card-body">
                     <h5 class="card-title">Rp 850.000/bulan</h5>
-                    <button type="button" class="btn btn-primary w-100" id="btn-simpan-dulu">Simpan dulu</button>
-                    <button type="button" class="btn btn-primary w-100" id="btn-sewa-sekarang"
+                    <button type="button" class="btn w-100 bg-white text-dark border border-info mb-2 fw-bold" id="btn-simpan-dulu">Simpan dulu</button>
+                    <button type="button" class="btn w-100 text-dark border fw-bold" style="background-color: var(--color-primary-yellow);" id="btn-sewa-sekarang"
                         onclick="window.location.href='pengajuan.html'">
                         Sewa sekarang!
                     </button>
@@ -72,12 +104,12 @@
             </div>
         </section>
 
-        <section id="product-catalog">
+        <section id="product-catalog" class="my-4">
             <h3 class="fw-bold" id="product-catalog-title">Rekomendasi Kost Lainnya</h3>
             <div class="catalog-row row row-cols-auto row-cols-lg-5 g-2 g-lg-3">
                 <div class="col col-6 kost-container mx-auto">
                     <div class="card kost-content">
-                        <img src="../../assets/img/ngekost-aja-logo.png" class="card-img-top" alt="photo1">
+                        <img src="/assets/img/ngekost-aja-logo.png" class="card-img-top" alt="photo1">
                         <div class="card-body">
                             <p class="judul-kost">Kost Melati Indah</p>
                             <p class="harga-kost">Rp 765.000/bulan</p>
@@ -96,7 +128,7 @@
                 </div>
                 <div class="col col-6 kost-container mx-auto">
                     <div class="card kost-content">
-                        <img src="../../assets/img/ngekost-aja-logo.png" class="card-img-top" alt="...">
+                        <img src="/assets/img/ngekost-aja-logo.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="judul-kost">Kost Andalas</p>
                             <p class="harga-kost">Rp 810.000/bulan</p>
@@ -115,7 +147,7 @@
                 </div>
                 <div class="col col-6 kost-container mx-auto">
                     <div class="card kost-content">
-                        <img src="../../assets/img/ngekost-aja-logo.png" class="card-img-top" alt="...">
+                        <img src="/assets/img/ngekost-aja-logo.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="judul-kost">Kost Flamboyan</p>
                             <p class="harga-kost">Rp 2.120.000/bulan</p>
@@ -134,7 +166,7 @@
                 </div>
                 <div class="col col-6 kost-container mx-auto">
                     <div class="card kost-content">
-                        <img src="../../assets/img/ngekost-aja-logo.png" class="card-img-top" alt="...">
+                        <img src="/assets/img/ngekost-aja-logo.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="judul-kost">Kost Puri Asri</p>
                             <p class="harga-kost">Rp 1.100.000/bulan</p>
@@ -153,7 +185,7 @@
                 </div>
                 <div class="col col-6 kost-container mx-auto">
                     <div class="card kost-content">
-                        <img src="../../assets/img/ngekost-aja-logo.png" class="card-img-top" alt="...">
+                        <img src="/assets/img/ngekost-aja-logo.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="judul-kost">Kost Dahlia</p>
                             <p class="harga-kost">Rp 780.000/bulan</p>
@@ -184,7 +216,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-    <script src="../../assets/js/renter/detail-kos.js"></script>
+    <script src="/assets/js/renter/detail-kos.js"></script>
 </body>
 
 </html>

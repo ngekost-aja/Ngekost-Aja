@@ -1,33 +1,32 @@
 class NavbarTop extends HTMLElement {
     constructor() {
         super()
+    }
 
-        const shadow = this.attachShadow({ mode: 'open' })
-
-        // Some HTML element for the component
-        shadow.innerHTML = `
-        <nav class="navbar navbar-expand-lg d-flex p-2 fixed-top">
+    connectedCallback() {
+        this.innerHTML = `
+        <nav class="navbar navbar-expand-lg d-flex p-2 fixed-top fw-bold" style="background-color: var(--color-primary-yellow)">
             <a class="navbar-brand text-black" href="/" id="homepage-link">
-                <img src="../../assets/img/ngekost-aja-long-low.png" id="brand-logo" alt="Logo Ngekost-Aja!">
+                <img src="/assets/img/logo/ngekost-aja-long-low.png" id="brand-logo" style="width: 200px;" alt="Logo Ngekost-Aja!">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <form id="search-form" class="d-flex justify-content-center w-100" role="search" method="get" action="search.html">
+            <form id="search-form" class="d-flex justify-content-center w-100" role="search" method="get" action="/pages/renter/search.html">
                 <input class="form-control me-2" type="search" placeholder="Cari kos di sekitarmu!" aria-label="Search">
                 <button class="btn bg-black text-white" type="submit">Search</button>
             </form>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <div class="navbar-nav d-flex">
-                    <a class="side-nav-option nav-link text-black" href="#" id="notifikasi-option">
+                    <a class="nav-link text-black" href="#" style="width: 50px; height: 50px;" id="notifikasi-option">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6 h-100 w-100">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                         </svg>
                     </a>
-                    <a class="side-nav-option nav-link text-black" href="#" id="chat-option">
+                    <a class="nav-link text-black" href="#" style="width: 50px; height: 50px;" id="chat-option">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6 h-100 w-100">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -36,73 +35,14 @@ class NavbarTop extends HTMLElement {
                     </a>
                 </div>
             </div>
-            <a href="/pages/renter/profil.html" class="side-nav-option nav-link text-black" id="profil-option">
+            <a href="/pages/renter/profil.html" class="nav-link text-black" style="width: 50px; height: 50px;" id="profil-option">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 h-100 w-100">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>                      
             </a>
         </nav>
         `
-        // Bootstrap style for this component
-        const bootstrapLink = document.createElement('link')
-        bootstrapLink.setAttribute('rel', 'stylesheet')
-        bootstrapLink.setAttribute('integrity', 'sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH')
-        bootstrapLink.setAttribute('crossorigin', 'anonymous')
-        bootstrapLink.setAttribute('href', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')
-
-        // Custom style CSS for this component
-        const style = document.createElement('style')
-        style.textContent = `
-            nav {
-                background-color: #EDCD44! important;
-                font-weight: bolder;
-            }
-
-            .side-nav-option {
-                padding: 0;
-                width: 3rem;
-                height: 3rem;
-            }
-                
-            #brand-logo {
-                width: 10rem;
-            }
-            `
-
-        // Attach Bootstrap and custom CSS to the component
-        shadow.append(bootstrapLink)
-        shadow.append(style)
-    }
-
-    // Custom attributes
-    static get observedAttributes() {
-        return ['data-homepage-link', 'data-brand-logo', 'data-search-action', 'data-profil-href']
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'data-homepage-link' && this.shadowRoot) {
-            const homepageLink = this.shadowRoot.querySelector('#homepage-link')
-            if (homepageLink) {
-                homepageLink.setAttribute('href', newValue)
-            }
-        } else if (name == 'data-brand-logo' && this.shadowRoot) {
-            const brandLogo = this.shadowRoot.querySelector('#brand-logo')
-            if (brandLogo) {
-                brandLogo.setAttribute('src', newValue)
-            }
-        } else if (name == 'data-search-action' && this.shadowRoot) {
-            const search = this.shadowRoot.querySelector('#search-form')
-            if (search) {
-                search.setAttribute('action', newValue)
-            }
-        } else if (name == 'data-profil-href' && this.shadowRoot) {
-            const linkPlace = this.shadowRoot.querySelector('#profil-option')
-            if (linkPlace) {
-                linkPlace.setAttribute('href', newValue)
-            }
-        }
     }
 }
 
-// Register component to valid HTML element
 customElements.define('navbar-top', NavbarTop)

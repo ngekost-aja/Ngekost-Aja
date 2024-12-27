@@ -14,21 +14,12 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/global.css">
-    <style>
-        #product-catalog {
-            margin: 3rem 0rem 3rem;
-        }
-
-        .container-row {
-            margin: 1rem;
-        }
-    </style>
     <script type="module" src="/components/NavbarTop.js"></script>
+    <script src="/components/KostItem.js"></script>
 </head>
 
 <body>
-    <navbar-top data-homepage-link="/" data-brand-logo="/assets/img/logo/ngekost-aja-long-low.png"
-        data-search-action="pages/renter/search.html" data-profil-href="pages/renter/profil.html"></navbar-top>
+    <navbar-top></navbar-top>
 
     <main class="d-flex flex-column fw-100 min-vh-100">
         <section class="mx-auto w-50" id="slide-promo">
@@ -67,7 +58,7 @@
             </div>
         </section>
 
-        <section id="product-catalog" class="mx-auto container"></section>
+        <section id="product-catalog" class="mx-auto my-3 container"></section>
     </main>
 
 
@@ -81,50 +72,49 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <script type="module">
-        import KostItem from '../../components/KostItem.js';
-
-
-        const productCatalog = document.getElementById('product-catalog');
-
-        let currentRow = document.createElement('div');
-        currentRow.classList.add('row', 'd-flex')
-
-
-        function createNewRowContainer() {
-            currentRow = document.createElement('div');
-            currentRow.classList.add('row', 'row-cols-auto', 'g-2', 'g-lg-3');
-            productCatalog.appendChild(currentRow);
-        }
-
-
-        fetch('http://localhost:8000/api/kost')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(data => {
-                    if (currentRow.children.length >= 5) {
-                        createNewRowContainer();
+        document.addEventListener('DOMContentLoaded', () => {
+            const productCatalog = document.getElementById('product-catalog');
+    
+            let currentRow = document.createElement('div');
+            currentRow.classList.add('row', 'row-cols-auto', 'gx-2', 'gy-5', 'g-lg-3', 'my-3');
+    
+    
+            function createNewRowContainer() {
+                currentRow = document.createElement('div');
+                currentRow.classList.add('row', 'row-cols-auto', 'gx-2', 'gy-5', 'g-lg-3', 'my-3');
+                productCatalog.appendChild(currentRow);
+            }
+    
+    
+            fetch('http://localhost:8000/api/kost')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-
-                    const kostItem = document.createElement('kost-item');
-                    kostItem.setAttribute('nama-kost', data.nama);
-                    kostItem.setAttribute('harga-kost', '699000');
-                    kostItem.setAttribute('kost-img-thumbnail', '');
-                    kostItem.setAttribute('alamat-kost', data.alamat);
-                    kostItem.setAttribute('avg-rating', 4);
-                    kostItem.setAttribute('total-rating', 23);
-                    kostItem.setAttribute('detail-link', '');
-                    kostItem.classList.add('col-6', 'col-lg-2')
-
-                    currentRow.appendChild(kostItem);
-                });
-                productCatalog.appendChild(currentRow)
-            })
-            .catch(error => console.error('Error:', error));
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(data => {
+                        if (currentRow.children.length >= 6) {
+                            createNewRowContainer();
+                        }
+    
+                        const kostItem = document.createElement('kost-item');
+                        kostItem.setAttribute('nama-kost', data.nama);
+                        kostItem.setAttribute('harga-kost', '699000');
+                        kostItem.setAttribute('kost-img-thumbnail', '');
+                        kostItem.setAttribute('alamat-kost', data.alamat);
+                        kostItem.setAttribute('avg-rating', 4);
+                        kostItem.setAttribute('total-rating', 23);
+                        kostItem.setAttribute('detail-link', '');
+                        kostItem.classList.add('col-6', 'col-lg-2')
+    
+                        currentRow.appendChild(kostItem);
+                    });
+                    productCatalog.appendChild(currentRow)
+                })
+                .catch(error => console.error('Error:', error));
+        });
     </script>
 </body>
 
