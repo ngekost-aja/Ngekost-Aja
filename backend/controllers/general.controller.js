@@ -1,3 +1,5 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
 import { getAllKostData, getSingleKostData } from '../repository/KostRepository.js'
 
 const viewHomePage = async (req, res) => {
@@ -19,7 +21,21 @@ const viewLoginPage = (req, res) => {
     res.render('general/login')
 }
 
+const viewProfilPage = (req, res) => {
+    const isUserLoggedIn = !!req.session.user
+
+    const __filename = fileURLToPath(import.meta.url)
+    const __dirname = path.dirname(__filename)
+    if (!isUserLoggedIn) {
+        res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'pages', 'general', '401-not-authorized.html'))
+        return;
+    }
+
+    res.render('renter/profil')
+}
+
 export {
     viewHomePage,
-    viewLoginPage
+    viewLoginPage,
+    viewProfilPage
 }
