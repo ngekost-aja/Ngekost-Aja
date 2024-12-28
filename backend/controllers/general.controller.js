@@ -13,6 +13,11 @@ const viewHomePage = async (req, res) => {
     res.render('general/index', { data: data})
 }
 
+const viewLoginPage = (req, res) => {
+    res.render('general/login')
+}
+
 export {
-    viewHomePage
+    viewHomePage,
+    viewLoginPage
 }
