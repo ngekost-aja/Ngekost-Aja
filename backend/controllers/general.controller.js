@@ -1,6 +1,6 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { getAllKostData, getSingleKostData } from '../repository/KostRepository.js'
+import { getAllKostData, getAllKostByKeyword } from '../repository/KostRepository.js'
 
 
 const __filename = fileURLToPath(import.meta.url)
@@ -20,7 +20,12 @@ const viewHomePage = async (req, res) => {
 
     const isUserLoggedIn = !!req.session.user
 
-    res.render('general/index', { kost: kostData, user: { loginStatus: isUserLoggedIn } })
+    res.render('general/index', {
+        kost: kostData,
+        user: {
+            loginStatus: isUserLoggedIn
+        }
+    })
 }
 
 const viewLoginPage = (req, res) => {
@@ -42,10 +47,26 @@ const viewProfilPage = (req, res) => {
     res.render('renter/profil')
 }
 
-const viewSearchPage = (req, res) => {
+const viewSearchPage = async (req, res) => {
+    const { keyword } = req.query
+
+    let kostData = null
+    try {
+        kostData = await getAllKostByKeyword(keyword)
+    } catch (error) {
+        return res.status(500).json({
+            message: "server error!"
+        })
+    }
+
     const isUserLoggedIn = !!req.session.user
 
-    res.render('renter/search', { user: { loginStatus: isUserLoggedIn }})
+    res.render('renter/search', {
+        kost: kostData,
+        user: {
+            loginStatus: isUserLoggedIn
+        }
+    })
 }
 
 const view404PageNotFound = (req, res) => {
