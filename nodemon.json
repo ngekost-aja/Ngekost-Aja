@@ -1,5 +1,6 @@
 {
     "watch": [
+        "index.js",
         "backend"
     ],
     "ext": "js",
