@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ngekost Aja!</title>
-    <link rel="icon" href="/assets/img/favicon/ngekost-aja.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/icon/ngekost-aja.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <%- include('../../components/NavbarTop.ejs', { user: { login: false } } ) %>
+    <%- include('../../components/NavbarTop.ejs', { user: { login: user.loginStatus } }) %>
 
     <main class="d-flex flex-column fw-100 min-vh-100">
         <section class="mx-auto w-50" id="slide-promo">
@@ -57,10 +57,10 @@
         </section>
 
         <section id="product-catalog" class="mx-auto my-3 container">
-            <% for(let i = 0; i < data.length; i += 6) { %>
+            <% for(let i = 0; i < kost.length; i += 6) { %>
                 <div class="row row-cols-auto gx-2 gy-5 g-lg-3 my-3">
-                    <% for(let j = i; j < i + 6 && j < data.length; j++) { %>
-                        <%- include('../../components/KostItem.ejs', { namaKost: data[j].nama, hargaKost: 699000, alamatKost: data[j]['alamat'], avgRating: 4.6, totalSewa: 84}) %>
+                    <% for(let j = i; j < i + 6 && j < kost.length; j++) { %>
+                        <%- include('../../components/KostItem.ejs', { namaKost: kost[j].nama, hargaKost: 699000, alamatKost: kost[j]['alamat'], avgRating: 4.6, totalSewa: 84}) %>
                     <% } %> 
                 </div>
             <% } %>
