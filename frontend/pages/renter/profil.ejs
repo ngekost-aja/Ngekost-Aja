@@ -157,8 +157,10 @@
         for (let i = 0; i < profileOption.length; i++) {
             profileOption[i].onclick = () => {
                 currentSection.classList.toggle('d-none')
+                currentSection.classList.toggle('d-block')
                 currentSection = profileSection[i]
                 currentSection.classList.toggle('d-block')
+                currentSection.classList.toggle('d-none')
             }
         }
     </script>
