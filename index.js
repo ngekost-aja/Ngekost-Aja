@@ -20,7 +20,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'frontend', 'pages'))
 
 
-app.use(express.static('frontend'))
+app.use(express.static('public'))
 
 
 app.use(express.json())
