@@ -1,5 +1,5 @@
 import express from 'express'
-import { viewHomePage, viewLoginPage, viewProfilPage, viewSearchPage, viewSignupPage } from '../controllers/general.controller.js'
+import { view404PageNotFound, viewHomePage, viewLoginPage, viewProfilPage, viewSearchPage, viewSignupPage } from '../controllers/general.controller.js'
 import { userLogin } from '../controllers/user.controller.js'
 
 
@@ -12,5 +12,7 @@ router.get('/profil', viewProfilPage)
 router.get('/search', viewSearchPage)
 
 router.post('/user/login', userLogin)
+
+router.get('/*', view404PageNotFound)
 
 export default router
