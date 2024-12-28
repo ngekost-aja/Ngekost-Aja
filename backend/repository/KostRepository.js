@@ -3,8 +3,10 @@ import connectionPool from "../core/Database.js"
 
 const getAllKostData = async () => {
     try {
-        const [result] = await connectionPool
-                                .execute(`SELECT * FROM kost`)
+        const [result] = await connectionPool.execute(`
+            SELECT * 
+            FROM kost
+        `)
 
         return result
     } catch (error) {
@@ -12,23 +14,37 @@ const getAllKostData = async () => {
     }
 }
 
-const getSingleKostData = async (itemID) => {
+const getSingleKostDataByID = async (itemID) => {
     try {
-        const [result] = await connectionPool
-                                .execute(`
-                                    SELECT * 
-                                    FROM kost 
-                                    WHERE kode_kost = ?
-                                `, [itemID])
+        const [result] = await connectionPool.execute(`
+            SELECT * 
+            FROM kost 
+            WHERE kode_kost = ?
+        `, [itemID])
 
-        if (result.length === 0) {
-            throw new Error("Data not found");
-        }
-
-        return result[0]
+        return result
     } catch (error) {
         throw error
     }
 }
 
-export { getAllKostData, getSingleKostData }
+const getAllKostByKeyword = async (keyword) => {
+    try {
+        const [result] = await connectionPool.execute(`
+            SELECT *
+            FROM kost
+            WHERE alamat LIKE ?
+        `, [`%${keyword}%`]);
+        
+
+        return result
+    } catch (error) {
+        throw new error
+    }
+}
+
+export { 
+    getAllKostData,
+    getSingleKostDataByID,
+    getAllKostByKeyword
+}

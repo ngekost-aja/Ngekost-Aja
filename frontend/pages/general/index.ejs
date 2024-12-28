@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <%- include('../../components/NavbarTop.ejs', { user: { login: user.loginStatus } }) %>
+    <%- include('../../components/navbar-top.ejs', { user: { login: user.loginStatus } }) %>
 
     <main class="d-flex flex-column fw-100 min-vh-100">
         <section class="mx-auto w-50" id="slide-promo">
@@ -56,11 +56,13 @@
             </div>
         </section>
 
-        <section id="product-catalog" class="mx-auto my-3 container">
+        <section id="product-catalog" class="my-3 container">
             <% for(let i = 0; i < kost.length; i += 6) { %>
-                <div class="row row-cols-auto gx-2 gy-5 g-lg-3 my-3">
+                <div class="row gx-2 gy-5 g-lg-3 my-3">
                     <% for(let j = i; j < i + 6 && j < kost.length; j++) { %>
-                        <%- include('../../components/KostItem.ejs', { namaKost: kost[j].nama, hargaKost: 699000, alamatKost: kost[j]['alamat'], avgRating: 4.6, totalSewa: 84}) %>
+                        <div class="col">
+                            <%- include('../../components/kost-item.ejs', { namaKost: kost[j].nama, hargaKost: 699000, alamatKost: kost[j]['alamat'], avgRating: 4.6, totalSewa: 84}) %>
+                        </div>
                     <% } %> 
                 </div>
             <% } %>
