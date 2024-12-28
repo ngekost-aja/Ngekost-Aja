@@ -45,11 +45,10 @@
             color: #FFC400;
         }
     </style>
-    <script type="module" src="/components/NavbarTop.js"></script>
 </head>
 
 <body>
-    <navbar-top></navbar-top>
+    <%- include('../../components/NavbarTop.ejs', { user: { login: user.loginStatus } }) %>
 
     <main class="container flex-column fw-100">
         <section class="container d-flex justify-content-center" id="gallery-photo-kost">
@@ -216,7 +215,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-    <script src="/assets/js/renter/detail-kos.js"></script>
 </body>
 
 </html>
