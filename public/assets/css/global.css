@@ -13,10 +13,3 @@ main {
     padding-top: 5rem;
     min-height: 100vh;
 }
-
-footer {
-    background-color: #3081D0 !important;
-    padding: 100px;
-    text-align: center;
-    color: white;
-}
