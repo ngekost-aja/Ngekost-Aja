@@ -21,6 +21,10 @@ const viewLoginPage = (req, res) => {
     res.render('general/login')
 }
 
+const viewSignupPage = (req, res) => {
+    res.render('general/signup')
+}
+
 const viewProfilPage = (req, res) => {
     const isUserLoggedIn = !!req.session.user
 
@@ -43,6 +47,7 @@ const viewSearchPage = (req, res) => {
 export {
     viewHomePage,
     viewLoginPage,
+    viewSignupPage,
     viewProfilPage,
     viewSearchPage
 }
