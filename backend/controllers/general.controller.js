@@ -34,8 +34,15 @@ const viewProfilPage = (req, res) => {
     res.render('renter/profil')
 }
 
+const viewSearchPage = (req, res) => {
+    const isUserLoggedIn = !!req.session.user
+
+    res.render('renter/search', { user: { loginStatus: isUserLoggedIn }})
+}
+
 export {
     viewHomePage,
     viewLoginPage,
-    viewProfilPage
+    viewProfilPage,
+    viewSearchPage
 }
