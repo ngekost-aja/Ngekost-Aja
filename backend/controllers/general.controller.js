@@ -2,6 +2,12 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { getAllKostData, getSingleKostData } from '../repository/KostRepository.js'
 
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+
+
 const viewHomePage = async (req, res) => {
     let kostData = null
     try {
@@ -28,8 +34,6 @@ const viewSignupPage = (req, res) => {
 const viewProfilPage = (req, res) => {
     const isUserLoggedIn = !!req.session.user
 
-    const __filename = fileURLToPath(import.meta.url)
-    const __dirname = path.dirname(__filename)
     if (!isUserLoggedIn) {
         res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'pages', 'general', '401-not-authorized.html'))
         return;
@@ -44,10 +48,15 @@ const viewSearchPage = (req, res) => {
     res.render('renter/search', { user: { loginStatus: isUserLoggedIn }})
 }
 
+const view404PageNotFound = (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'pages', 'general', '404-page-not-found.html'))
+}
+
 export {
     viewHomePage,
     viewLoginPage,
     viewSignupPage,
     viewProfilPage,
-    viewSearchPage
+    viewSearchPage,
+    view404PageNotFound
 }
