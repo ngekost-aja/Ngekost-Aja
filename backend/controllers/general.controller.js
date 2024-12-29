@@ -94,6 +94,8 @@ const viewDetailKost = async (req, res) => {
     if (kostData.length == 0) {
         res.status(404)
         kostData = null
+    } else {
+        kostData = kostData[0]
     }
 
     const isUserLoggedIn = !!req.session.user
