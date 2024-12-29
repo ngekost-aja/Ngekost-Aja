@@ -13,9 +13,7 @@ const viewHomePage = async (req, res) => {
     try {
         kostData = await getAllKostData()
     } catch (error) {
-        return res.status(500).json({
-            message: "server error!"
-        })
+        console.error(error)
     }
 
     const isUserLoggedIn = !!req.session.user
@@ -54,9 +52,7 @@ const viewSearchPage = async (req, res) => {
     try {
         kostData = await getAllKostByKeyword(keyword)
     } catch (error) {
-        return res.status(500).json({
-            message: "server error!"
-        })
+        console.error(error)
     }
 
     const isUserLoggedIn = !!req.session.user
