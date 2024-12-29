@@ -10,7 +10,7 @@ const getAllKostData = async () => {
 
         return result
     } catch (error) {
-        console.log(error)
+        throw error
     }
 }
 
@@ -39,7 +39,7 @@ const getAllKostByKeyword = async (keyword) => {
 
         return result
     } catch (error) {
-        throw new error
+        throw error
     }
 }
 
