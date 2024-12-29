@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<%- include('../../components/NavbarTop.ejs', { user: { login: false } } ) %>
+	<%- include('../../components/navbar-top.ejs', { user: { login: false } } ) %>
 
 	<main class="container d-flex justify-content-center align-items-center">
 		<form id="form-login" action="/api/user/login" method="post" class="card p-4 w-50"
@@ -72,11 +72,10 @@
 							throw new Error(response);
 						}
 
-						response.json();
+						return response.json();
 					})
 					.then(data => {
-						alert('Sukses login!');
-						console.log(data);
+						window.location.href = data.redirect
 					})
 					.catch(error => {
 						alert('Gagal login!');

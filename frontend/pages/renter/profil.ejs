@@ -28,7 +28,7 @@
 </head>
 
 <body>
-    <%- include('../../components/NavbarTop.ejs', { user: { login: true } }) %>
+    <%- include('../../components/navbar-top.ejs', { user: { login: true } }) %>
 
     <main class="container d-flex">
         <aside id="sidebar" class="container position-fixed" style="height: 70vh; width: 250px;">
@@ -39,7 +39,7 @@
                         <img src="https://img.freepik.com/free-photo/smiling-asian-woman_23-2147766303.jpg?t=st=1720171491~exp=1720175091~hmac=1e1fecbcb9586410527b916e5af9cd223d3c5ee47caf15b56bf9a1bbedf540c8&w=1380"
                             alt="Profile photo" class="img-fluid rounded-circle" id="profile-photo" style="width: 6rem;">
                     </div>
-                    <div class="fw-bold">Melati Lestari</div>
+                    <div class="fw-bold"><%= user.username %></div>
                 </div>
                 <br>
                 <div id="sidebar-body" class="card p-3 h-75">
@@ -67,79 +67,81 @@
             </div>
         </aside>
 
-        <div id="main-content" class="container w-75 h-100" style="margin-left: 22rem;">
-            <div class="card h-100">
-                <section id="pengaturan-section" class="profile-section d-none container h-100">
+        <div id="main-content" class="container w-75 h-100 card" style="margin-left: 22rem; min-height: 70vh;">
+            <section id="pengaturan-section" class="profile-section d-block container p-4">
+                <h4 class="fw-bold">Pengaturan Umum</h4>
+                <label for="field-username">Nama pengguna</label>
+                <input type="text" name="username" id="field-username" value="<%= user.username %>" class="form-control" readonly>
+                <label for="field-email">Email</label>
+                <input type="email" name="email" id="field-email" value="<%= user.id %>" class="form-control" readonly>
+            </section>
 
-                </section>
+            <section id="tagihan-section" class="profile-section d-none container h-100 p-4">
+                <h4 class="fw-bold">Tagihan yang harus anda bayar</h4>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nominal</th>
+                                <th scope="col">Tenggat waktu</th>
+                                <th scope="col">Keterangan</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="table-secondary">Rp 780.000,-</td>
+                                <td class="table-secondary">25 hari lagi</td>
+                                <td class="table-secondary">Cicilan</td>
+                                <td class="table-secondary">
+                                    <button class="btn btn-primary">Bayar</button>
+                                    <button class="btn btn-secondary">Berhenti ngekost</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="">
+                        Perpanjang kontrak
+                    </a>
+                </div>
 
-                <section id="tagihan-section" class="profile-section d-none container h-100 p-3">
-                    <h4 class="fw-bold">Tagihan yang harus anda bayar</h4>
-                    <div class="container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nominal</th>
-                                    <th scope="col">Tenggat waktu</th>
-                                    <th scope="col">Keterangan</th>
-                                    <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="table-secondary">Rp 780.000,-</td>
-                                    <td class="table-secondary">25 hari lagi</td>
-                                    <td class="table-secondary">Cicilan</td>
-                                    <td class="table-secondary">
-                                        <button class="btn btn-primary">Bayar</button>
-                                        <button class="btn btn-secondary">Berhenti ngekost</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <a href="">
-                            Perpanjang kontrak
-                        </a>
-                    </div>
+                <br><br>
 
-                    <br><br>
-
-                    <h4 class="fw-bold">Riwayat tagihan</h4>
-                    <div class="container">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nominal</th>
-                                    <th scope="col">Tanggal</th>
-                                    <th scope="col">Keterangan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Rp 780.000,-</td>
-                                    <td>2 Feb 2024</td>
-                                    <td>Cicilan</td>
-                                </tr>
-                                <tr>
-                                    <td>Rp 780.000,-</td>
-                                    <td>5 Jan 2024</td>
-                                    <td>Cicilan</td>
-                                </tr>
-                                <tr>
-                                    <td>Rp 780.000,-</td>
-                                    <td>1 Des 2024</td>
-                                    <td>Cicilan</td>
-                                </tr>
-                                <tr>
-                                    <td>Rp 780.000,-</td>
-                                    <td>6 Nov 2024</td>
-                                    <td>Cicilan</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
+                <h4 class="fw-bold">Riwayat tagihan</h4>
+                <div class="container">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nominal</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rp 780.000,-</td>
+                                <td>2 Feb 2024</td>
+                                <td>Cicilan</td>
+                            </tr>
+                            <tr>
+                                <td>Rp 780.000,-</td>
+                                <td>5 Jan 2024</td>
+                                <td>Cicilan</td>
+                            </tr>
+                            <tr>
+                                <td>Rp 780.000,-</td>
+                                <td>1 Des 2024</td>
+                                <td>Cicilan</td>
+                            </tr>
+                            <tr>
+                                <td>Rp 780.000,-</td>
+                                <td>6 Nov 2024</td>
+                                <td>Cicilan</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -158,11 +160,11 @@
         let currentSection = profileSection[0]
         for (let i = 0; i < profileOption.length; i++) {
             profileOption[i].onclick = () => {
-                currentSection.classList.toggle('d-none')
-                currentSection.classList.toggle('d-block')
+                currentSection.classList.toggle('d-block', false)
+                currentSection.classList.toggle('d-none', true)
                 currentSection = profileSection[i]
-                currentSection.classList.toggle('d-block')
-                currentSection.classList.toggle('d-none')
+                currentSection.classList.toggle('d-none', false)
+                currentSection.classList.toggle('d-block', true)
             }
         }
     </script>

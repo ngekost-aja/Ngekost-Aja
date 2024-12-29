@@ -1,6 +1,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { getAllKostData, getAllKostByKeyword } from '../repository/KostRepository.js'
+import { USER_TYPE } from '../config/user-type.js'
 
 
 const __filename = fileURLToPath(import.meta.url)
@@ -34,7 +35,7 @@ const viewSignupPage = (req, res) => {
     res.render('general/signup')
 }
 
-const viewProfilPage = (req, res) => {
+const viewProfilPage = async (req, res) => {
     const isUserLoggedIn = !!req.session.user
 
     if (!isUserLoggedIn) {
@@ -42,7 +43,22 @@ const viewProfilPage = (req, res) => {
         return;
     }
 
-    res.render('renter/profil')
+    let profilPage = null
+    switch (req.session.user.role) {
+        case USER_TYPE.penyewa:
+            profilPage = 'renter/profil'
+            break;
+        case USER_TYPE.pemilik:
+            profilPage = 'owner/profil'
+            break;
+        case USER_TYPE.pengelola:
+            profilPage = 'manager/profil'
+            break;
+    }
+
+    res.render(profilPage, {
+        user: req.session.user
+    })
 }
 
 const viewSearchPage = async (req, res) => {

@@ -45,11 +45,12 @@ const userLogin = async (req, res) => {
         req.session.user = {
             id: result[0]['email'],
             username: result[0]['nama'],
-            password: result[0]['password']
+            password: result[0]['password'],
+            role: result[0]['role']
         }
         res.status(200).json({
             message: "success",
-            data: result
+            redirect: '/profil'
         })
     } catch (error) {
         console.error(error)
@@ -60,7 +61,6 @@ const userLogin = async (req, res) => {
 }
 
 const userLogout = async (req, res) => {
-    console.log(req.session)
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).json({ error: 'Error logging out' })
@@ -68,7 +68,6 @@ const userLogout = async (req, res) => {
         res.clearCookie('SESSION_ID_NGEKOST_AJA')
         res.status(200).json({ message: 'Logout successful' })
     })
-    console.log(req.session)
 }
 
 export {
