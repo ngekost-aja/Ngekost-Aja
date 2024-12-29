@@ -116,7 +116,7 @@
                     <div class="row gx-2 gy-5 g-lg-3 my-3">
                         <% for(let j = i; j < i + 6 && j < kost.length; j++) { %>
                             <div class="col-6 col-md-3">
-                                <%- include('../../components/kost-item.ejs', { namaKost: kost[j].nama, hargaKost: 699000, alamatKost: kost[j]['alamat'], avgRating: 4.6, totalSewa: 84}) %>
+                                <%- include('../../components/kost-item.ejs', { kostID: kost[j]['kode_kost'], namaKost: kost[j].nama, hargaKost: 699000, alamatKost: kost[j]['alamat'], avgRating: 4.6, totalSewa: 84}) %>
                             </div>
                         <% } %> 
                     </div>

@@ -4,7 +4,10 @@ import connectionPool from "../core/Database.js"
 const getAllKostData = async () => {
     try {
         const [result] = await connectionPool.execute(`
-            SELECT * 
+            SELECT
+                kode_kost,
+                nama,
+                alamat
             FROM kost
         `)
 
