@@ -18,6 +18,10 @@ const viewTambahRuang = (req, res) => {
     res.render('owner/tambah-ruang')
 }
 
+const viewStatisticsRoomKost = (req, res) => {
+    res.render('owner/statistics-room-kost')
+}
+
 const viewTambahPengelola = (req, res) => {
     res.render('owner/tambah-pengelola')
 }
@@ -28,5 +32,6 @@ export {
     viewTambahAset,
     viewDetailAsetKost,
     viewTambahRuang,
+    viewStatisticsRoomKost,
     viewTambahPengelola
 }
