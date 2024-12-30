@@ -60,13 +60,14 @@ const userLogin = async (req, res) => {
     }
 }
 
-const userLogout = async (req, res) => {
+const userLogout = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).json({ error: 'Error logging out' })
         }
+
         res.clearCookie('SESSION_ID_NGEKOST_AJA')
-        res.status(200).json({ message: 'Logout successful' })
+        res.status(200).redirect('/')
     })
 }
 
