@@ -1,7 +1,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { getAllKostData, getAllKostByKeyword, getSingleKostDataByID } from '../repository/KostRepository.js'
-import { USER_TYPE } from '../config/user-type.js'
+import { USER_TYPE } from '../models/User.js'
 
 
 const __filename = fileURLToPath(import.meta.url)
@@ -36,13 +36,6 @@ const viewSignupPage = (req, res) => {
 }
 
 const viewProfilPage = async (req, res) => {
-    const isUserLoggedIn = !!req.session.user
-
-    if (!isUserLoggedIn) {
-        res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'pages', 'general', '401-not-authorized.html'))
-        return;
-    }
-
     let profilPage = null
     switch (req.session.user.role) {
         case USER_TYPE.penyewa:
