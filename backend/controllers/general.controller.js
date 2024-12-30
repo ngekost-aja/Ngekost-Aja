@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename)
 
 
 
-const viewHomePage = async (req, res) => {
+export const viewHomePage = async (req, res) => {
     let kostData = null
     try {
         kostData = await getAllKostData()
@@ -27,15 +27,15 @@ const viewHomePage = async (req, res) => {
     })
 }
 
-const viewLoginPage = (req, res) => {
+export const viewLoginPage = (req, res) => {
     res.render('general/login')
 }
 
-const viewSignupPage = (req, res) => {
+export const viewSignupPage = (req, res) => {
     res.render('general/signup')
 }
 
-const viewProfilPage = async (req, res) => {
+export const viewProfilPage = async (req, res) => {
     let profilPage = null
     switch (req.session.user.role) {
         case USER_TYPE.penyewa:
@@ -54,7 +54,7 @@ const viewProfilPage = async (req, res) => {
     })
 }
 
-const viewSearchPage = async (req, res) => {
+export const viewSearchPage = async (req, res) => {
     const { keyword } = req.query
 
     let kostData = null
@@ -74,7 +74,7 @@ const viewSearchPage = async (req, res) => {
     })
 }
 
-const viewDetailKost = async (req, res) => {
+export const viewDetailKost = async (req, res) => {
     const kostID = req.params.id
 
     let kostData = null
@@ -102,7 +102,7 @@ const viewDetailKost = async (req, res) => {
     })
 }
 
-const viewPengajuanSewa = (req, res) => {
+export const viewPengajuanSewa = (req, res) => {
     const isUserLoggedIn = !!req.session.user
 
     res.render('renter/pengajuan-sewa', {
@@ -112,17 +112,6 @@ const viewPengajuanSewa = (req, res) => {
     })
 }
 
-const view404PageNotFound = (req, res) => {
+export const view404PageNotFound = (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'pages', 'general', '404-page-not-found.html'))
-}
-
-export {
-    viewHomePage,
-    viewLoginPage,
-    viewSignupPage,
-    viewProfilPage,
-    viewSearchPage,
-    viewDetailKost,
-    viewPengajuanSewa,
-    view404PageNotFound
 }
