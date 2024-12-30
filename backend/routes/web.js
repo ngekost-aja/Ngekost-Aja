@@ -1,7 +1,7 @@
 import express from 'express'
 import { view404PageNotFound, viewDetailKost, viewHomePage, viewLoginPage, viewProfilPage, viewSearchPage, viewSignupPage } from '../controllers/general.controller.js'
-import { userLogin } from '../controllers/user.controller.js'
-import { viewDashboard } from '../controllers/owner.controller.js'
+import { userLogin, userLogout } from '../controllers/user.controller.js'
+import { viewDashboard, viewPengelola } from '../controllers/owner.controller.js'
 
 
 const router = express.Router()
@@ -14,9 +14,11 @@ router.get('/search', viewSearchPage)
 router.get('/detail-kost/:id', viewDetailKost)
 
 router.post('/user/login', userLogin)
+router.post('/logout', userLogout)
 
 
 router.get('/dashboard', viewDashboard)
+router.get('/pengelola', viewPengelola)
 
 
 

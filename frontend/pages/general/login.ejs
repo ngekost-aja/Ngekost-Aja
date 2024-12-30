@@ -20,7 +20,7 @@
 	<%- include('../../components/navbar-top.ejs', { user: { login: false } } ) %>
 
 	<main class="container d-flex justify-content-center align-items-center">
-		<form id="form-login" action="/api/user/login" method="post" class="card p-4 w-50"
+		<form id="form-login" method="post" class="card p-4 w-50"
 			style="background-color: var(--color-primary-yellow);">
 			<div id="logo-container" class="d-flex justify-content-center">
 				<img src="/assets/img/logo/ngekost-aja-logo-2.png" alt="Logo Ngekost Aja!" id="logo-ngekost-aja"
@@ -78,8 +78,8 @@
 						window.location.href = data.redirect
 					})
 					.catch(error => {
-						alert('Gagal login!');
 						console.error(error);
+						alert('Gagal login!');
 					})
 			});
 		});
