@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt'
-import { getUserByEmail } from '../repository/UserRepository.js'
+import { getUserByEmail } from '../repository/user.repository.js'
 import { USER_TYPE } from '../models/User.js'
 
 
 
-const userLogin = async (req, res) => {
+export const userLogin = async (req, res) => {
     const { email, password } = req.body
 
     if (!email || !password) {
@@ -61,7 +61,7 @@ const userLogin = async (req, res) => {
     }
 }
 
-const userLogout = (req, res) => {
+export const userLogout = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).json({ error: 'Error logging out' })
@@ -70,9 +70,4 @@ const userLogout = (req, res) => {
         res.clearCookie('SESSION_ID_NGEKOST_AJA')
         res.status(200).redirect('/')
     })
-}
-
-export {
-    userLogin,
-    userLogout
 }

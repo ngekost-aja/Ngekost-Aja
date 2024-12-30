@@ -1,7 +1,7 @@
 import connectionPool from '../core/Database.js';
 
 
-const getUserByEmail = async (email) => {
+export const getUserByEmail = async (email) => {
     try {
         const [result] = await connectionPool.execute(`
             SELECT email, nama, password, 'penyewa' AS role
@@ -21,8 +21,4 @@ const getUserByEmail = async (email) => {
     } catch (error) {
         throw error
     }
-}
-
-export {
-    getUserByEmail
 }

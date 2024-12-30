@@ -1,7 +1,7 @@
 import { getAllKostData, getSingleKostData } from '../repository/KostRepository.js'
 
 
-const getAllKost = async (req, res) => {
+export const getAllKost = async (req, res) => {
     let data = null
     try {
         data = await getAllKostData()
@@ -15,7 +15,7 @@ const getAllKost = async (req, res) => {
     res.status(200).json(data)
 }
 
-const getSingleKost = async (req, res) => {
+export const getSingleKost = async (req, res) => {
     let data = null
     try {
         data = await getSingleKostData(req.params.id)
@@ -28,5 +28,3 @@ const getSingleKost = async (req, res) => {
 
     res.status(200).json(data)
 }
-
-export { getAllKost, getSingleKost }
