@@ -6,33 +6,64 @@
 
 
 
-<nav class="position-fixed" style="background-color: rgb(49, 49, 49); color: white; width: 15vw; height: 100vh;">
-    <header class="p-4">
+<nav class="position-fixed text-white" style="background-color: rgb(49, 49, 49); width: 15vw; height: 100vh;">
+    <header class="p-4 d-flex flex-column align-items-center">
         <img src="https://img.freepik.com/free-photo/portrait-smiling-blonde-woman_23-2148316635.jpg?t=st=1720770619~exp=1720774219~hmac=b5bffda522a1687d7366e345348ef2b91d4decf4cb14559194863e2ff4282559&w=1380"
             alt="Photo Profile" id="user-photo-profile" class="mb-2 rounded-circle" style="width: 3rem;">
-        <h5>Stephanie Putri</h5>
+        <h5 class="mt-3">Stephanie Putri</h5>
     </header>
     <hr>
-    <ul class="list-unstyled p-4">
-        <li class="m-2">
-            <a href="/dashboard" class="text-decoration-none text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="nav-option-icon size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                </svg>
-                <span>Aset</span>
-            </a>
-        </li>
-        <li class="m-2">
-            <a href="/pengelola" class="text-decoration-none text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="nav-option-icon size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-                <span>Pengelola</span>
-            </a>
-        </li>
-    </ul>
+    <div class="ps-5 p-4 d-flex flex-column">
+        <a href="/dashboard" class="text-decoration-none text-white my-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="nav-option-icon size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            <span>Aset</span>
+        </a>
+        <a href="/pengelola" class="text-decoration-none text-white my-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="nav-option-icon size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+            <span>Pengelola</span>
+        </a>
+    </div>
+
+    <div class="mt-auto w-100 mb-4 d-flex justify-content-center position-absolute bottom-0">
+        <button type="button" class="sidebar-nav nav-link w-100 ps-5 p-3 d-flex text-start" data-bs-toggle="modal"
+            data-bs-target="#modalConfirmationLogout">
+            <svg class="me-2 text-black" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.36828 6.65552C6.91888 7.45808 5.77602 8.71798 5.11811 10.2385C4.46021 11.759 4.32429 13.4546 4.73158 15.0605C5.13886 16.6665 6.06643 18.0923 7.36947 19.1155C8.67251 20.1387 10.2777 20.7017 11.9344 20.7165C13.5911 20.7313 15.206 20.1971 16.5272 19.1974C17.8483 18.1976 18.8012 16.7886 19.2371 15.1902C19.6731 13.5918 19.5675 11.8941 18.9369 10.362C18.3062 8.82999 17.1861 7.54987 15.7513 6.72152L16.5013 5.42252C18.2228 6.4168 19.5666 7.95307 20.323 9.79154C21.0795 11.63 21.2059 13.6672 20.6826 15.5851C20.1593 17.5029 19.0157 19.1936 17.4304 20.3931C15.8451 21.5926 13.9072 22.2335 11.9193 22.2157C9.93136 22.1978 8.00528 21.5223 6.44172 20.2945C4.87816 19.0668 3.7651 17.3559 3.2763 15.4289C2.78749 13.5019 2.95046 11.4674 3.73974 9.64277C4.52903 7.81817 5.90022 6.30625 7.63928 5.34302L8.36828 6.65552Z"
+                    fill="#E4EEFF" />
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.25 12V1.5H12.75V12H11.25Z" fill="#E4EEFF" />
+            </svg>
+            Keluar
+        </button>
+    </div>
 </nav>
+
+
+
+
+<div class="modal" tabindex="-1" id="modalConfirmationLogout">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Konfirmasi logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin untuk logout ?</p>
+            </div>
+            <form action="/logout" method="post" class="modal-footer">
+                <button type="submit" class="text-white px-4" style="background-color: #052C65;">Iya</button>
+                <button type="button" class="bg-white px-4" style="color: #052C65;" data-bs-dismiss="modal">Batal</button>
+            </form>
+        </div>
+    </div>
+</div>
