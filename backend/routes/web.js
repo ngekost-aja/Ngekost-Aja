@@ -14,7 +14,7 @@ router.get('/signup', viewSignupPage)
 router.get('/profil', checkUserAuth(USER_TYPE.penyewa), viewProfilPage)
 router.get('/search', viewSearchPage)
 router.get('/detail-kost/:id', viewDetailKost)
-router.get('/pengajuan-sewa', viewPengajuanSewa)
+router.get('/pengajuan-sewa', checkUserAuth(USER_TYPE.penyewa), viewPengajuanSewa)
 
 router.post('/user/login', userLogin)
 router.post('/logout', userLogout)
