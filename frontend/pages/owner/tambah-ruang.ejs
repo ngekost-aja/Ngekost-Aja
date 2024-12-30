@@ -18,7 +18,7 @@
 </head>
 
 <body class="d-flex">
-    <%- include('../../components/owner/sidebar.html') %>
+    <%- include('../../components/owner/sidebar.ejs', { user: user }) %>
 
     <main class="d-flex align-items-center flex-column">
         <form action="/tambah-aset" method="post" class="p-3 w-100">

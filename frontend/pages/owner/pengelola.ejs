@@ -28,7 +28,7 @@
 </head>
 
 <body class="d-flex">
-    <%- include('../../components/owner/sidebar.html') %>
+    <%- include('../../components/owner/sidebar.ejs', { user: user }) %>
 
     <main class="d-flex align-items-center flex-column">
         <section id="tambah-pengelola" class="d-flex flex-row justify-content-end w-100 card p-2" style="background-color: var(--color-primary-yellow);">
