@@ -1,20 +1,8 @@
 import bcrypt from 'bcrypt'
 import { getUserByEmail } from '../repository/UserRepository.js'
-import { USER_TYPE } from '../config/user-type.js'
+import { USER_TYPE } from '../models/User.js'
 
 
-
-const checkUserAuth = async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).json({
-            message: "user don't have the appropriate session ID"
-        })
-    }
-
-    res.status(200).json({
-        message: "user have valid session ID",
-    })
-}
 
 const userLogin = async (req, res) => {
     const { email, password } = req.body
@@ -85,7 +73,6 @@ const userLogout = (req, res) => {
 }
 
 export {
-    checkUserAuth,
     userLogin,
     userLogout
 }
