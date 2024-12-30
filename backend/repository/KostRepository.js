@@ -1,7 +1,7 @@
 import connectionPool from "../core/Database.js"
 
 
-const getAllKostData = async () => {
+export const getAllKostData = async () => {
     try {
         const [result] = await connectionPool.execute(`
             SELECT
@@ -17,7 +17,7 @@ const getAllKostData = async () => {
     }
 }
 
-const getSingleKostDataByID = async (itemID) => {
+export const getSingleKostDataByID = async (itemID) => {
     try {
         const [result] = await connectionPool.execute(`
             SELECT * 
@@ -31,7 +31,7 @@ const getSingleKostDataByID = async (itemID) => {
     }
 }
 
-const getAllKostByKeyword = async (keyword) => {
+export const getAllKostByKeyword = async (keyword) => {
     try {
         const [result] = await connectionPool.execute(`
             SELECT *
@@ -44,10 +44,4 @@ const getAllKostByKeyword = async (keyword) => {
     } catch (error) {
         throw error
     }
-}
-
-export { 
-    getAllKostData,
-    getSingleKostDataByID,
-    getAllKostByKeyword
 }
