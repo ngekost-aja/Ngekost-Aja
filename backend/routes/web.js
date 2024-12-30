@@ -1,7 +1,7 @@
 import express from 'express'
 import { view404PageNotFound, viewDetailKost, viewHomePage, viewLoginPage, viewProfilPage, viewSearchPage, viewSignupPage } from '../controllers/general.controller.js'
 import { userLogin, userLogout } from '../controllers/user.controller.js'
-import { viewDashboard, viewPengelola } from '../controllers/owner.controller.js'
+import { viewDashboard, viewDetailAsetKost, viewPengelola, viewTambahAset, viewTambahPengelola, viewTambahRuang } from '../controllers/owner.controller.js'
 
 
 const router = express.Router()
@@ -19,7 +19,11 @@ router.post('/logout', userLogout)
 
 router.get('/dashboard', viewDashboard)
 router.get('/pengelola', viewPengelola)
-
+router.get('/tambah-aset', viewTambahAset)
+router.get('/detail-aset-kost', viewDetailAsetKost)
+router.get('/tambah-ruang', viewTambahRuang)
+router.get('/statistics-room-kost')
+router.get('/tambah-pengelola', viewTambahPengelola)
 
 
 router.get('/*', view404PageNotFound)
