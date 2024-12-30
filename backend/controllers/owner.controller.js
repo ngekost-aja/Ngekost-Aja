@@ -10,8 +10,13 @@ const viewTambahAset = (req, res) => {
     res.render('owner/tambah-aset')
 }
 
+const viewTambahPengelola = (req, res) => {
+    res.render('owner/tambah-pengelola')
+}
+
 export {
     viewDashboard,
     viewPengelola,
-    viewTambahAset
+    viewTambahAset,
+    viewTambahPengelola
 }
