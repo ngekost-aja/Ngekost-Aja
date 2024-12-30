@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import { getUserByEmail } from '../repository/UserRepository.js'
+import { USER_TYPE } from '../config/user-type.js'
 
 
 
@@ -27,6 +28,7 @@ const userLogin = async (req, res) => {
     try {
         const result = await getUserByEmail(email)
 
+
         if (result.length === 0) {
             return res.status(404).json({
                 message: "data not found"
@@ -48,9 +50,20 @@ const userLogin = async (req, res) => {
             password: result[0]['password'],
             role: result[0]['role']
         }
+
+        let targetRedirection = null
+        switch (req.session.user.role) {
+            case USER_TYPE.pemilik: targetRedirection = '/dashboard'
+                break;
+            case USER_TYPE.pengelola: targetRedirection = '/dashboard-pengelola'
+                break;
+            case USER_TYPE.penyewa: targetRedirection = '/profil'
+                break;
+        }
+
         res.status(200).json({
             message: "success",
-            redirect: '/profil'
+            redirect: targetRedirection
         })
     } catch (error) {
         console.error(error)
