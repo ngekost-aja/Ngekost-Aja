@@ -22,6 +22,7 @@ router.get('/pengelola', viewPengelola)
 router.get('/tambah-aset', viewTambahAset)
 router.get('/detail-aset-kost', viewDetailAsetKost)
 router.get('/tambah-ruang', viewTambahRuang)
+router.get('/statistics-room-kost')
 router.get('/tambah-pengelola', viewTambahPengelola)
 
 
