@@ -102,6 +102,16 @@ const viewDetailKost = async (req, res) => {
     })
 }
 
+const viewPengajuanSewa = (req, res) => {
+    const isUserLoggedIn = !!req.session.user
+
+    res.render('renter/pengajuan-sewa', {
+        user: {
+            loginStatus: isUserLoggedIn
+        }
+    })
+}
+
 const view404PageNotFound = (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'pages', 'general', '404-page-not-found.html'))
 }
@@ -113,5 +123,6 @@ export {
     viewProfilPage,
     viewSearchPage,
     viewDetailKost,
+    viewPengajuanSewa,
     view404PageNotFound
 }
