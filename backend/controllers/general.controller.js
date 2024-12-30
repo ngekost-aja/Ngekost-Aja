@@ -1,6 +1,6 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { getAllKostData, getAllKostByKeyword, getSingleKostDataByID } from '../repository/KostRepository.js'
+import { getAllKostData, getAllKostByKeyword, getSingleKostDataByID } from '../repository/kost.repository.js'
 import { USER_TYPE } from '../models/User.js'
 
 

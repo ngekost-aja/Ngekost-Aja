@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { getUserByEmail } from '../repository/UserRepository.js'
+import { getUserByEmail } from '../repository/user.repository.js'
 import { USER_TYPE } from '../models/User.js'
 
 
