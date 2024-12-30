@@ -10,11 +10,12 @@ dotenv.config()
 
 const SERVER_HOST = process.env.SERVER_HOST || 'localhost'
 const SERVER_PORT = process.env.SERVER_PORT || 8000
-const app = express()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+
+const app = express()
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'frontend', 'pages'))
