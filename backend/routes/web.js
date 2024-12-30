@@ -1,5 +1,5 @@
 import express from 'express'
-import { view404PageNotFound, viewDetailKost, viewHomePage, viewLoginPage, viewProfilPage, viewSearchPage, viewSignupPage } from '../controllers/general.controller.js'
+import { view404PageNotFound, viewDetailKost, viewHomePage, viewLoginPage, viewPengajuanSewa, viewProfilPage, viewSearchPage, viewSignupPage } from '../controllers/general.controller.js'
 import { userLogin, userLogout } from '../controllers/user.controller.js'
 import { viewDashboard, viewDetailAsetKost, viewPengelola, viewStatisticsRoomKost, viewTambahAset, viewTambahPengelola, viewTambahRuang } from '../controllers/owner.controller.js'
 import { checkUserAuth } from '../middleware/auth.middleware.js'
@@ -14,6 +14,7 @@ router.get('/signup', viewSignupPage)
 router.get('/profil', checkUserAuth(USER_TYPE.penyewa), viewProfilPage)
 router.get('/search', viewSearchPage)
 router.get('/detail-kost/:id', viewDetailKost)
+router.get('/pengajuan-sewa', viewPengajuanSewa)
 
 router.post('/user/login', userLogin)
 router.post('/logout', userLogout)
