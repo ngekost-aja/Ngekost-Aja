@@ -1,7 +1,27 @@
 import express from 'express'
-import { view404PageNotFound, viewDetailKost, viewHomePage, viewLoginPage, viewPengajuanSewa, viewProfilPage, viewSearchPage, viewSignupPage } from '../controllers/general.controller.js'
-import { userLogin, userLogout } from '../controllers/user.controller.js'
-import { viewDashboard, viewDetailAsetKost, viewPengelola, viewStatisticsRoomKost, viewTambahAset, viewTambahPengelola, viewTambahRuang } from '../controllers/owner.controller.js'
+import { 
+    view404PageNotFound, 
+    viewDetailKost, 
+    viewHomePage, 
+    viewLoginPage, 
+    viewPengajuanSewa, 
+    viewProfilPage, 
+    viewSearchPage, 
+    viewSignupPage 
+} from '../controllers/general.controller.js'
+import { 
+    userLogin, 
+    userLogout 
+} from '../controllers/user.controller.js'
+import { 
+    viewDashboard, 
+    viewDetailAsetKost, 
+    viewPengelola, 
+    viewStatisticsRoomKost, 
+    viewTambahAset, 
+    viewTambahPengelola, 
+    viewTambahRuang 
+} from '../controllers/owner.controller.js'
 import { checkUserAuth } from '../middleware/auth.middleware.js'
 import { USER_TYPE } from '../models/User.js'
 
