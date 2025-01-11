@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model gambar {
+  id_gambar Int             @id @default(autoincrement())
+  kategori  gambar_kategori
+  id_kost   Int?
+  id_kamar  Int?
+  link      String          @db.VarChar(100)
+  kamar     kamar?          @relation(fields: [id_kamar], references: [kode_kamar], onDelete: NoAction, onUpdate: NoAction, map: "gambar_ibfk_1")
+  kost      kost?           @relation(fields: [id_kost], references: [kode_kost], onDelete: NoAction, onUpdate: NoAction, map: "gambar_ibfk_2")
+
+  @@index([id_kamar], map: "id_kamar")
+  @@index([id_kost], map: "id_kost")
+}
+
+model kamar {
+  kode_kamar Int      @id @default(autoincrement())
+  kode_kost  Int
+  harga      Decimal  @db.Decimal(10, 2)
+  fasilitas  String   @db.Text
+  nama_kamar String   @db.VarChar(20)
+  gambar     gambar[]
+  kost       kost     @relation(fields: [kode_kost], references: [kode_kost], onDelete: NoAction, onUpdate: NoAction, map: "kamar_ibfk_1")
+  sewa       sewa[]
+
+  @@index([kode_kost], map: "kode_kost")
+}
+
+model kost {
+  kode_kost                           Int       @id @default(autoincrement())
+  pemilik                             Int
+  pengelola                           Int
+  nama                                String    @db.VarChar(50)
+  alamat                              String    @db.VarChar(50)
+  deskripsi                           String?   @db.Text
+  aturan                              String    @db.Text
+  fasilitas                           String    @db.Text
+  gambar                              gambar[]
+  kamar                               kamar[]
+  pemilik_kost_pemilikTopemilik       pemilik   @relation("kost_pemilikTopemilik", fields: [pemilik], references: [kode_pengguna], onDelete: NoAction, onUpdate: NoAction, map: "kost_ibfk_1")
+  pengelola_kost_pengelolaTopengelola pengelola @relation("kost_pengelolaTopengelola", fields: [pengelola], references: [kode_pengguna], onDelete: NoAction, onUpdate: NoAction, map: "kost_ibfk_2")
+
+  @@index([pemilik], map: "pemilik")
+  @@index([pengelola], map: "pengelola")
+}
+
+model pemilik {
+  kode_pengguna                        Int                   @id @default(autoincrement())
+  nama                                 String                @db.VarChar(50)
+  jenis_kelamin                        pemilik_jenis_kelamin
+  email                                String?               @db.VarChar(50)
+  no_hp                                String?               @db.VarChar(15)
+  PASSWORD                             String                @db.VarChar(255)
+  kost_kost_pemilikTopemilik           kost[]                @relation("kost_pemilikTopemilik")
+  pengelola_pengelola_pemilikTopemilik pengelola[]           @relation("pengelola_pemilikTopemilik")
+}
+
+model pengelola {
+  kode_pengguna                      Int                     @id @default(autoincrement())
+  nama                               String                  @db.VarChar(50)
+  jenis_kelamin                      pengelola_jenis_kelamin
+  email                              String?                 @db.VarChar(50)
+  no_hp                              String?                 @db.VarChar(15)
+  PASSWORD                           String                  @db.VarChar(255)
+  pemilik                            Int
+  kost_kost_pengelolaTopengelola     kost[]                  @relation("kost_pengelolaTopengelola")
+  pemilik_pengelola_pemilikTopemilik pemilik                 @relation("pengelola_pemilikTopemilik", fields: [pemilik], references: [kode_pengguna], onDelete: NoAction, onUpdate: NoAction, map: "pengelola_ibfk_1")
+
+  @@index([pemilik], map: "pemilik")
+}
+
+model penyewa {
+  email                      String                @id @db.VarChar(50)
+  nama                       String                @db.VarChar(50)
+  jenis_kelamin              penyewa_jenis_kelamin
+  pekerjaan                  penyewa_pekerjaan
+  PASSWORD                   String                @db.VarChar(255)
+  alamat                     String                @db.VarChar(50)
+  sewa_sewa_penyewaTopenyewa sewa[]                @relation("sewa_penyewaTopenyewa")
+}
+
+model sewa {
+  kode_sewa                     Int         @id @default(autoincrement())
+  penyewa                       String      @db.VarChar(50)
+  kode_kamar                    Int
+  tanggal_awal                  DateTime    @db.Date
+  tanggal_akhir                 DateTime    @db.Date
+  catatan                       String?     @db.Text
+  biaya                         Decimal     @db.Decimal(10, 2)
+  STATUS                        sewa_STATUS
+  kamar                         kamar       @relation(fields: [kode_kamar], references: [kode_kamar], onDelete: NoAction, onUpdate: NoAction, map: "fk_sewa_kode_kamar")
+  penyewa_sewa_penyewaTopenyewa penyewa     @relation("sewa_penyewaTopenyewa", fields: [penyewa], references: [email], onDelete: NoAction, onUpdate: NoAction, map: "sewa_ibfk_1")
+  ulasan                        ulasan[]
+
+  @@index([kode_kamar], map: "fk_sewa_kode_kamar")
+  @@index([penyewa], map: "penyewa")
+}
+
+model ulasan {
+  kode_ulasan Int     @id @default(autoincrement())
+  kode_sewa   Int
+  teks_ulasan String? @db.Text
+  rating      Int
+  sewa        sewa    @relation(fields: [kode_sewa], references: [kode_sewa], onDelete: NoAction, onUpdate: NoAction, map: "fk_ulasan_kode_sewa")
+
+  @@index([kode_sewa], map: "fk_ulasan_kode_sewa")
+}
+
+enum gambar_kategori {
+  Kamar
+  Kost
+}
+
+enum penyewa_jenis_kelamin {
+  Laki_laki @map("Laki-laki")
+  Perempuan
+}
+
+enum pengelola_jenis_kelamin {
+  Laki_laki @map("Laki-laki")
+  Perempuan
+}
+
+enum pemilik_jenis_kelamin {
+  Laki_laki @map("Laki-laki")
+  Perempuan
+}
+
+enum penyewa_pekerjaan {
+  Mahasiswa
+  Pegawai
+  Lainnya
+}
+
+enum sewa_STATUS {
+  digunakan
+  dibatalkan
+}
