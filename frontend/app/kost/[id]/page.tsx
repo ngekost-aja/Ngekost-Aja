@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import {
-  ArrowLeft,
-  Heart,
-  Share2,
   MapPin,
   Wifi,
   Car,
@@ -17,6 +13,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import Navbar from "@/app/components/ui/Navbar";
 
 export default function KostDetailPage() {
   const params = useParams();
@@ -86,39 +83,12 @@ export default function KostDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-3 md:py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => router.back()}
-                className="p-2 hover:bg-gray-100 rounded-full transition"
-              >
-                <ArrowLeft size={24} className="text-gray-700" />
-              </button>
-              <Link href="/" className="flex items-center gap-2">
-                <div className="bg-[#EDCD44] p-1.5 md:p-2 rounded-lg">
-                  <span className="text-xl md:text-2xl">🏠</span>
-                </div>
-                <div className="hidden sm:block">
-                  <h1 className="text-lg md:text-xl font-bold text-black">
-                    Ngekost Aja
-                  </h1>
-                </div>
-              </Link>
-            </div>
-            <div className="flex items-center gap-2 md:gap-4">
-              <button className="p-2 hover:bg-gray-100 rounded-full transition">
-                <Heart size={20} className="md:w-6 md:h-6 text-gray-600" />
-              </button>
-              <button className="p-2 hover:bg-gray-100 rounded-full transition">
-                <Share2 size={20} className="md:w-6 md:h-6 text-gray-600" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar
+        showBackButton={true}
+        showTopBar={false}
+        showNavigation={false}
+        showSearch={false}
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
@@ -190,10 +160,7 @@ export default function KostDetailPage() {
                 {property.title}
               </h1>
               <div className="flex items-start gap-2 text-gray-600 text-sm md:text-base mb-4">
-                <MapPin
-                  size={18}
-                  className="shrink-0 mt-0.5 md:w-5 md:h-5"
-                />
+                <MapPin size={18} className="shrink-0 mt-0.5 md:w-5 md:h-5" />
                 <span>{property.subtitle}</span>
               </div>
 

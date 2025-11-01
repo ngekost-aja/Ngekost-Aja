@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
-  Search,
   MapPin,
   SlidersHorizontal,
   Grid3x3,
@@ -14,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Navbar from "../components/ui/Navbar";
 
 export default function SearchPage() {
   const router = useRouter();
@@ -103,56 +103,17 @@ export default function SearchPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-3 md:py-4">
-          <div className="flex items-center justify-between gap-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="bg-[#EDCD44] p-1.5 md:p-2 rounded-lg">
-                <span className="text-xl md:text-2xl">🏠</span>
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="text-lg md:text-xl font-bold text-black">
-                  Ngekost Aja
-                </h1>
-              </div>
-            </Link>
-
-            {/* Search Bar */}
-            <div className="flex-1 max-w-2xl">
-              <div className="relative">
-                <Search
-                  className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Cari lokasi, kampus..."
-                  className="w-full pl-10 md:pl-12 pr-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm md:text-base"
-                />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#EDCD44] text-white p-2 rounded-lg hover:bg-yellow-500 transition">
-                  <Search size={18} />
-                </button>
-              </div>
-            </div>
-
-            {/* Add Property Button - Desktop */}
-            <Link
-              href="/add-property"
-              className="hidden lg:flex items-center gap-2 bg-[#EDCD44] text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition font-medium"
-            >
-              + Tambah Properti
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Navbar
+        showBackButton={false}
+        showTopBar={false}
+        showNavigation={true}
+        showSearch={true}
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
         <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
           {/* Sidebar Filters - Desktop */}
-          <div className="hidden lg:block w-80 flex-shrink-0">
+          <div className="hidden lg:block w-80 shrink-0">
             <div className="bg-white rounded-xl p-6 shadow-sm sticky top-24">
               <h2 className="text-xl font-bold text-gray-900 mb-6">Filter</h2>
 
@@ -471,7 +432,7 @@ export default function SearchPage() {
                   key={property.id}
                   className="bg-white rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100"
                 >
-                  <div className="relative h-48 md:h-56 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                  <div className="relative h-48 md:h-56 bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                     <span className="text-6xl md:text-7xl">
                       {property.image}
                     </span>
