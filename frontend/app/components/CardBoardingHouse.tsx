@@ -1,45 +1,63 @@
 import { Heart, MapPin } from "lucide-react";
 import { Property } from "../types/property";
+import Link from "next/link";
 
-export default function CardBoardingHouse({ property } : { property: Property}) {
+export default function CardBoardingHouse({
+  property,
+}: {
+  property: Property;
+}) {
+  // Generate slug from title
+  const slug = property.title
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+
   return (
-    <div
-      className="bg-white rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100"
-    >
-      <div className="relative h-48 bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-        <span className="text-6xl">{property.image}</span>
+    <div className="bg-white rounded-lg md:rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100">
+      <div className="relative h-32 md:h-48 bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+        <span className="text-4xl md:text-6xl">{property.image}</span>
         {property.discount && (
-          <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+          <div className="absolute top-2 left-2 bg-red-500 text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded text-[10px] md:text-xs font-bold">
             {property.discount} OFF
           </div>
         )}
         {property.badge && (
-          <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded text-xs font-bold">
+          <div className="absolute top-2 left-2 bg-green-500 text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded text-[10px] md:text-xs font-bold">
             {property.badge}
           </div>
         )}
-        <button className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition">
-          <Heart size={18} className="text-gray-600" />
+        <button className="absolute top-2 right-2 bg-white p-1.5 md:p-2 rounded-full shadow-md hover:bg-gray-100 transition">
+          <Heart size={14} className="md:w-[18px] md:h-[18px] text-gray-600" />
         </button>
       </div>
-      <div className="p-4">
-        <div className="flex items-center gap-1 text-xs text-gray-500 mb-1">
-          <MapPin size={12} />
+      <div className="p-3 md:p-4">
+        <div className="flex items-center gap-1 text-[10px] md:text-xs text-gray-500 mb-1">
+          <MapPin size={10} className="md:w-3 md:h-3" />
           <span>{property.location}</span>
         </div>
-        <h3 className="font-semibold text-gray-800 mb-2">{property.title}</h3>
+        <h3 className="text-xs md:text-base font-semibold text-gray-800 mb-2 line-clamp-1">
+          {property.title}
+        </h3>
         <div className="flex items-center justify-between">
-          <div>
+          <div className="flex-1">
             <div className="flex items-center gap-1 mb-1">
-              <span className="text-yellow-400">★★★★★</span>
-              <span className="text-xs text-gray-500">(4.8)</span>
+              <span className="text-yellow-400 text-xs md:text-sm">★★★★★</span>
+              <span className="text-[10px] md:text-xs text-gray-500">
+                (4.8)
+              </span>
             </div>
-            <p className="text-lg font-bold text-[#EDCD44]">{property.price}</p>
-            <p className="text-xs text-gray-500">per bulan</p>
+            <p className="text-sm md:text-lg font-bold text-[#EDCD44]">
+              {property.price}
+            </p>
+            <p className="text-[10px] md:text-xs text-gray-500">per bulan</p>
           </div>
-          <button className="bg-[#EDCD44] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-500 transition">
+          <Link
+            href={`/kost/${slug}`}
+            className="bg-[#EDCD44] text-white px-2 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-yellow-500 transition whitespace-nowrap ml-2"
+          >
             Lihat
-          </button>
+          </Link>
         </div>
       </div>
     </div>
