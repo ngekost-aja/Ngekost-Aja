@@ -15,6 +15,7 @@ import Newsletter from "./components/Newsletter";
 import { Category } from "./types/category";
 import { Property } from "./types/property";
 import BannerPromo from "./components/BannerPromo";
+import SearchBar from "./components/SearchBar";
 
 export default function Home() {
   const categories: Category[] = [
@@ -95,19 +96,7 @@ export default function Home() {
             </Link>
 
             {/* Search Bar */}
-            <div className="flex-1 max-w-2xl">
-              <div className="relative">
-                <Search
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-                <input
-                  type="text"
-                  placeholder="Cari kos berdasarkan lokasi, kampus, atau tipe kos..."
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] focus:border-transparent"
-                />
-              </div>
-            </div>
+            <SearchBar />
 
             {/* Right Icons */}
             <div className="hidden md:flex items-center gap-4">
