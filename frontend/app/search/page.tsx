@@ -458,7 +458,7 @@ export default function SearchPage() {
                       {property.title}
                     </h3>
                     <div className="flex items-start gap-1 text-gray-600 mb-3 text-xs md:text-sm">
-                      <MapPin size={14} className="flex-shrink-0 mt-0.5" />
+                      <MapPin size={14} className="shrink-0 mt-0.5" />
                       <span className="line-clamp-1">{property.address}</span>
                     </div>
                     <div className="flex items-center gap-3 md:gap-4 mb-3 text-xs md:text-sm text-gray-600">

@@ -151,25 +151,25 @@ export default function Navbar({
       {showNavigation && isMobileMenuOpen && (
         <nav className="lg:hidden bg-white border-t border-b">
           <div className="px-4 py-3 space-y-2">
-            <Link href="/kos-putra" className="block py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link href="/kos-putra" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
               Kos Putra
             </Link>
-            <Link href="/kos-putri" className="block py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link href="/kos-putri" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
               Kos Putri
             </Link>
-            <Link href="/kos-campur" className="block py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link href="/kos-campur" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
               Kos Campur
             </Link>
-            <Link href="/promo" className="block py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link href="/promo" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
               Promo
             </Link>
-            <Link href="/blog" className="block py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link href="/blog" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
               Blog
             </Link>
-            <Link href="/tentang" className="block py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link href="/tentang" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
               Tentang Kami
             </Link>
-            <Link href="/favorit" className="block py-2 text-gray-700 hover:text-[#EDCD44] transition flex items-center gap-2">
+            <Link href="/favorit" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition items-center gap-2">
               <Heart size={16} />
               Kos Favorit
             </Link>
