@@ -5,13 +5,13 @@ import User from "@/models/User";
 import {
   Body,
   Controller,
-  Get,
   Post,
   Route,
   Tags,
   Response,
-  Security,
   SuccessResponse,
+  Res,
+  TsoaResponse,
 } from "tsoa";
 
 interface RegisterRequest {
@@ -30,10 +30,6 @@ interface LoginRequest {
 
 interface LoginResponse {
   token: string;
-}
-
-interface ProfileResponse {
-  email: string;
 }
 
 interface VerifyTokenRequest {
@@ -93,19 +89,20 @@ export class AuthController extends Controller {
   @Post("login")
   @SuccessResponse("200", "Login successful")
   @Response("401", "Invalid credentials")
-  public async login(@Body() body: LoginRequest): Promise<LoginResponse> {
+  public async login(
+    @Body() body: LoginRequest,
+    @Res() unauthorizedResponse: TsoaResponse<401, { message: string }>
+  ): Promise<LoginResponse> {
     const { email, password } = body;
     const user = users.find((u) => u.email === email);
 
     if (!user) {
-      this.setStatus(401);
-      throw new Error("Invalid credentials");
+      return unauthorizedResponse(401, { message: "Invalid credentials" });
     }
 
     const validPassword = await bcrypt.compare(password, user.passwordHash);
     if (!validPassword) {
-      this.setStatus(401);
-      throw new Error("Invalid credentials");
+      return unauthorizedResponse(401, { message: "Invalid credentials" });
     }
 
     const SECRET_KEY = process.env.JWT_SECRET;

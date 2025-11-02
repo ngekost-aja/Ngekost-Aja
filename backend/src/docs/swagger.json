@@ -178,7 +178,22 @@
 						}
 					},
 					"401": {
-						"description": "Invalid credentials"
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
 					}
 				},
 				"description": "Login user and get JWT token",
