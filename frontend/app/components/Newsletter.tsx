@@ -13,9 +13,9 @@ export default function Newsletter() {
             <input
               type="email"
               placeholder="email@mahasiswa.ac.id"
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44]"
+              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow"
             />
-            <button className="bg-[#EDCD44] text-white px-6 py-3 rounded-lg font-medium hover:bg-yellow-500 transition whitespace-nowrap">
+            <button className="bg-golden-yellow text-white px-6 py-3 rounded-lg font-medium hover:bg-yellow-500 transition whitespace-nowrap">
               Daftar Sekarang
             </button>
           </div>

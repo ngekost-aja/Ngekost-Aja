@@ -85,7 +85,7 @@ export default function OwnerLayout({
                   <item.icon size={20} />
                   <span className="font-medium text-sm">{item.label}</span>
                   {item.badge && (
-                    <span className="ml-auto bg-[#EDCD44] text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                    <span className="ml-auto bg-golden-yellow text-white text-xs font-bold px-2 py-0.5 rounded-full">
                       {item.badge}
                     </span>
                   )}
@@ -160,7 +160,7 @@ export default function OwnerLayout({
                     <item.icon size={20} />
                     <span className="font-medium text-sm">{item.label}</span>
                     {item.badge && (
-                      <span className="ml-auto bg-[#EDCD44] text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                      <span className="ml-auto bg-golden-yellow text-white text-xs font-bold px-2 py-0.5 rounded-full">
                         {item.badge}
                       </span>
                     )}

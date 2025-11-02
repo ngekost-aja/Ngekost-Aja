@@ -33,7 +33,7 @@ export default function BookingConfirmationPage() {
           <p className="text-sm md:text-base text-gray-600">Terima kasih telah memesan kos di Ngekost Aja</p>
         </div>
 
-        <div className="bg-linear-to-r from-[#EDCD44] to-yellow-300 rounded-xl p-6 mb-6">
+        <div className="bg-linear-to-r from-golden-yellow to-yellow-300 rounded-xl p-6 mb-6">
           <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-4">Detail Pemesanan</h2>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -80,13 +80,13 @@ export default function BookingConfirmationPage() {
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
             href="/"
-            className="flex-1 bg-[#EDCD44] text-white py-3 rounded-lg font-semibold text-center hover:bg-yellow-500 transition text-sm md:text-base"
+            className="flex-1 bg-golden-yellow text-white py-3 rounded-lg font-semibold text-center hover:bg-yellow-500 transition text-sm md:text-base"
           >
             Kembali ke Beranda
           </Link>
           <Link
             href="/bookings"
-            className="flex-1 border-2 border-[#EDCD44] text-[#EDCD44] py-3 rounded-lg font-semibold text-center hover:bg-yellow-50 transition text-sm md:text-base"
+            className="flex-1 border-2 border-golden-yellow text-golden-yellow py-3 rounded-lg font-semibold text-center hover:bg-yellow-50 transition text-sm md:text-base"
           >
             Lihat Pesanan Saya
           </Link>

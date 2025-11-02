@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="bg-[#EDCD44] p-2 rounded-lg">
+              <div className="bg-golden-yellow p-2 rounded-lg">
                 <Image
                   src="/ngekost-aja-logo.png"
                   alt="Logo"
@@ -30,22 +30,22 @@ export default function Footer() {
             <h4 className="font-bold mb-4">Kategori</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <Link href="/kos-putra" className="hover:text-[#EDCD44]">
+                <Link href="/kos-putra" className="hover:text-golden-yellow">
                   Kos Putra
                 </Link>
               </li>
               <li>
-                <Link href="/kos-putri" className="hover:text-[#EDCD44]">
+                <Link href="/kos-putri" className="hover:text-golden-yellow">
                   Kos Putri
                 </Link>
               </li>
               <li>
-                <Link href="/kos-campur" className="hover:text-[#EDCD44]">
+                <Link href="/kos-campur" className="hover:text-golden-yellow">
                   Kos Campur
                 </Link>
               </li>
               <li>
-                <Link href="/promo" className="hover:text-[#EDCD44]">
+                <Link href="/promo" className="hover:text-golden-yellow">
                   Promo Spesial
                 </Link>
               </li>
@@ -55,22 +55,22 @@ export default function Footer() {
             <h4 className="font-bold mb-4">Bantuan</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <Link href="/faq" className="hover:text-[#EDCD44]">
+                <Link href="/faq" className="hover:text-golden-yellow">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/cara-pesan" className="hover:text-[#EDCD44]">
+                <Link href="/cara-pesan" className="hover:text-golden-yellow">
                   Cara Pesan
                 </Link>
               </li>
               <li>
-                <Link href="/syarat" className="hover:text-[#EDCD44]">
+                <Link href="/syarat" className="hover:text-golden-yellow">
                   Syarat & Ketentuan
                 </Link>
               </li>
               <li>
-                <Link href="/kontak" className="hover:text-[#EDCD44]">
+                <Link href="/kontak" className="hover:text-golden-yellow">
                   Hubungi Kami
                 </Link>
               </li>

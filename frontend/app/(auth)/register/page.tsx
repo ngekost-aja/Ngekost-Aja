@@ -56,7 +56,7 @@ export default function RegisterPage() {
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
           {/* Logo */}
           <div className="flex justify-center mb-6">
-            <div className="bg-[#EDCD44] p-3 rounded-2xl">
+            <div className="bg-golden-yellow p-3 rounded-2xl">
               <Image
                 src="/ngekost-aja-logo.png"
                 alt="Logo"
@@ -93,7 +93,7 @@ export default function RegisterPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your full name"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EDCD44] focus:border-transparent transition"
+                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:border-transparent transition"
                   required
                 />
               </div>
@@ -114,7 +114,7 @@ export default function RegisterPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your Email"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EDCD44] focus:border-transparent transition"
+                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:border-transparent transition"
                   required
                 />
               </div>
@@ -135,7 +135,7 @@ export default function RegisterPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Create Password"
-                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EDCD44] focus:border-transparent transition"
+                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:border-transparent transition"
                   required
                 />
                 <button
@@ -163,7 +163,7 @@ export default function RegisterPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Password"
-                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EDCD44] focus:border-transparent transition"
+                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:border-transparent transition"
                   required
                 />
                 <button
@@ -186,14 +186,14 @@ export default function RegisterPage() {
                 type="checkbox"
                 checked={agreeTerms}
                 onChange={(e) => setAgreeTerms(e.target.checked)}
-                className="w-4 h-4 mt-1 accent-[#EDCD44] rounded"
+                className="w-4 h-4 mt-1 accent-golden-yellow rounded"
                 required
               />
               <span className="text-sm text-gray-600">
                 I agree to the{" "}
                 <Link
                   href="/terms"
-                  className="text-[#EDCD44] hover:text-yellow-600 font-medium"
+                  className="text-golden-yellow hover:text-yellow-600 font-medium"
                 >
                   Terms and Conditions
                 </Link>
@@ -203,7 +203,7 @@ export default function RegisterPage() {
             {/* Sign Up Button */}
             <button
               type="submit"
-              className="w-full bg-[#EDCD44] text-white py-3 rounded-xl font-bold text-base hover:bg-yellow-500 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="w-full bg-golden-yellow text-white py-3 rounded-xl font-bold text-base hover:bg-yellow-500 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Sign Up
             </button>
@@ -247,7 +247,7 @@ export default function RegisterPage() {
             Already have an account?{" "}
             <Link
               href="/login"
-              className="text-[#EDCD44] hover:text-yellow-600 font-semibold transition"
+              className="text-golden-yellow hover:text-yellow-600 font-semibold transition"
             >
               Sign in
             </Link>

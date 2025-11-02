@@ -45,7 +45,7 @@ export default function LoginPage() {
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
           {/* Logo */}
           <div className="flex justify-center mb-6">
-            <div className="bg-[#EDCD44] p-3 rounded-2xl">
+            <div className="bg-golden-yellow p-3 rounded-2xl">
               <Image
                 src="/ngekost-aja-logo.png"
                 alt="Logo"
@@ -82,7 +82,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your Email"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EDCD44] focus:border-transparent transition"
+                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:border-transparent transition"
                   required
                 />
               </div>
@@ -103,7 +103,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter Password"
-                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EDCD44] focus:border-transparent transition"
+                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:border-transparent transition"
                   required
                 />
                 <button
@@ -123,13 +123,13 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 accent-[#EDCD44] rounded"
+                  className="w-4 h-4 accent-golden-yellow rounded"
                 />
                 <span className="text-sm text-gray-600">Remember me</span>
               </label>
               <Link
                 href="/forgot-password"
-                className="text-sm text-[#EDCD44] hover:text-yellow-600 font-medium transition"
+                className="text-sm text-golden-yellow hover:text-yellow-600 font-medium transition"
               >
                 Forgot password?
               </Link>
@@ -138,7 +138,7 @@ export default function LoginPage() {
             {/* Sign In Button */}
             <button
               type="submit"
-              className="w-full bg-[#EDCD44] text-white py-3 rounded-xl font-bold text-base hover:bg-yellow-500 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="w-full bg-golden-yellow text-white py-3 rounded-xl font-bold text-base hover:bg-yellow-500 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Sign In
             </button>
@@ -182,7 +182,7 @@ export default function LoginPage() {
             Don't have an account?{" "}
             <Link
               href="/register"
-              className="text-[#EDCD44] hover:text-yellow-600 font-semibold transition"
+              className="text-golden-yellow hover:text-yellow-600 font-semibold transition"
             >
               Sign up
             </Link>

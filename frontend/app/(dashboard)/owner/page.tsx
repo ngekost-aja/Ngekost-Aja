@@ -179,7 +179,7 @@ export default function OwnerDashboard() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
           <div>
             <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-              Good Morning, <span className="text-[#EDCD44]">Ahsan</span>
+              Good Morning, <span className="text-golden-yellow">Ahsan</span>
             </h1>
             <p className="text-sm text-gray-500 mt-1">
               📍 414 E Clark street, Vermillion
@@ -206,7 +206,7 @@ export default function OwnerDashboard() {
           <select
             value={priceFilter}
             onChange={(e) => setpriceFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
           >
             <option>Up to $35k</option>
             <option>$35k - $50k</option>
@@ -216,7 +216,7 @@ export default function OwnerDashboard() {
           <select
             value={amenitiesFilter}
             onChange={(e) => setAmenitiesFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
           >
             <option>Amenities</option>
             <option>WiFi</option>
@@ -227,7 +227,7 @@ export default function OwnerDashboard() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
           >
             <option>Type</option>
             <option>Studio</option>
@@ -244,7 +244,7 @@ export default function OwnerDashboard() {
         <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
           <span>More than 1k house available</span>
           <span className="text-gray-400">•</span>
-          <button className="text-[#EDCD44] hover:underline flex items-center gap-1">
+          <button className="text-golden-yellow hover:underline flex items-center gap-1">
             Last added <ChevronDown size={14} />
           </button>
         </div>
@@ -277,7 +277,7 @@ export default function OwnerDashboard() {
           <div className="bg-white rounded-xl shadow-sm">
             <div className="p-4 lg:p-6 border-b border-gray-200 flex items-center justify-between">
               <h2 className="text-lg font-bold text-gray-900">My Properties</h2>
-              <Link href="/owner/properties" className="text-sm text-[#EDCD44] hover:underline font-medium">
+              <Link href="/owner/properties" className="text-sm text-golden-yellow hover:underline font-medium">
                 View All
               </Link>
             </div>
@@ -383,7 +383,7 @@ export default function OwnerDashboard() {
                   <p className="text-xs text-gray-500">m²</p>
                 </div>
               </div>
-              <button className="w-full bg-[#EDCD44] text-white py-2.5 rounded-lg font-semibold hover:bg-yellow-500 transition">
+              <button className="w-full bg-golden-yellow text-white py-2.5 rounded-lg font-semibold hover:bg-yellow-500 transition">
                 Book a tour
               </button>
             </div>
@@ -393,7 +393,7 @@ export default function OwnerDashboard() {
           <div className="bg-white rounded-xl p-4 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-gray-900">Monthly Stats</h3>
-              <select className="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#EDCD44]">
+              <select className="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-golden-yellow">
                 <option>2024</option>
                 <option>2023</option>
               </select>
@@ -412,7 +412,7 @@ export default function OwnerDashboard() {
                   </div>
                   <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-[#EDCD44] rounded-full transition-all"
+                      className="h-full bg-golden-yellow rounded-full transition-all"
                       style={{ width: `${data.percent}%` }}
                     ></div>
                   </div>

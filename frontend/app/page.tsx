@@ -69,7 +69,7 @@ export default function Home() {
           </h2>
           <Link
             href="/categories"
-            className="text-[#EDCD44] hover:underline text-sm font-medium"
+            className="text-golden-yellow hover:underline text-sm font-medium"
           >
             Semua Kategori →
           </Link>
@@ -89,7 +89,7 @@ export default function Home() {
           </h2>
           <Link
             href="/featured"
-            className="text-[#EDCD44] hover:underline text-sm font-medium"
+            className="text-golden-yellow hover:underline text-sm font-medium"
           >
             Lihat Semua →
           </Link>

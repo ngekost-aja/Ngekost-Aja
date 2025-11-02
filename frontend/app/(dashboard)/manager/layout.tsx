@@ -84,7 +84,7 @@ export default function ManagerLayout({
                       href={item.href}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition ${
                         isActive
-                          ? "bg-[#EDCD44] text-white"
+                          ? "bg-golden-yellow text-white"
                           : "text-gray-700 hover:bg-gray-100"
                       }`}
                     >
@@ -94,8 +94,8 @@ export default function ManagerLayout({
                         <span
                           className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full ${
                             isActive
-                              ? "bg-white text-[#EDCD44]"
-                              : "bg-[#EDCD44] text-white"
+                              ? "bg-white text-golden-yellow"
+                              : "bg-golden-yellow text-white"
                           }`}
                         >
                           {item.badge}
@@ -165,7 +165,7 @@ export default function ManagerLayout({
                           onClick={() => setIsSidebarOpen(false)}
                           className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition ${
                             isActive
-                              ? "bg-[#EDCD44] text-white"
+                              ? "bg-golden-yellow text-white"
                               : "text-gray-700 hover:bg-gray-100"
                           }`}
                         >
@@ -177,8 +177,8 @@ export default function ManagerLayout({
                             <span
                               className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full ${
                                 isActive
-                                  ? "bg-white text-[#EDCD44]"
-                                  : "bg-[#EDCD44] text-white"
+                                  ? "bg-white text-golden-yellow"
+                                  : "bg-golden-yellow text-white"
                               }`}
                             >
                               {item.badge}

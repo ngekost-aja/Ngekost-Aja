@@ -104,7 +104,7 @@ export default function ManagerDashboard() {
             <input
               type="text"
               placeholder="Search bookings..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
             />
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function ManagerDashboard() {
               key={booking.id}
               onClick={() => setSelectedBooking(booking.id)}
               className={`w-full p-4 border-b border-gray-200 hover:bg-gray-50 transition text-left ${
-                selectedBooking === booking.id ? "bg-blue-50 border-l-4 border-l-[#EDCD44]" : ""
+                selectedBooking === booking.id ? "bg-blue-50 border-l-4 border-l-golden-yellow" : ""
               }`}
             >
               <div className="flex items-start gap-3">
@@ -169,7 +169,7 @@ export default function ManagerDashboard() {
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={handleNotifyGuest}
-                  className="flex-1 sm:flex-none bg-[#EDCD44] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-yellow-500 transition"
+                  className="flex-1 sm:flex-none bg-golden-yellow text-white px-6 py-2.5 rounded-lg font-medium hover:bg-yellow-500 transition"
                 >
                   Notify guest
                 </button>
@@ -279,11 +279,11 @@ export default function ManagerDashboard() {
                     value={replyMessage}
                     onChange={(e) => setReplyMessage(e.target.value)}
                     placeholder="Write a reply..."
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm"
+                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
                   />
                   <button
                     type="submit"
-                    className="bg-[#EDCD44] text-white px-6 py-2 rounded-lg font-medium hover:bg-yellow-500 transition whitespace-nowrap"
+                    className="bg-golden-yellow text-white px-6 py-2 rounded-lg font-medium hover:bg-yellow-500 transition whitespace-nowrap"
                   >
                     Send reply
                   </button>

@@ -25,7 +25,7 @@ export default function BannerPromo() {
         </div>
 
         {/* Banner 2 */}
-        <div className="bg-linear-to-r from-[#EDCD44] to-yellow-300 rounded-2xl p-8 flex items-center justify-between overflow-hidden relative">
+        <div className="bg-linear-to-r from-golden-yellow to-yellow-300 rounded-2xl p-8 flex items-center justify-between overflow-hidden relative">
           <div className="z-10">
             <div className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-2">
               PROMO SPESIAL

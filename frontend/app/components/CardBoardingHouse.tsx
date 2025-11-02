@@ -47,14 +47,14 @@ export default function CardBoardingHouse({
                 (4.8)
               </span>
             </div>
-            <p className="text-sm md:text-lg font-bold text-[#EDCD44]">
+            <p className="text-sm md:text-lg font-bold text-golden-yellow">
               {property.price}
             </p>
             <p className="text-[10px] md:text-xs text-gray-500">per bulan</p>
           </div>
           <Link
             href={`/kost/${slug}`}
-            className="bg-[#EDCD44] text-white px-2 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-yellow-500 transition whitespace-nowrap ml-2"
+            className="bg-golden-yellow text-white px-2 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-yellow-500 transition whitespace-nowrap ml-2"
           >
             Lihat
           </Link>
