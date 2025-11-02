@@ -13,42 +13,16 @@ import {
   Res,
   TsoaResponse,
 } from "tsoa";
-
-interface RegisterRequest {
-  email: string;
-  password: string;
-}
-
-interface RegisterResponse {
-  message: string;
-}
-
-interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-interface LoginResponse {
-  token: string;
-}
-
-interface VerifyTokenRequest {
-  token: string;
-}
-
-interface VerifyTokenResponse {
-  valid: boolean;
-  decoded?: any;
-  message?: string;
-}
-
-interface RefreshTokenRequest {
-  token: string;
-}
-
-interface RefreshTokenResponse {
-  token: string;
-}
+import {
+  RegisterRequest,
+  RegisterResponse,
+  LoginRequest,
+  LoginResponse,
+  VerifyTokenRequest,
+  VerifyTokenResponse,
+  RefreshTokenRequest,
+  RefreshTokenResponse,
+} from "@/dto/auth.dto";
 
 @Route("auth")
 @Tags("Authentication")
