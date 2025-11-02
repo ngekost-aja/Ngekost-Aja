@@ -1,10 +1,10 @@
 import { Router } from "express";
-import UserController from "@/controllers/UserController";
+import AuthController from "@/controllers/AuthController";
 
 const router = Router();
 
 // Initialize controllers
-const userController = new UserController();
+const authController = new AuthController();
 
 // Welcome route
 router.get("/", (req, res) => {
@@ -16,7 +16,10 @@ router.get("/", (req, res) => {
 });
 
 // Define your API routes here
-router.get("/users", userController.getUsers);
-router.post("/users", userController.createUser);
+router.post("/auth/register", (req, res) => authController.register);
+router.post("/auth/login", (req, res) => authController.login);
+router.get("/profile", (req, res) => authController.getProfile);
+router.post("/auth/verify", (req, res) => authController.verifyToken);
+router.post("/auth/refresh", (req, res) => authController.refreshToken);
 
 export default router;
