@@ -1,9 +1,10 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, ArrowLeft, Mail, Lock, User } from "lucide-react";
+import Image from "next/image";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -56,7 +57,12 @@ export default function RegisterPage() {
           {/* Logo */}
           <div className="flex justify-center mb-6">
             <div className="bg-[#EDCD44] p-3 rounded-2xl">
-              <span className="text-4xl">🏠</span>
+              <Image
+                src="/ngekost-aja-logo.png"
+                alt="Logo"
+                width={50}
+                height={50}
+              />
             </div>
           </div>
 
@@ -78,7 +84,10 @@ export default function RegisterPage() {
                 Full Name
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <User
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="text"
                   value={name}
@@ -96,7 +105,10 @@ export default function RegisterPage() {
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Mail
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="email"
                   value={email}
@@ -114,7 +126,10 @@ export default function RegisterPage() {
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Lock
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
@@ -139,7 +154,10 @@ export default function RegisterPage() {
                 Confirm Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Lock
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   value={confirmPassword}
@@ -153,7 +171,11 @@ export default function RegisterPage() {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
                 >
-                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {showConfirmPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
                 </button>
               </div>
             </div>
@@ -169,7 +191,10 @@ export default function RegisterPage() {
               />
               <span className="text-sm text-gray-600">
                 I agree to the{" "}
-                <Link href="/terms" className="text-[#EDCD44] hover:text-yellow-600 font-medium">
+                <Link
+                  href="/terms"
+                  className="text-[#EDCD44] hover:text-yellow-600 font-medium"
+                >
                   Terms and Conditions
                 </Link>
               </span>

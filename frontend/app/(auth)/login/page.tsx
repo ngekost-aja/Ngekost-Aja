@@ -1,9 +1,10 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, ArrowLeft, Mail, Lock } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -45,7 +46,12 @@ export default function LoginPage() {
           {/* Logo */}
           <div className="flex justify-center mb-6">
             <div className="bg-[#EDCD44] p-3 rounded-2xl">
-              <span className="text-4xl">🏠</span>
+              <Image
+                src="/ngekost-aja-logo.png"
+                alt="Logo"
+                width={50}
+                height={50}
+              />
             </div>
           </div>
 
@@ -67,7 +73,10 @@ export default function LoginPage() {
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Mail
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="email"
                   value={email}
@@ -85,7 +94,10 @@ export default function LoginPage() {
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Lock
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}

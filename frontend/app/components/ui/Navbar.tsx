@@ -1,17 +1,26 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
-import { MapPin, Heart, User, ShoppingCart, Phone, Menu, X, ArrowLeft } from "lucide-react";
+import {
+  MapPin,
+  Heart,
+  User,
+  ShoppingCart,
+  Phone,
+  Menu,
+  X,
+  ArrowLeft,
+} from "lucide-react";
 import SearchBar from "../SearchBar";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-
-export default function Navbar({ 
-  showBackButton = false, 
-  showTopBar = true, 
+export default function Navbar({
+  showBackButton = false,
+  showTopBar = true,
   showNavigation = true,
-  showSearch = true 
+  showSearch = true,
 }: {
   showBackButton?: boolean;
   showTopBar?: boolean;
@@ -60,10 +69,17 @@ export default function Navbar({
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <div className="bg-[#EDCD44] p-1.5 md:p-2 rounded-lg">
-              <span className="text-xl md:text-2xl">🏠</span>
+              <Image
+                src="/ngekost-aja-logo.png"
+                alt="Logo"
+                width={50}
+                height={50}
+              />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-lg md:text-xl font-bold text-black">Ngekost Aja</h1>
+              <h1 className="text-lg md:text-xl font-bold text-black">
+                Ngekost Aja
+              </h1>
               {showTopBar && <p className="text-xs text-gray-500">Cari kos</p>}
             </div>
           </Link>
@@ -121,22 +137,40 @@ export default function Navbar({
               <Menu size={18} />
               JELAJAHI KATEGORI
             </button>
-            <Link href="/kos-putra" className="text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/kos-putra"
+              className="text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Kos Putra
             </Link>
-            <Link href="/kos-putri" className="text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/kos-putri"
+              className="text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Kos Putri
             </Link>
-            <Link href="/kos-campur" className="text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/kos-campur"
+              className="text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Kos Campur
             </Link>
-            <Link href="/promo" className="text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/promo"
+              className="text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Promo
             </Link>
-            <Link href="/blog" className="text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/blog"
+              className="text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Blog
             </Link>
-            <Link href="/tentang" className="text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/tentang"
+              className="text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Tentang Kami
             </Link>
             <div className="ml-auto flex items-center gap-2 text-gray-600">
@@ -151,25 +185,46 @@ export default function Navbar({
       {showNavigation && isMobileMenuOpen && (
         <nav className="lg:hidden bg-white border-t border-b">
           <div className="px-4 py-3 space-y-2">
-            <Link href="/kos-putra" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/kos-putra"
+              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Kos Putra
             </Link>
-            <Link href="/kos-putri" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/kos-putri"
+              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Kos Putri
             </Link>
-            <Link href="/kos-campur" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/kos-campur"
+              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Kos Campur
             </Link>
-            <Link href="/promo" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/promo"
+              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Promo
             </Link>
-            <Link href="/blog" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/blog"
+              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Blog
             </Link>
-            <Link href="/tentang" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition">
+            <Link
+              href="/tentang"
+              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+            >
               Tentang Kami
             </Link>
-            <Link href="/favorit" className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition items-center gap-2">
+            <Link
+              href="/favorit"
+              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition items-center gap-2"
+            >
               <Heart size={16} />
               Kos Favorit
             </Link>

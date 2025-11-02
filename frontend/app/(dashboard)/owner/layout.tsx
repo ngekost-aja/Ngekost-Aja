@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
+import {
   Home,
   Building2,
   Users,
@@ -15,8 +15,9 @@ import {
   LogOut,
   Menu,
   X,
-  Bell
+  Bell,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function OwnerLayout({
   children,
@@ -32,7 +33,12 @@ export default function OwnerLayout({
     { icon: Users, label: "Clients", href: "/owner/clients" },
     { icon: DollarSign, label: "Transaction", href: "/owner/transaction" },
     { icon: BarChart3, label: "Analytics", href: "/owner/analytics" },
-    { icon: MessageSquare, label: "Messages", href: "/owner/messages", badge: 3 },
+    {
+      icon: MessageSquare,
+      label: "Messages",
+      href: "/owner/messages",
+      badge: 3,
+    },
     { icon: Settings, label: "Settings", href: "/owner/settings" },
   ];
 
@@ -48,9 +54,12 @@ export default function OwnerLayout({
         {/* Logo */}
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#EDCD44] rounded-lg flex items-center justify-center text-2xl">
-              🏠
-            </div>
+            <Image
+              src="/ngekost-aja-logo.png"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
             <div>
               <h2 className="font-bold text-gray-900 text-lg">Ngekost Aja</h2>
               <p className="text-xs text-gray-500">Owner Panel</p>
@@ -99,28 +108,30 @@ export default function OwnerLayout({
             </Link>
           ))}
         </div>
-
-        {/* Upgrade Premium */}
-        <div className="p-4 m-4 bg-linear-to-br from-[#EDCD44] to-yellow-500 rounded-xl text-white">
-          <h3 className="font-bold mb-2">Upgrade to Premium</h3>
-          <p className="text-xs mb-3 opacity-90">Get 1-month free trial!</p>
-          <button className="w-full bg-gray-900 text-white py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition">
-            Upgrade
-          </button>
-        </div>
       </aside>
 
       {/* Mobile Sidebar */}
       {isSidebarOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/50" onClick={() => setIsSidebarOpen(false)}>
-          <aside className="w-64 h-full bg-white" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="lg:hidden fixed inset-0 z-50 bg-black/50"
+          onClick={() => setIsSidebarOpen(false)}
+        >
+          <aside
+            className="w-64 h-full bg-white"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="p-6 border-b border-gray-200 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#EDCD44] rounded-lg flex items-center justify-center text-2xl">
-                  🏠
-                </div>
+                <Image
+                  src="/ngekost-aja-logo.png"
+                  alt="Logo"
+                  width={40}
+                  height={40}
+                />
                 <div>
-                  <h2 className="font-bold text-gray-900 text-lg">Ngekost Aja</h2>
+                  <h2 className="font-bold text-gray-900 text-lg">
+                    Ngekost Aja
+                  </h2>
                   <p className="text-xs text-gray-500">Owner Panel</p>
                 </div>
               </div>
@@ -129,7 +140,10 @@ export default function OwnerLayout({
               </button>
             </div>
 
-            <nav className="p-4 space-y-1 overflow-y-auto" style={{ height: 'calc(100% - 200px)' }}>
+            <nav
+              className="p-4 space-y-1 overflow-y-auto"
+              style={{ height: "calc(100% - 200px)" }}
+            >
               {menuItems.map((item, idx) => {
                 const isActive = pathname === item.href;
                 return (
@@ -153,7 +167,7 @@ export default function OwnerLayout({
                   </Link>
                 );
               })}
-              
+
               <div className="border-t border-gray-200 pt-4 mt-4 space-y-1">
                 {bottomMenuItems.map((item, idx) => (
                   <Link
@@ -189,9 +203,7 @@ export default function OwnerLayout({
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>
   );

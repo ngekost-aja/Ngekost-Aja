@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Footer from "./components/Footer";
+import Footer from "./components/ui/Footer";
 import CardCategory from "./components/CardCategory";
 import CardBoardingHouse from "./components/CardBoardingHouse";
 import Newsletter from "./components/Newsletter";

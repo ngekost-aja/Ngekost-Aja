@@ -1,18 +1,19 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  Calendar, 
-  Settings, 
-  BarChart3, 
-  MessageSquare, 
+import {
+  Calendar,
+  Settings,
+  BarChart3,
+  MessageSquare,
   Home,
   LogOut,
   Menu,
-  X
+  X,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function ManagerLayout({
   children,
@@ -54,9 +55,12 @@ export default function ManagerLayout({
         {/* Logo & Profile */}
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-[#EDCD44] rounded-full flex items-center justify-center text-2xl">
-              🏠
-            </div>
+            <Image
+              src="/ngekost-aja-logo.png"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
             <div>
               <h2 className="font-bold text-gray-900">Ngekost Aja</h2>
               <p className="text-xs text-gray-500">Manager Panel</p>
@@ -87,9 +91,13 @@ export default function ManagerLayout({
                       <item.icon size={20} />
                       <span className="font-medium text-sm">{item.label}</span>
                       {item.badge && (
-                        <span className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full ${
-                          isActive ? "bg-white text-[#EDCD44]" : "bg-[#EDCD44] text-white"
-                        }`}>
+                        <span
+                          className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full ${
+                            isActive
+                              ? "bg-white text-[#EDCD44]"
+                              : "bg-[#EDCD44] text-white"
+                          }`}
+                        >
                           {item.badge}
                         </span>
                       )}
@@ -112,13 +120,22 @@ export default function ManagerLayout({
 
       {/* Mobile Sidebar */}
       {isSidebarOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/50" onClick={() => setIsSidebarOpen(false)}>
-          <aside className="w-64 h-full bg-white" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="lg:hidden fixed inset-0 z-50 bg-black/50"
+          onClick={() => setIsSidebarOpen(false)}
+        >
+          <aside
+            className="w-64 h-full bg-white"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="p-6 border-b border-gray-200 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-[#EDCD44] rounded-full flex items-center justify-center text-2xl">
-                  🏠
-                </div>
+                <Image
+                  src="/ngekost-aja-logo.png"
+                  alt="Logo"
+                  width={40}
+                  height={40}
+                />
                 <div>
                   <h2 className="font-bold text-gray-900">Ngekost Aja</h2>
                   <p className="text-xs text-gray-500">Manager Panel</p>
@@ -129,7 +146,10 @@ export default function ManagerLayout({
               </button>
             </div>
 
-            <nav className="p-4 space-y-6 overflow-y-auto" style={{ height: 'calc(100% - 140px)' }}>
+            <nav
+              className="p-4 space-y-6 overflow-y-auto"
+              style={{ height: "calc(100% - 140px)" }}
+            >
               {menuItems.map((section, idx) => (
                 <div key={idx}>
                   <h3 className="text-xs font-semibold text-gray-400 uppercase mb-3 px-3">
@@ -150,11 +170,17 @@ export default function ManagerLayout({
                           }`}
                         >
                           <item.icon size={20} />
-                          <span className="font-medium text-sm">{item.label}</span>
+                          <span className="font-medium text-sm">
+                            {item.label}
+                          </span>
                           {item.badge && (
-                            <span className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full ${
-                              isActive ? "bg-white text-[#EDCD44]" : "bg-[#EDCD44] text-white"
-                            }`}>
+                            <span
+                              className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full ${
+                                isActive
+                                  ? "bg-white text-[#EDCD44]"
+                                  : "bg-[#EDCD44] text-white"
+                              }`}
+                            >
                               {item.badge}
                             </span>
                           )}
@@ -188,9 +214,7 @@ export default function ManagerLayout({
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>
   );

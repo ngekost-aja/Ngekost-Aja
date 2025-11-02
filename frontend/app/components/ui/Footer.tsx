@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -8,7 +9,12 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="bg-[#EDCD44] p-2 rounded-lg">
-                <span className="text-2xl">🏠</span>
+                <Image
+                  src="/ngekost-aja-logo.png"
+                  alt="Logo"
+                  width={50}
+                  height={50}
+                />
               </div>
               <div>
                 <h3 className="text-xl font-bold">Ngekost Aja</h3>
