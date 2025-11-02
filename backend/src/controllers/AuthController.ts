@@ -1,148 +1,168 @@
-import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import users from "@/data/users";
+import User from "@/models/User";
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Route,
+  Tags,
+  Response,
+  Security,
+  SuccessResponse,
+} from "tsoa";
 
-interface User {
+interface RegisterRequest {
   email: string;
-  passwordHash: string;
+  password: string;
 }
 
-export default class AuthController {
+interface RegisterResponse {
+  message: string;
+}
+
+interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+interface LoginResponse {
+  token: string;
+}
+
+interface ProfileResponse {
+  email: string;
+}
+
+interface VerifyTokenRequest {
+  token: string;
+}
+
+interface VerifyTokenResponse {
+  valid: boolean;
+  decoded?: any;
+  message?: string;
+}
+
+interface RefreshTokenRequest {
+  token: string;
+}
+
+interface RefreshTokenResponse {
+  token: string;
+}
+
+@Route("auth")
+@Tags("Authentication")
+export class AuthController extends Controller {
   /**
-   * @route POST /api/auth/register
+   * Register a new user account
    */
-  public async register(req: Request, res: Response): Promise<void> {
-    try {
-      const { email, password } = req.body;
+  @Post("register")
+  @SuccessResponse("201", "User registered successfully")
+  @Response("400", "Bad Request")
+  public async register(
+    @Body() body: RegisterRequest
+  ): Promise<RegisterResponse> {
+    const { email, password } = body;
 
-      if (!email || !password) {
-        res.status(400).json({ message: "Email and password are required" });
-        return;
-      }
-
-      const existingUser = users.find((u) => u.email === email);
-      if (existingUser) {
-        res.status(400).json({ message: "Email already registered" });
-        return;
-      }
-
-      const passwordHash = await bcrypt.hash(password, 10);
-      const newUser: User = { email, passwordHash };
-      users.push(newUser); // ✅ Normally you'd use a database
-
-      res.status(201).json({ message: "User registered successfully" });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Internal server error" });
+    if (!email || !password) {
+      this.setStatus(400);
+      return { message: "Email and password are required" };
     }
+
+    const existingUser = users.find((u) => u.email === email);
+    if (existingUser) {
+      this.setStatus(400);
+      return { message: "Email already registered" };
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    const newUser: User = { email, passwordHash };
+    users.push(newUser);
+
+    this.setStatus(201);
+    return { message: "User registered successfully" };
   }
 
   /**
-   * @route POST /api/auth/login
+   * Login user and get JWT token
    */
-  public async login(req: Request, res: Response): Promise<void> {
-    try {
-      const { email, password } = req.body;
+  @Post("login")
+  @SuccessResponse("200", "Login successful")
+  @Response("401", "Invalid credentials")
+  public async login(@Body() body: LoginRequest): Promise<LoginResponse> {
+    const { email, password } = body;
+    const user = users.find((u) => u.email === email);
 
-      const user = users.find((u) => u.email === email);
-      if (!user) {
-        res.status(401).json({ message: "Invalid credentials" });
-        return;
-      }
-
-      const validPassword = await bcrypt.compare(password, user.passwordHash);
-      if (!validPassword) {
-        res.status(401).json({ message: "Invalid credentials" });
-        return;
-      }
-
-      const SECRET_KEY = process.env.JWT_SECRET;
-      if (!SECRET_KEY) throw new Error("JWT_SECRET not set");
-
-      const token = jwt.sign({ email: user.email }, SECRET_KEY, {
-        expiresIn: "1d",
-      });
-
-      res.json({ token });
-    } catch (error) {
-      res.status(500).json({ message: "Internal server error" });
+    if (!user) {
+      this.setStatus(401);
+      throw new Error("Invalid credentials");
     }
+
+    const validPassword = await bcrypt.compare(password, user.passwordHash);
+    if (!validPassword) {
+      this.setStatus(401);
+      throw new Error("Invalid credentials");
+    }
+
+    const SECRET_KEY = process.env.JWT_SECRET;
+    if (!SECRET_KEY) throw new Error("JWT_SECRET not set");
+
+    const token = jwt.sign({ email: user.email }, SECRET_KEY, {
+      expiresIn: "1d",
+    });
+
+    return { token };
   }
 
   /**
-   * @route GET /api/auth/profile
-   * Protected route example
+   * Verify an existing JWT token
    */
-  public async getProfile(req: Request, res: Response): Promise<void> {
+  @Post("verify")
+  public async verifyToken(
+    @Body() body: VerifyTokenRequest
+  ): Promise<VerifyTokenResponse> {
+    const { token } = body;
+    const SECRET_KEY = process.env.JWT_SECRET;
+    if (!SECRET_KEY) throw new Error("JWT_SECRET not set");
+
     try {
-      const authHeader = req.headers.authorization;
-      if (!authHeader) {
-        res.status(401).json({ message: "No token provided" });
-        return;
-      }
-
-      const token = authHeader.split(" ")[1];
-      const SECRET_KEY = process.env.JWT_SECRET;
-      if (!SECRET_KEY) throw new Error("JWT_SECRET not set");
-
-      const decoded = jwt.verify(token, SECRET_KEY) as { email: string };
-
-      const user = users.find((u) => u.email === decoded.email);
-      if (!user) {
-        res.status(404).json({ message: "User not found" });
-        return;
-      }
-
-      res.json({ email: user.email });
-    } catch (error) {
-      console.error(error);
-      res.status(401).json({ message: "Invalid or expired token" });
-    }
-  }
-
-  /**
-   * @route POST /api/auth/verify
-   * Simple token verification
-   */
-  public async verifyToken(req: Request, res: Response): Promise<void> {
-    try {
-      const { token } = req.body;
-      const SECRET_KEY = process.env.JWT_SECRET;
-      if (!SECRET_KEY) throw new Error("JWT_SECRET not set");
-
       const decoded = jwt.verify(token, SECRET_KEY);
-      res.json({ valid: true, decoded });
+      return { valid: true, decoded };
     } catch (error) {
-      res
-        .status(401)
-        .json({ valid: false, message: "Invalid or expired token" });
+      return { valid: false, message: "Invalid or expired token" };
     }
   }
 
   /**
-   * @route POST /api/auth/refresh
-   * Optional: Refresh the token if expired
+   * Refresh a JWT token
    */
-  public async refreshToken(req: Request, res: Response): Promise<void> {
-    try {
-      const { token } = req.body;
-      const SECRET_KEY = process.env.JWT_SECRET;
-      if (!SECRET_KEY) throw new Error("JWT_SECRET not set");
+  @Post("refresh")
+  @SuccessResponse("200", "Token refreshed")
+  @Response("401", "Invalid token")
+  public async refreshToken(
+    @Body() body: RefreshTokenRequest
+  ): Promise<RefreshTokenResponse> {
+    const { token } = body;
+    const SECRET_KEY = process.env.JWT_SECRET;
+    if (!SECRET_KEY) throw new Error("JWT_SECRET not set");
 
-      // Verify old token first
+    try {
       const decoded = jwt.verify(token, SECRET_KEY, {
         ignoreExpiration: true,
       }) as { email: string };
 
-      // Generate new token
       const newToken = jwt.sign({ email: decoded.email }, SECRET_KEY, {
         expiresIn: "1d",
       });
 
-      res.json({ token: newToken });
+      return { token: newToken };
     } catch (error) {
-      res.status(401).json({ message: "Invalid token" });
+      this.setStatus(401);
+      throw new Error("Invalid token");
     }
   }
 }

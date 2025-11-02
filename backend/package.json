@@ -4,8 +4,11 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "dev": "nodemon --exec ts-node -r tsconfig-paths/register ./src/server.ts",
-    "build": "tsc",
+    "tsoa:spec": "tsoa spec",
+    "tsoa:routes": "tsoa routes",
+    "tsoa:build": "npm run tsoa:spec && npm run tsoa:routes",
+    "dev": "npm run tsoa:build && nodemon --exec ts-node -r tsconfig-paths/register ./src/server.ts",
+    "build": "npm run tsoa:build && tsc",
     "start": "node dist/server.js",
     "start:prod": "npm run build && npm run start"
   },
@@ -15,11 +18,15 @@
   "packageManager": "pnpm@10.18.2",
   "dependencies": {
     "@prisma/client": "^6.18.0",
+    "@tsoa/runtime": "^6.6.0",
+    "@types/swagger-ui-express": "^4.1.8",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "swagger-ui-express": "^5.0.1",
+    "tsoa": "^6.6.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
