@@ -68,25 +68,25 @@ export default function Navbar({
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="bg-[#EDCD44] p-1.5 md:p-2 rounded-lg">
+            <div className="w-12 h-12 p-0 lg:p-1.5 sm:w-14 sm:h-14 md:w-16 md:h-16">
               <Image
                 src="/ngekost-aja-logo.png"
                 alt="Logo"
-                width={50}
-                height={50}
+                width={64}
+                height={54}
+                className="w-full h-full object-contain rounded-lg"
               />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg md:text-xl font-bold text-black">
-                Ngekost Aja
+                Ngekost Aja!
               </h1>
-              {showTopBar && <p className="text-xs text-gray-500">Cari kos</p>}
             </div>
           </Link>
 
-          {/* Search Bar - Desktop (shown only if showSearch is true) */}
+          {/* Search Bar */}
           {showSearch && (
-            <div className="hidden lg:flex flex-1">
+            <div className="flex flex-1">
               <SearchBar />
             </div>
           )}
@@ -98,7 +98,7 @@ export default function Navbar({
             </button>
             <button className="p-2 hover:bg-gray-100 rounded-full transition relative">
               <ShoppingCart size={20} className="md:w-6 md:h-6 text-gray-600" />
-              <span className="absolute -top-1 -right-1 bg-[#EDCD44] text-white text-xs rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-[10px] md:text-xs">
+              <span className="absolute -top-1 -right-1 bg-golden-yellow text-white text-xs rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-[10px] md:text-xs">
                 0
               </span>
             </button>
@@ -120,56 +120,49 @@ export default function Navbar({
             )}
           </div>
         </div>
-
-        {/* Mobile Search Bar (shown only if showSearch is true) */}
-        {showSearch && (
-          <div className="lg:hidden mt-3">
-            <SearchBar />
-          </div>
-        )}
       </div>
 
       {/* Navigation - Desktop */}
       {showNavigation && (
         <nav className="hidden lg:block py-3 px-4 bg-white border-b">
           <div className="max-w-7xl mx-auto flex items-center gap-6 text-sm">
-            <button className="bg-[#EDCD44] text-black px-6 py-2 rounded-lg font-medium hover:bg-yellow-500 transition flex items-center gap-2">
+            <button className="bg-golden-yellow text-black px-6 py-2 rounded-lg font-medium hover:bg-yellow-500 transition flex items-center gap-2">
               <Menu size={18} />
               JELAJAHI KATEGORI
             </button>
             <Link
               href="/kos-putra"
-              className="text-gray-700 hover:text-[#EDCD44] transition"
+              className="text-gray-700 hover:text-golden-yellow transition"
             >
               Kos Putra
             </Link>
             <Link
               href="/kos-putri"
-              className="text-gray-700 hover:text-[#EDCD44] transition"
+              className="text-gray-700 hover:text-golden-yellow transition"
             >
               Kos Putri
             </Link>
             <Link
               href="/kos-campur"
-              className="text-gray-700 hover:text-[#EDCD44] transition"
+              className="text-gray-700 hover:text-golden-yellow transition"
             >
               Kos Campur
             </Link>
             <Link
               href="/promo"
-              className="text-gray-700 hover:text-[#EDCD44] transition"
+              className="text-gray-700 hover:text-golden-yellow transition"
             >
               Promo
             </Link>
             <Link
               href="/blog"
-              className="text-gray-700 hover:text-[#EDCD44] transition"
+              className="text-gray-700 hover:text-golden-yellow transition"
             >
               Blog
             </Link>
             <Link
               href="/tentang"
-              className="text-gray-700 hover:text-[#EDCD44] transition"
+              className="text-gray-700 hover:text-golden-yellow transition"
             >
               Tentang Kami
             </Link>
@@ -187,50 +180,50 @@ export default function Navbar({
           <div className="px-4 py-3 space-y-2">
             <Link
               href="/kos-putra"
-              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+              className="flex py-2 text-gray-700 hover:text-golden-yellow transition"
             >
               Kos Putra
             </Link>
             <Link
               href="/kos-putri"
-              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+              className="flex py-2 text-gray-700 hover:text-golden-yellow transition"
             >
               Kos Putri
             </Link>
             <Link
               href="/kos-campur"
-              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+              className="flex py-2 text-gray-700 hover:text-golden-yellow transition"
             >
               Kos Campur
             </Link>
             <Link
               href="/promo"
-              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+              className="flex py-2 text-gray-700 hover:text-golden-yellow transition"
             >
               Promo
             </Link>
             <Link
               href="/blog"
-              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+              className="flex py-2 text-gray-700 hover:text-golden-yellow transition"
             >
               Blog
             </Link>
             <Link
               href="/tentang"
-              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition"
+              className="flex py-2 text-gray-700 hover:text-golden-yellow transition"
             >
               Tentang Kami
             </Link>
             <Link
               href="/favorit"
-              className="flex py-2 text-gray-700 hover:text-[#EDCD44] transition items-center gap-2"
+              className="flex py-2 text-gray-700 hover:text-golden-yellow transition items-center gap-2"
             >
               <Heart size={16} />
               Kos Favorit
             </Link>
             <Link
               href="/login"
-              className="block py-3 mt-2 bg-[#EDCD44] text-black rounded-lg text-center font-medium hover:bg-yellow-500 transition"
+              className="block py-3 mt-2 bg-golden-yellow text-black rounded-lg text-center font-medium hover:bg-yellow-500 transition"
             >
               Masuk / Daftar
             </Link>

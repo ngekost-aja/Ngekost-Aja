@@ -87,7 +87,7 @@ export default function KostDetailPage() {
         showBackButton={true}
         showTopBar={false}
         showNavigation={false}
-        showSearch={false}
+        showSearch={true}
       />
 
       <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
