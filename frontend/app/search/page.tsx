@@ -129,7 +129,7 @@ export default function SearchPage() {
                       onClick={() => setCategory(cat.id)}
                       className={`p-3 rounded-lg border-2 transition flex flex-col items-center gap-2 ${
                         category === cat.id
-                          ? "border-[#EDCD44] bg-yellow-50"
+                          ? "border-golden-yellow bg-yellow-50"
                           : "border-gray-200 hover:border-gray-300"
                       }`}
                     >
@@ -155,7 +155,7 @@ export default function SearchPage() {
                     onChange={(e) =>
                       setPriceRange([priceRange[0], parseInt(e.target.value)])
                     }
-                    className="w-full accent-[#EDCD44]"
+                    className="w-full accent-golden-yellow"
                   />
                   <div className="flex justify-between text-sm text-gray-600">
                     <span>Rp {priceRange[0].toLocaleString()}</span>
@@ -182,7 +182,7 @@ export default function SearchPage() {
                         parseInt(e.target.value),
                       ])
                     }
-                    className="w-full accent-[#EDCD44]"
+                    className="w-full accent-golden-yellow"
                   />
                   <div className="flex justify-between text-sm text-gray-600">
                     <span>{propertySize[0]} sqft</span>
@@ -204,7 +204,7 @@ export default function SearchPage() {
                     <select
                       value={bedrooms}
                       onChange={(e) => setBedrooms(parseInt(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
                     >
                       {[1, 2, 3, 4, 5].map((num) => (
                         <option key={num} value={num}>
@@ -220,7 +220,7 @@ export default function SearchPage() {
                     <select
                       value={bathrooms}
                       onChange={(e) => setBathrooms(parseInt(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
                     >
                       {[1, 2, 3, 4, 5].map((num) => (
                         <option key={num} value={num}>
@@ -243,7 +243,7 @@ export default function SearchPage() {
                       type="checkbox"
                       checked={petsAllowed}
                       onChange={(e) => setPetsAllowed(e.target.checked)}
-                      className="rounded accent-[#EDCD44]"
+                      className="rounded accent-golden-yellow"
                     />
                     <span className="text-sm text-gray-700">Boleh Hewan</span>
                   </label>
@@ -252,7 +252,7 @@ export default function SearchPage() {
                       type="checkbox"
                       checked={furnished}
                       onChange={(e) => setFurnished(e.target.checked)}
-                      className="rounded accent-[#EDCD44]"
+                      className="rounded accent-golden-yellow"
                     />
                     <span className="text-sm text-gray-700">Furnished</span>
                   </label>
@@ -261,7 +261,7 @@ export default function SearchPage() {
                       type="checkbox"
                       checked={parking}
                       onChange={(e) => setParking(e.target.checked)}
-                      className="rounded accent-[#EDCD44]"
+                      className="rounded accent-golden-yellow"
                     />
                     <span className="text-sm text-gray-700">Parkir</span>
                   </label>
@@ -269,7 +269,7 @@ export default function SearchPage() {
               </div>
 
               {/* Apply Filter Button */}
-              <button className="w-full bg-[#EDCD44] text-white py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
+              <button className="w-full bg-golden-yellow text-white py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
                 Terapkan Filter
               </button>
             </div>
@@ -283,7 +283,7 @@ export default function SearchPage() {
                 <div>
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900">
                     114 Hasil untuk{" "}
-                    <span className="text-[#EDCD44]">{searchQuery}</span>
+                    <span className="text-golden-yellow">{searchQuery}</span>
                   </h2>
                 </div>
                 <div className="flex items-center gap-2 md:gap-3">
@@ -300,7 +300,7 @@ export default function SearchPage() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-sm"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
                   >
                     <option value="default">Urutkan: Default</option>
                     <option value="price-low">Harga: Rendah ke Tinggi</option>
@@ -315,7 +315,7 @@ export default function SearchPage() {
                       onClick={() => setViewMode("grid")}
                       className={`p-2 rounded ${
                         viewMode === "grid"
-                          ? "bg-[#EDCD44] text-white"
+                          ? "bg-golden-yellow text-white"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
                     >
@@ -325,7 +325,7 @@ export default function SearchPage() {
                       onClick={() => setViewMode("list")}
                       className={`p-2 rounded ${
                         viewMode === "list"
-                          ? "bg-[#EDCD44] text-white"
+                          ? "bg-golden-yellow text-white"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
                     >
@@ -370,7 +370,7 @@ export default function SearchPage() {
                             onClick={() => setCategory(cat.id)}
                             className={`p-3 rounded-lg border-2 transition flex flex-col items-center gap-2 ${
                               category === cat.id
-                                ? "border-[#EDCD44] bg-yellow-50"
+                                ? "border-golden-yellow bg-yellow-50"
                                 : "border-gray-200"
                             }`}
                           >
@@ -400,7 +400,7 @@ export default function SearchPage() {
                             parseInt(e.target.value),
                           ])
                         }
-                        className="w-full accent-[#EDCD44]"
+                        className="w-full accent-golden-yellow"
                       />
                       <div className="flex justify-between text-sm text-gray-600 mt-2">
                         <span>Rp {priceRange[0].toLocaleString()}</span>
@@ -410,7 +410,7 @@ export default function SearchPage() {
 
                     <button
                       onClick={() => setShowFilters(false)}
-                      className="w-full bg-[#EDCD44] text-white py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
+                      className="w-full bg-golden-yellow text-white py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
                     >
                       Terapkan Filter
                     </button>
@@ -481,7 +481,7 @@ export default function SearchPage() {
                             Rp {property.price.toLocaleString()}/bulan
                           </p>
                         )}
-                        <p className="text-lg md:text-xl font-bold text-[#EDCD44]">
+                        <p className="text-lg md:text-xl font-bold text-golden-yellow">
                           Rp{" "}
                           {(
                             property.discountedPrice || property.price
@@ -493,7 +493,7 @@ export default function SearchPage() {
                         href={`/kost/${property.title
                           .toLowerCase()
                           .replace(/\s+/g, "-")}`}
-                        className="bg-[#EDCD44] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-500 transition"
+                        className="bg-golden-yellow text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-500 transition"
                       >
                         Lihat Detail
                       </Link>
@@ -513,7 +513,7 @@ export default function SearchPage() {
                   key={page}
                   className={`px-4 py-2 rounded-lg transition text-sm ${
                     page === 1
-                      ? "bg-[#EDCD44] text-white"
+                      ? "bg-golden-yellow text-white"
                       : "border border-gray-300 hover:bg-gray-50"
                   }`}
                 >
