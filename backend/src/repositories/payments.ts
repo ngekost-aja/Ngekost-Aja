@@ -1,0 +1,86 @@
+import Payment from "@/models/Payment";
+
+const payments: Payment[] = [
+  {
+    id: 1,
+    bookingId: 1,
+    paymentMethod: "credit_card",
+    amount: 1500000,
+    status: "paid",
+    transactionDate: "2025-01-06T12:30:00Z",
+  },
+  {
+    id: 2,
+    bookingId: 2,
+    paymentMethod: "bank_transfer",
+    amount: 2000000,
+    status: "pending",
+    transactionDate: "2025-01-25T09:10:00Z",
+  },
+  {
+    id: 3,
+    bookingId: 3,
+    paymentMethod: "ewallet",
+    amount: 1200000,
+    status: "failed",
+    transactionDate: "2025-03-01T14:40:00Z",
+  },
+  {
+    id: 4,
+    bookingId: 4,
+    paymentMethod: "credit_card",
+    amount: 2500000,
+    status: "paid",
+    transactionDate: "2025-03-30T08:30:00Z",
+  },
+  {
+    id: 5,
+    bookingId: 5,
+    paymentMethod: "bank_transfer",
+    amount: 800000,
+    status: "paid",
+    transactionDate: "2025-05-03T15:00:00Z",
+  },
+  {
+    id: 6,
+    bookingId: 6,
+    paymentMethod: "ewallet",
+    amount: 1800000,
+    status: "pending",
+    transactionDate: "2025-05-06T11:45:00Z",
+  },
+  {
+    id: 7,
+    bookingId: 7,
+    paymentMethod: "credit_card",
+    amount: 1300000,
+    status: "paid",
+    transactionDate: "2025-05-29T09:20:00Z",
+  },
+  {
+    id: 8,
+    bookingId: 8,
+    paymentMethod: "bank_transfer",
+    amount: 2700000,
+    status: "refunded",
+    transactionDate: "2025-06-12T12:15:00Z",
+  },
+  {
+    id: 9,
+    bookingId: 9,
+    paymentMethod: "ewallet",
+    amount: 3200000,
+    status: "paid",
+    transactionDate: "2025-06-26T09:40:00Z",
+  },
+  {
+    id: 10,
+    bookingId: 10,
+    paymentMethod: "credit_card",
+    amount: 2100000,
+    status: "paid",
+    transactionDate: "2025-08-13T10:20:00Z",
+  },
+];
+
+export default payments;

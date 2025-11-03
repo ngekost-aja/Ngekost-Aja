@@ -7,6 +7,41 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"Payment": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"bookingId": {
+						"type": "number",
+						"format": "double"
+					},
+					"paymentMethod": {
+						"type": "string"
+					},
+					"amount": {
+						"type": "number",
+						"format": "double"
+					},
+					"status": {
+						"type": "string"
+					},
+					"transactionDate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"bookingId",
+					"paymentMethod",
+					"amount",
+					"status",
+					"transactionDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"House": {
 				"properties": {
 					"id": {
@@ -256,6 +291,219 @@
 		"contact": {}
 	},
 	"paths": {
+		"/payments": {
+			"get": {
+				"operationId": "List",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Payment"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "List payments with optional filters",
+				"tags": [
+					"Payment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "bookingId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "status",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "paymentMethod",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 20,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Payment"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Create (simulate) a payment\r\nBody: { bookingId, paymentMethod, amount }",
+				"tags": [
+					"Payment"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"amount": {
+										"type": "number",
+										"format": "double"
+									},
+									"paymentMethod": {
+										"type": "string"
+									},
+									"bookingId": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"amount",
+									"paymentMethod",
+									"bookingId"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/payments/{id}": {
+			"get": {
+				"operationId": "GetById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Payment"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Get payment by id",
+				"tags": [
+					"Payment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/payments/{id}/refund": {
+			"post": {
+				"operationId": "Refund",
+				"responses": {
+					"200": {
+						"description": "Refunded",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"payment": {
+											"$ref": "#/components/schemas/Payment"
+										},
+										"success": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"success"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Refund a payment (simulate)",
+				"tags": [
+					"Payment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
 		"/houses": {
 			"get": {
 				"operationId": "List",
@@ -503,7 +751,7 @@
 				]
 			}
 		},
-		"/houses/{id}/book": {
+		"/booking/{id}/book": {
 			"post": {
 				"operationId": "Book",
 				"responses": {
@@ -535,7 +783,7 @@
 				},
 				"description": "Student: Book a boarding house\r\nBody: { userId, startDate, endDate, note }",
 				"tags": [
-					"BoardingHouse"
+					"Booking"
 				],
 				"security": [],
 				"parameters": [
@@ -578,7 +826,7 @@
 				}
 			}
 		},
-		"/houses/{id}/bookings": {
+		"/booking/{id}/bookings": {
 			"get": {
 				"operationId": "Bookings",
 				"responses": {
@@ -599,7 +847,7 @@
 				},
 				"description": "Manager: View bookings for a house",
 				"tags": [
-					"BoardingHouse"
+					"Booking"
 				],
 				"security": [],
 				"parameters": [
@@ -614,7 +862,7 @@
 				]
 			}
 		},
-		"/houses/{id}/bookings/{bookingId}/confirm": {
+		"/booking/{id}/bookings/{bookingId}/confirm": {
 			"post": {
 				"operationId": "ConfirmBooking",
 				"responses": {
@@ -642,7 +890,7 @@
 				},
 				"description": "Manager: Confirm a booking",
 				"tags": [
-					"BoardingHouse"
+					"Booking"
 				],
 				"security": [],
 				"parameters": [
@@ -665,7 +913,7 @@
 				]
 			}
 		},
-		"/houses/{id}/bookings/{bookingId}/reject": {
+		"/booking/{id}/bookings/{bookingId}/reject": {
 			"post": {
 				"operationId": "RejectBooking",
 				"responses": {
@@ -693,7 +941,7 @@
 				},
 				"description": "Manager: Reject a booking",
 				"tags": [
-					"BoardingHouse"
+					"Booking"
 				],
 				"security": [],
 				"parameters": [
