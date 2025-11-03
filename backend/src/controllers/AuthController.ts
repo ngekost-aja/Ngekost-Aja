@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import users from "@/data/users";
+import users from "@/repositories/users";
 import User from "@/models/User";
 import {
   Body,
