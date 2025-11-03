@@ -7,6 +7,70 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"Review": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"userId": {
+						"type": "number",
+						"format": "double"
+					},
+					"houseId": {
+						"type": "number",
+						"format": "double"
+					},
+					"rating": {
+						"type": "number",
+						"format": "double"
+					},
+					"comment": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"userId",
+					"houseId",
+					"rating",
+					"comment",
+					"createdAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_Review_": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"userId": {
+						"type": "number",
+						"format": "double"
+					},
+					"houseId": {
+						"type": "number",
+						"format": "double"
+					},
+					"rating": {
+						"type": "number",
+						"format": "double"
+					},
+					"comment": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
 			"Payment": {
 				"properties": {
 					"id": {
@@ -326,6 +390,333 @@
 		"contact": {}
 	},
 	"paths": {
+		"/reviews": {
+			"get": {
+				"operationId": "List",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Review"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "List reviews with optional filters\r\nExample: GET /reviews?houseId=1&userId=2&minRating=3&page=1&limit=20",
+				"tags": [
+					"Review"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "houseId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "userId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "minRating",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "maxRating",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 20,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Review"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Create a review for a house (ideally after booking)\r\nBody: { userId, houseId, rating, comment, createdAt? }\r\nNote: This uses a lightweight validation. In a real app verify booking/payment.",
+				"tags": [
+					"Review"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"createdAt": {
+										"type": "string"
+									},
+									"comment": {
+										"type": "string"
+									},
+									"rating": {
+										"type": "number",
+										"format": "double"
+									},
+									"houseId": {
+										"type": "number",
+										"format": "double"
+									},
+									"userId": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"rating",
+									"houseId",
+									"userId"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/reviews/{id}": {
+			"get": {
+				"operationId": "GetById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Review"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Get single review by id",
+				"tags": [
+					"Review"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "Update",
+				"responses": {
+					"200": {
+						"description": "Updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Review"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Update a review (user can edit their review)",
+				"tags": [
+					"Review"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_Review_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/reviews/{id}/delete": {
+			"post": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"success": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"success"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Delete a review (removes entry)",
+				"tags": [
+					"Review"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/reviews/house/{houseId}/stats": {
+			"get": {
+				"operationId": "HouseStats",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"count": {
+											"type": "number",
+											"format": "double"
+										},
+										"averageRating": {
+											"type": "number",
+											"format": "double"
+										},
+										"houseId": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"count",
+										"averageRating",
+										"houseId"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Get review stats for a house (average rating and count)\r\nExample: GET /reviews/house/1/stats",
+				"tags": [
+					"Review"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "houseId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
 		"/payments": {
 			"get": {
 				"operationId": "List",
