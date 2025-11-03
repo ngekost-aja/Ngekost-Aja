@@ -13,12 +13,35 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login:", { email, password, rememberMe });
-    // For now, just redirect to home
-    router.push("/");
+
+    const res = await fetch(`${apiUrl}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message);
+    }
+
+    localStorage.setItem("token", data.token);
+
+    switch (data.role) {
+      case "student":
+        router.push("/");
+        break;
+      case "manager":
+      case "owner":
+        router.push("/dashboard");
+    }
+
+    alert(data.message || "Logged in!");
   };
 
   const handleGoogleLogin = () => {
