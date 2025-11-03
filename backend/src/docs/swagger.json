@@ -42,6 +42,41 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"Message": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"senderId": {
+						"type": "number",
+						"format": "double"
+					},
+					"receiverId": {
+						"type": "number",
+						"format": "double"
+					},
+					"messageText": {
+						"type": "string"
+					},
+					"sentAt": {
+						"type": "string"
+					},
+					"isRead": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"id",
+					"senderId",
+					"receiverId",
+					"messageText",
+					"sentAt",
+					"isRead"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"House": {
 				"properties": {
 					"id": {
@@ -496,6 +531,330 @@
 						"in": "path",
 						"name": "id",
 						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/messages": {
+			"get": {
+				"operationId": "List",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Message"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "List messages with optional filters\r\nExample: GET /messages?senderId=1&receiverId=2&unreadOnly=true&page=1&limit=20",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "senderId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "receiverId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "conversationWith",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "unreadOnly",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 50,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Message"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Send a message (student <-> manager)\r\nBody: { senderId, receiverId, messageText, sentAt? }",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"sentAt": {
+										"type": "string"
+									},
+									"messageText": {
+										"type": "string"
+									},
+									"receiverId": {
+										"type": "number",
+										"format": "double"
+									},
+									"senderId": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"messageText",
+									"receiverId",
+									"senderId"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/messages/{id}": {
+			"get": {
+				"operationId": "GetById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Message"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Get single message by id",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/messages/{id}/read": {
+			"post": {
+				"operationId": "MarkAsRead",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"$ref": "#/components/schemas/Message"
+										},
+										"success": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"success"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Mark a message as read",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/messages/{id}/delete": {
+			"post": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"success": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"success"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Delete a message (soft deletion not implemented; this removes the entry)",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/messages/conversations": {
+			"get": {
+				"operationId": "Conversations",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"properties": {
+											"unreadCount": {
+												"type": "number",
+												"format": "double"
+											},
+											"lastMessage": {
+												"$ref": "#/components/schemas/Message"
+											},
+											"participantId": {
+												"type": "number",
+												"format": "double"
+											}
+										},
+										"required": [
+											"unreadCount",
+											"lastMessage",
+											"participantId"
+										],
+										"type": "object"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "List conversation summaries for a given user\r\nExample: GET /messages/conversations?userId=2\r\nReturns: [{ participantId, lastMessage, unreadCount }]",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "userId",
+						"required": false,
 						"schema": {
 							"format": "double",
 							"type": "number"

@@ -1,0 +1,86 @@
+import Message from "@/models/Message";
+
+const messages: Message[] = [
+  {
+    id: 1,
+    senderId: 3,
+    receiverId: 1,
+    messageText: "Hi, I’d like to confirm my booking details for next week.",
+    sentAt: "2025-01-05T09:15:00Z",
+    isRead: true,
+  },
+  {
+    id: 2,
+    senderId: 1,
+    receiverId: 3,
+    messageText: "Sure! Your booking from Jan 10–15 has been confirmed.",
+    sentAt: "2025-01-05T09:18:00Z",
+    isRead: true,
+  },
+  {
+    id: 3,
+    senderId: 4,
+    receiverId: 2,
+    messageText: "Hello, I’ve just made the payment via bank transfer.",
+    sentAt: "2025-01-25T10:45:00Z",
+    isRead: false,
+  },
+  {
+    id: 4,
+    senderId: 2,
+    receiverId: 4,
+    messageText: "Got it. We’ll verify and notify you once confirmed.",
+    sentAt: "2025-01-25T11:00:00Z",
+    isRead: false,
+  },
+  {
+    id: 5,
+    senderId: 5,
+    receiverId: 1,
+    messageText: "Hi, can I reschedule my booking to a later date?",
+    sentAt: "2025-02-28T13:20:00Z",
+    isRead: true,
+  },
+  {
+    id: 6,
+    senderId: 1,
+    receiverId: 5,
+    messageText: "Of course! Please provide your new preferred dates.",
+    sentAt: "2025-02-28T13:25:00Z",
+    isRead: true,
+  },
+  {
+    id: 7,
+    senderId: 6,
+    receiverId: 2,
+    messageText: "The room was great, thanks for the hospitality!",
+    sentAt: "2025-05-04T16:40:00Z",
+    isRead: true,
+  },
+  {
+    id: 8,
+    senderId: 2,
+    receiverId: 6,
+    messageText: "Thank you! We hope to see you again soon.",
+    sentAt: "2025-05-04T17:00:00Z",
+    isRead: true,
+  },
+  {
+    id: 9,
+    senderId: 7,
+    receiverId: 2,
+    messageText: "I think there’s an issue with my payment status.",
+    sentAt: "2025-05-06T10:10:00Z",
+    isRead: false,
+  },
+  {
+    id: 10,
+    senderId: 2,
+    receiverId: 7,
+    messageText: "Thanks for reporting, we’ll look into it right away.",
+    sentAt: "2025-05-06T10:20:00Z",
+    isRead: false,
+  },
+];
+
+export default messages;
