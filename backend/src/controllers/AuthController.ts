@@ -50,7 +50,7 @@ export class AuthController extends Controller {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const newUser: User = { email, passwordHash };
+    const newUser: User = { email, passwordHash, role: "user" };
     users.push(newUser);
 
     this.setStatus(201);
@@ -82,11 +82,15 @@ export class AuthController extends Controller {
     const SECRET_KEY = process.env.JWT_SECRET;
     if (!SECRET_KEY) throw new Error("JWT_SECRET not set");
 
-    const token = jwt.sign({ email: user.email }, SECRET_KEY, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(
+      { email: user.email, role: user.role }, 
+      SECRET_KEY, 
+      { expiresIn: "1d"}
+    );
 
-    return { token };
+    console.log("user role: ", user.role);
+
+    return { token, role: user.role };
   }
 
   /**

@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 
+// Load .env file
 dotenv.config();
 
 const config = {
@@ -11,6 +12,9 @@ const config = {
     password: process.env.DB_PASSWORD || 'password',
     database: process.env.DB_NAME || 'database',
   },
+  webFrontend: {
+    url: process.env.WEB_FRONTEND_URL
+  }
   // Add other configuration settings as needed
 };
 

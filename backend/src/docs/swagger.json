@@ -39,10 +39,14 @@
 				"properties": {
 					"token": {
 						"type": "string"
+					},
+					"role": {
+						"type": "string"
 					}
 				},
 				"required": [
-					"token"
+					"token",
+					"role"
 				],
 				"type": "object",
 				"additionalProperties": false

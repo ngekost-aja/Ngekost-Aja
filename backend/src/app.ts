@@ -1,9 +1,11 @@
 import express from "express";
+import cors from "cors";
 import { json, urlencoded } from "body-parser";
 import { logger, errorHandler } from "./middlewares";
 import { RegisterRoutes } from "./routes/routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "@/docs/swagger.json";
+import config from "./config";
 
 const app = express();
 
@@ -11,6 +13,12 @@ const app = express();
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(logger);
+
+// CORS
+app.use(cors({
+  origin: config.webFrontend.url,
+  credentials: true,
+}));
 
 RegisterRoutes(app);
 
