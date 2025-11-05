@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
   MapPin,
   SlidersHorizontal,
@@ -11,13 +12,40 @@ import {
   Bed,
   Users,
   X,
+  Loader2,
+  Search,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import Navbar from "../components/ui/Navbar";
+
+interface Property {
+  id: string;
+  name: string;
+  address: string;
+  location: string;
+  price: number;
+  type: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  area?: number;
+  images?: string[];
+  rating?: number;
+  isFavorite?: boolean;
+}
 
 export default function SearchPage() {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState("Bandung");
+  const searchParams = useSearchParams();
+  const queryParam = searchParams.get("q");
+  const locationParam = searchParams.get("location");
+
+  const [searchQuery, setSearchQuery] = useState(queryParam || locationParam || "");
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [totalResults, setTotalResults] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [sortBy, setSortBy] = useState("default");
   const [showFilters, setShowFilters] = useState(false);
@@ -26,80 +54,106 @@ export default function SearchPage() {
   const [category, setCategory] = useState("house");
   const [priceRange, setPriceRange] = useState([500000, 3000000]);
   const [propertySize, setPropertySize] = useState([500, 2000]);
-  const [bedrooms, setBedrooms] = useState(2);
-  const [bathrooms, setBathrooms] = useState(1);
+  const [bedrooms, setBedrooms] = useState(0);
+  const [bathrooms, setBathrooms] = useState(0);
   const [petsAllowed, setPetsAllowed] = useState(false);
   const [furnished, setFurnished] = useState(false);
   const [parking, setParking] = useState(false);
 
-  const properties = [
-    {
-      id: 1,
-      title: "Kos St. Joseph Apartments",
-      address: "2821 Lake Sevilla, New York, 4167 Eagle Drive",
-      beds: 2,
-      baths: 3,
-      sqft: 2510,
-      price: 450000,
-      pricePerMonth: true,
-      image: "🏠",
-      badge: "NEWINDING",
-      rating: 4.8,
-      isFavorite: false,
-    },
-    {
-      id: 2,
-      title: "Mitchell Park Plaza Apartments",
-      address: "2899 Rues Lane",
-      beds: 1,
-      baths: 3,
-      sqft: 1750,
-      price: 440000,
-      pricePerMonth: true,
-      discountedPrice: 366000,
-      image: "🏢",
-      badge: "FOR SALE",
-      rating: 4.9,
-      isFavorite: false,
-    },
-    {
-      id: 3,
-      title: "Arlo Apartment",
-      address: "New York, 4167 Eagle Drive",
-      beds: 3,
-      baths: 6,
-      sqft: 2460,
-      price: 438000,
-      pricePerMonth: true,
-      discountedPrice: 241000,
-      image: "🏘️",
-      badge: "HOT OFFER",
-      rating: 4.7,
-      isFavorite: false,
-    },
-    {
-      id: 4,
-      title: "Mitchell Park Plaza Apartments",
-      address: "2899 Rues Lane",
-      beds: 3,
-      baths: 6,
-      sqft: 3680,
-      price: 450000,
-      pricePerMonth: true,
-      discountedPrice: 366000,
-      image: "🏡",
-      badge: "HOT OFFER",
-      rating: 4.6,
-      isFavorite: false,
-    },
-  ];
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  // Fetch properties from API
+  const fetchProperties = async (page = 1) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const params = new URLSearchParams();
+      
+      if (searchQuery) params.append("search", searchQuery);
+      if (category && category !== "house") params.append("type", category);
+      params.append("minPrice", priceRange[0].toString());
+      params.append("maxPrice", priceRange[1].toString());
+      if (bedrooms > 0) params.append("bedrooms", bedrooms.toString());
+      if (bathrooms > 0) params.append("bathrooms", bathrooms.toString());
+      params.append("page", page.toString());
+      params.append("limit", "12");
+
+      // Sort
+      if (sortBy === "price-low") params.append("sort", "price:asc");
+      if (sortBy === "price-high") params.append("sort", "price:desc");
+      if (sortBy === "newest") params.append("sort", "createdAt:desc");
+      if (sortBy === "rating") params.append("sort", "rating:desc");
+
+      const response = await fetch(`${apiUrl}/houses?${params.toString()}`);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch properties");
+      }
+
+      const data = await response.json();
+      
+      // Adjust based on your API response structure
+      const propertiesData = Array.isArray(data) ? data : data.data || [];
+      const total = data.total || data.meta?.total || propertiesData.length;
+      const pages = data.totalPages || data.meta?.totalPages || Math.ceil(total / 12);
+
+      setProperties(propertiesData);
+      setTotalResults(total);
+      setTotalPages(pages);
+      setCurrentPage(page);
+    } catch (err) {
+      console.error("Error fetching properties:", err);
+      setError("Gagal memuat data properti. Silakan coba lagi.");
+      setProperties([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Initial fetch and when search query changes
+  useEffect(() => {
+    if (queryParam || locationParam) {
+      setSearchQuery(queryParam || locationParam || "");
+      fetchProperties(1);
+    }
+  }, [queryParam, locationParam]);
+
+  // Apply filters
+  const handleApplyFilters = () => {
+    setShowFilters(false);
+    fetchProperties(1);
+  };
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    fetchProperties(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Handle search from the page
+  const handleLocalSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      fetchProperties(1);
+    }
+  };
 
   const categories = [
     { id: "house", icon: "🏠", name: "Kos" },
-    { id: "apartment", icon: "🏢", name: "Apartment" },
-    { id: "office", icon: "🏢", name: "Kantor" },
-    { id: "land", icon: "🌳", name: "Tanah" },
+    { id: "putra", icon: "👨", name: "Kos Putra" },
+    { id: "putri", icon: "👩", name: "Kos Putri" },
+    { id: "campur", icon: "🏡", name: "Kos Campur" },
   ];
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(price);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -158,35 +212,8 @@ export default function SearchPage() {
                     className="w-full accent-golden-yellow"
                   />
                   <div className="flex justify-between text-sm text-gray-600">
-                    <span>Rp {priceRange[0].toLocaleString()}</span>
-                    <span>Rp {priceRange[1].toLocaleString()}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Property Size */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">
-                  Ukuran Properti
-                </h3>
-                <div className="space-y-3">
-                  <input
-                    type="range"
-                    min="500"
-                    max="3000"
-                    step="100"
-                    value={propertySize[1]}
-                    onChange={(e) =>
-                      setPropertySize([
-                        propertySize[0],
-                        parseInt(e.target.value),
-                      ])
-                    }
-                    className="w-full accent-golden-yellow"
-                  />
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>{propertySize[0]} sqft</span>
-                    <span>{propertySize[1]} sqft</span>
+                    <span>{formatPrice(priceRange[0])}</span>
+                    <span>{formatPrice(priceRange[1])}</span>
                   </div>
                 </div>
               </div>
@@ -206,6 +233,7 @@ export default function SearchPage() {
                       onChange={(e) => setBedrooms(parseInt(e.target.value))}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
                     >
+                      <option value={0}>Semua</option>
                       {[1, 2, 3, 4, 5].map((num) => (
                         <option key={num} value={num}>
                           {num}
@@ -222,6 +250,7 @@ export default function SearchPage() {
                       onChange={(e) => setBathrooms(parseInt(e.target.value))}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
                     >
+                      <option value={0}>Semua</option>
                       {[1, 2, 3, 4, 5].map((num) => (
                         <option key={num} value={num}>
                           {num}
@@ -232,44 +261,11 @@ export default function SearchPage() {
                 </div>
               </div>
 
-              {/* Additional Filters */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">
-                  Tambahan
-                </h3>
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={petsAllowed}
-                      onChange={(e) => setPetsAllowed(e.target.checked)}
-                      className="rounded accent-golden-yellow"
-                    />
-                    <span className="text-sm text-gray-700">Boleh Hewan</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={furnished}
-                      onChange={(e) => setFurnished(e.target.checked)}
-                      className="rounded accent-golden-yellow"
-                    />
-                    <span className="text-sm text-gray-700">Furnished</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={parking}
-                      onChange={(e) => setParking(e.target.checked)}
-                      className="rounded accent-golden-yellow"
-                    />
-                    <span className="text-sm text-gray-700">Parkir</span>
-                  </label>
-                </div>
-              </div>
-
               {/* Apply Filter Button */}
-              <button className="w-full bg-golden-yellow text-white py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
+              <button
+                onClick={handleApplyFilters}
+                className="w-full bg-golden-yellow text-white py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
+              >
                 Terapkan Filter
               </button>
             </div>
@@ -282,8 +278,21 @@ export default function SearchPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900">
-                    114 Hasil untuk{" "}
-                    <span className="text-golden-yellow">{searchQuery}</span>
+                    {isLoading ? (
+                      "Mencari..."
+                    ) : (
+                      <>
+                        {totalResults} Hasil
+                        {searchQuery && (
+                          <>
+                            {" "}untuk{" "}
+                            <span className="text-golden-yellow">
+                              {searchQuery}
+                            </span>
+                          </>
+                        )}
+                      </>
+                    )}
                   </h2>
                 </div>
                 <div className="flex items-center gap-2 md:gap-3">
@@ -299,7 +308,10 @@ export default function SearchPage() {
                   {/* Sort By */}
                   <select
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
+                    onChange={(e) => {
+                      setSortBy(e.target.value);
+                      fetchProperties(1);
+                    }}
                     className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
                   >
                     <option value="default">Urutkan: Default</option>
@@ -356,7 +368,6 @@ export default function SearchPage() {
                     </button>
                   </div>
 
-                  {/* Same filter content as desktop */}
                   <div className="space-y-6">
                     {/* Category */}
                     <div>
@@ -403,13 +414,13 @@ export default function SearchPage() {
                         className="w-full accent-golden-yellow"
                       />
                       <div className="flex justify-between text-sm text-gray-600 mt-2">
-                        <span>Rp {priceRange[0].toLocaleString()}</span>
-                        <span>Rp {priceRange[1].toLocaleString()}</span>
+                        <span>{formatPrice(priceRange[0])}</span>
+                        <span>{formatPrice(priceRange[1])}</span>
                       </div>
                     </div>
 
                     <button
-                      onClick={() => setShowFilters(false)}
+                      onClick={handleApplyFilters}
                       className="w-full bg-golden-yellow text-white py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
                     >
                       Terapkan Filter
@@ -419,111 +430,160 @@ export default function SearchPage() {
               </div>
             )}
 
-            {/* Property Grid/List */}
-            <div
-              className={
-                viewMode === "grid"
-                  ? "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
-                  : "space-y-4"
-              }
-            >
-              {properties.map((property) => (
-                <div
-                  key={property.id}
-                  className="bg-white rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100"
+            {/* Loading State */}
+            {isLoading && (
+              <div className="flex flex-col items-center justify-center py-20">
+                <Loader2 size={48} className="animate-spin text-golden-yellow mb-4" />
+                <p className="text-gray-600">Memuat hasil pencarian...</p>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && !isLoading && (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+                <p className="text-red-600 mb-4">{error}</p>
+                <button
+                  onClick={() => fetchProperties(currentPage)}
+                  className="bg-golden-yellow text-white px-6 py-2 rounded-lg font-medium hover:bg-yellow-500 transition"
                 >
-                  <div className="relative h-48 md:h-56 bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                    <span className="text-6xl md:text-7xl">
-                      {property.image}
-                    </span>
-                    {property.badge && (
-                      <div
-                        className={`absolute top-3 left-3 px-3 py-1 rounded text-xs font-bold text-white ${
-                          property.badge === "NEW INDING"
-                            ? "bg-blue-600"
-                            : property.badge === "FOR SALE"
-                            ? "bg-orange-500"
-                            : "bg-red-500"
-                        }`}
-                      >
-                        {property.badge}
+                  Coba Lagi
+                </button>
+              </div>
+            )}
+
+            {/* No Results */}
+            {!isLoading && !error && properties.length === 0 && (
+              <div className="bg-white rounded-xl p-12 text-center">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  Tidak ada hasil ditemukan
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Coba ubah filter pencarian atau kata kunci Anda
+                </p>
+                <Link
+                  href="/"
+                  className="inline-block bg-golden-yellow text-white px-6 py-3 rounded-lg font-medium hover:bg-yellow-500 transition"
+                >
+                  Kembali ke Beranda
+                </Link>
+              </div>
+            )}
+
+            {/* Property Grid/List */}
+            {!isLoading && !error && properties.length > 0 && (
+              <>
+                <div
+                  className={
+                    viewMode === "grid"
+                      ? "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+                      : "space-y-4"
+                  }
+                >
+                  {properties.map((property) => (
+                    <div
+                      key={property.id}
+                      className="bg-white rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100"
+                    >
+                      <div className="relative h-48 md:h-56 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        {property.images && property.images.length > 0 ? (
+                          <img
+                            src={property.images[0]}
+                            alt={property.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-6xl md:text-7xl">🏠</span>
+                        )}
+                        <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition">
+                          <Heart size={18} className="text-gray-600" />
+                        </button>
                       </div>
-                    )}
-                    <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition">
-                      <Heart size={18} className="text-gray-600" />
+                      <div className="p-4 md:p-5">
+                        <h3 className="font-bold text-gray-900 mb-1 text-base md:text-lg line-clamp-1">
+                          {property.name}
+                        </h3>
+                        <div className="flex items-start gap-1 text-gray-600 mb-3 text-xs md:text-sm">
+                          <MapPin size={14} className="shrink-0 mt-0.5" />
+                          <span className="line-clamp-1">
+                            {property.address || property.location}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3 md:gap-4 mb-3 text-xs md:text-sm text-gray-600">
+                          {property.bedrooms && (
+                            <div className="flex items-center gap-1">
+                              <Bed size={16} />
+                              <span>{property.bedrooms} Kamar</span>
+                            </div>
+                          )}
+                          {property.bathrooms && (
+                            <div className="flex items-center gap-1">
+                              <Users size={16} />
+                              <span>{property.bathrooms} Mandi</span>
+                            </div>
+                          )}
+                          {property.area && (
+                            <div className="flex items-center gap-1">
+                              <span>{property.area} m²</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div>
+                            <p className="text-lg md:text-xl font-bold text-golden-yellow">
+                              {formatPrice(property.price)}
+                            </p>
+                            <p className="text-xs text-gray-500">/bulan</p>
+                          </div>
+                          <Link
+                            href={`/kost/${property.id}`}
+                            className="bg-golden-yellow text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-500 transition"
+                          >
+                            Lihat Detail
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center gap-2 mt-8">
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Previous
+                    </button>
+                    {[...Array(Math.min(5, totalPages))].map((_, idx) => {
+                      const page = idx + 1;
+                      return (
+                        <button
+                          key={page}
+                          onClick={() => handlePageChange(page)}
+                          className={`px-4 py-2 rounded-lg transition text-sm ${
+                            page === currentPage
+                              ? "bg-golden-yellow text-white"
+                              : "border border-gray-300 hover:bg-gray-50"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      );
+                    })}
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Next
                     </button>
                   </div>
-                  <div className="p-4 md:p-5">
-                    <h3 className="font-bold text-gray-900 mb-1 text-base md:text-lg">
-                      {property.title}
-                    </h3>
-                    <div className="flex items-start gap-1 text-gray-600 mb-3 text-xs md:text-sm">
-                      <MapPin size={14} className="shrink-0 mt-0.5" />
-                      <span className="line-clamp-1">{property.address}</span>
-                    </div>
-                    <div className="flex items-center gap-3 md:gap-4 mb-3 text-xs md:text-sm text-gray-600">
-                      <div className="flex items-center gap-1">
-                        <Bed size={16} />
-                        <span>{property.beds} Kamar</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Users size={16} />
-                        <span>{property.baths} Mandi</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span>{property.sqft} sqft</span>
-                      </div>
-                    </div>
-                    <div className="flex items-end justify-between">
-                      <div>
-                        {property.discountedPrice && (
-                          <p className="text-xs text-gray-400 line-through">
-                            Rp {property.price.toLocaleString()}/bulan
-                          </p>
-                        )}
-                        <p className="text-lg md:text-xl font-bold text-golden-yellow">
-                          Rp{" "}
-                          {(
-                            property.discountedPrice || property.price
-                          ).toLocaleString()}
-                        </p>
-                        <p className="text-xs text-gray-500">/bulan</p>
-                      </div>
-                      <Link
-                        href={`/kost/${property.title
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`}
-                        className="bg-golden-yellow text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-500 transition"
-                      >
-                        Lihat Detail
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Pagination */}
-            <div className="flex justify-center items-center gap-2 mt-8">
-              <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm">
-                Previous
-              </button>
-              {[1, 2, 3, 4, 5].map((page) => (
-                <button
-                  key={page}
-                  className={`px-4 py-2 rounded-lg transition text-sm ${
-                    page === 1
-                      ? "bg-golden-yellow text-white"
-                      : "border border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
-                  {page}
-                </button>
-              ))}
-              <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm">
-                Next
-              </button>
-            </div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

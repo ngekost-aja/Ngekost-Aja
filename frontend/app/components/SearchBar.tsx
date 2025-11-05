@@ -29,26 +29,22 @@ export default function SearchBar() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
-    // Run only on client side
     if (typeof window === "undefined") return;
 
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        // mobile screen
         setPlaceholder("Cari kos di dekatmu...");
       } else {
-        // desktop screen
         setPlaceholder("Cari kos berdasarkan lokasi, kampus, atau tipe kos...");
       }
     };
 
-    handleResize(); // Run once on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Close suggestions when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
@@ -60,7 +56,6 @@ export default function SearchBar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Fetch suggestions from API
   const fetchSuggestions = async (query: string) => {
     if (!query.trim() || query.length < 2) {
       setSuggestions([]);
@@ -97,7 +92,6 @@ export default function SearchBar() {
     }
   };
 
-  // Debounced search to avoid too many API calls
   useEffect(() => {
     if (debounceTimer.current) {
       clearTimeout(debounceTimer.current);
@@ -110,7 +104,7 @@ export default function SearchBar() {
         setSuggestions([]);
         setShowSuggestions(false);
       }
-    }, 300); // Wait 300ms after user stops typing
+    }, 300);
 
     return () => {
       if (debounceTimer.current) {
@@ -123,14 +117,16 @@ export default function SearchBar() {
     e.preventDefault();
     if (searchQuery.trim()) {
       setShowSuggestions(false);
-      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+      // Navigate to search page with query parameter
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
   const handleSuggestionClick = (house: House) => {
-    setSearchQuery(house.name);
+    setSearchQuery("");
     setShowSuggestions(false);
-    router.push(`/house/${house.id}`);
+    // Navigate to specific house detail page
+    router.push(`/kost/${house.id}`);
   };
 
   const handleClearSearch = () => {
@@ -177,7 +173,6 @@ export default function SearchBar() {
           autoComplete="off"
         />
         
-        {/* Loading or Clear button */}
         {searchQuery && (
           <button
             type="button"
@@ -239,19 +234,23 @@ export default function SearchBar() {
         </div>
       )}
 
-      {/* Error Message */}
       {error && showSuggestions && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-red-200 rounded-lg shadow-lg z-50 p-4">
           <p className="text-sm text-red-600 text-center">{error}</p>
         </div>
       )}
 
-      {/* No Results Message */}
       {showSuggestions && !isLoading && suggestions.length === 0 && searchQuery.length >= 2 && !error && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4">
           <p className="text-sm text-gray-500 text-center">
             Tidak ada hasil untuk "{searchQuery}"
           </p>
+          <button
+            onClick={handleSearch}
+            className="mt-2 w-full bg-golden-yellow text-white py-2 rounded-lg text-sm font-medium hover:bg-yellow-500 transition"
+          >
+            Cari di semua kos
+          </button>
         </div>
       )}
     </div>
