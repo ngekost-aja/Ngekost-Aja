@@ -1,17 +1,10 @@
 "use client";
 
-import { Search, MapPin, X, Loader2 } from "lucide-react";
+import { Search, X, Loader2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-
-interface House {
-  id: string;
-  name: string;
-  location: string;
-  address: string;
-  price: number;
-  type: string;
-}
+import SuggestionSearchCard from "./SuggestionSearchCard";
+import House from "@/models/House";
 
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -47,7 +40,10 @@ export default function SearchBar() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
         setShowSuggestions(false);
       }
     };
@@ -76,10 +72,10 @@ export default function SearchBar() {
       }
 
       const data = await response.json();
-      
+
       // Assuming the API returns an array of houses or { data: houses }
       const houses = Array.isArray(data) ? data : data.data || [];
-      
+
       setSuggestions(houses);
       setShowSuggestions(houses.length > 0);
     } catch (err) {
@@ -122,13 +118,6 @@ export default function SearchBar() {
     }
   };
 
-  const handleSuggestionClick = (house: House) => {
-    setSearchQuery("");
-    setShowSuggestions(false);
-    // Navigate to specific house detail page
-    router.push(`/kost/${house.id}`);
-  };
-
   const handleClearSearch = () => {
     setSearchQuery("");
     setSuggestions([]);
@@ -141,14 +130,6 @@ export default function SearchBar() {
     } else if (e.key === "Escape") {
       setShowSuggestions(false);
     }
-  };
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(price);
   };
 
   return (
@@ -172,7 +153,7 @@ export default function SearchBar() {
           className="w-full pl-4 lg:pl-12 pr-20 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:border-transparent"
           autoComplete="off"
         />
-        
+
         {searchQuery && (
           <button
             type="button"
@@ -202,33 +183,13 @@ export default function SearchBar() {
             <p className="text-xs text-gray-500 px-3 py-2 font-medium">
               Saran Pencarian
             </p>
-            {suggestions.map((house) => (
-              <button
-                key={house.id}
-                onClick={() => handleSuggestionClick(house)}
-                className="w-full text-left px-3 py-3 hover:bg-gray-50 rounded-lg transition flex items-start gap-3 group"
-              >
-                <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-golden-yellow group-hover:text-white transition shrink-0">
-                  <MapPin size={18} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-gray-900 text-sm truncate group-hover:text-golden-yellow transition">
-                    {house.name}
-                  </h4>
-                  <p className="text-xs text-gray-500 truncate">
-                    {house.address || house.location}
-                  </p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs font-semibold text-golden-yellow">
-                      {formatPrice(house.price)}
-                    </span>
-                    <span className="text-xs text-gray-400">•</span>
-                    <span className="text-xs text-gray-500 capitalize">
-                      {house.type}
-                    </span>
-                  </div>
-                </div>
-              </button>
+            {suggestions.map((house, index) => (
+              <SuggestionSearchCard
+                key={index}
+                house={house}
+                setSearchQuery={setSearchQuery}
+                setShowSuggestions={setShowSuggestions}
+              />
             ))}
           </div>
         </div>
@@ -240,19 +201,23 @@ export default function SearchBar() {
         </div>
       )}
 
-      {showSuggestions && !isLoading && suggestions.length === 0 && searchQuery.length >= 2 && !error && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4">
-          <p className="text-sm text-gray-500 text-center">
-            Tidak ada hasil untuk "{searchQuery}"
-          </p>
-          <button
-            onClick={handleSearch}
-            className="mt-2 w-full bg-golden-yellow text-white py-2 rounded-lg text-sm font-medium hover:bg-yellow-500 transition"
-          >
-            Cari di semua kos
-          </button>
-        </div>
-      )}
+      {showSuggestions &&
+        !isLoading &&
+        suggestions.length === 0 &&
+        searchQuery.length >= 2 &&
+        !error && (
+          <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4">
+            <p className="text-sm text-gray-500 text-center">
+              Tidak ada hasil untuk "{searchQuery}"
+            </p>
+            <button
+              onClick={handleSearch}
+              className="mt-2 w-full bg-golden-yellow text-white py-2 rounded-lg text-sm font-medium hover:bg-yellow-500 transition"
+            >
+              Cari di semua kos
+            </button>
+          </div>
+        )}
     </div>
   );
 }
