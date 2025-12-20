@@ -14,7 +14,10 @@ export default function CardBoardingHouse({
     .replace(/[^a-z0-9-]/g, "");
 
   return (
-    <div className="bg-white rounded-lg md:rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100">
+    <Link
+      href={`/kost/${slug}`}
+      className="bg-white rounded-lg md:rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100"
+    >
       <div className="relative h-32 md:h-48 bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
         <span className="text-4xl md:text-6xl">{property.image}</span>
         {property.discount && (
@@ -52,14 +55,8 @@ export default function CardBoardingHouse({
             </p>
             <p className="text-[10px] md:text-xs text-gray-500">per bulan</p>
           </div>
-          <Link
-            href={`/kost/${slug}`}
-            className="bg-golden-yellow text-white px-2 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-yellow-500 transition whitespace-nowrap ml-2"
-          >
-            Lihat
-          </Link>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
