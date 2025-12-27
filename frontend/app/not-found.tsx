@@ -32,13 +32,13 @@ export default function NotFound() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
+          <a
             href="/"
             className="flex items-center gap-2 bg-golden-yellow text-white px-8 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition shadow-lg hover:shadow-xl w-full sm:w-auto justify-center"
           >
             <Home size={20} />
             Kembali ke beranda
-          </Link>
+          </a>
           <Link
             href="/search"
             className="flex items-center gap-2 bg-white text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition border-2 border-gray-300 w-full sm:w-auto justify-center"

@@ -45,8 +45,10 @@ export default function LoginPage() {
           router.push("/");
           break;
         case "manager":
+					router.push("/manager");
+					break;
         case "owner":
-          router.push("/dashboard");
+          router.push("/owner");
           break;
       }
     } catch (err) {
