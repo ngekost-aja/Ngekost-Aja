@@ -1,4 +1,4 @@
-import { LucideIcon, Calendar, Settings, BarChart3, MessageSquare, Home, Menu } from "lucide-react";
+import { LucideIcon, CalendarCheck, MessageSquare, Home, ChartLine, Building2 } from "lucide-react";
 
 export interface MenuItem {
 	icon: LucideIcon;
@@ -22,32 +22,41 @@ export interface BottomNavItem {
 
 export const menuItems: MenuSection[] = [
 	{
-		section: "BOOKINGS",
+		section: "DASHBOARD",
 		items: [
-			{ icon: Calendar, label: "Bookings", href: "/manager", badge: 5 },
-			{ icon: Calendar, label: "Calendar", href: "/manager/calendar" },
+			{ icon: Home, label: "Dashboard", href: "/manager" },
 		],
 	},
 	{
-		section: "MANAGEMENT",
+		section: "PROPERTI",
 		items: [
-			{ icon: Home, label: "Listing", href: "/manager/listing" },
-			{ icon: Settings, label: "Settings", href: "/manager/settings" },
-			{ icon: BarChart3, label: "Review", href: "/manager/review" },
+			{ icon: Building2, label: "Kos-kosan", href: "/manager/property" },
 		],
 	},
 	{
-		section: "SUPPORT",
+		section: "PEMESANAN",
 		items: [
-			{ icon: MessageSquare, label: "Contact us", href: "/manager/contact" },
-			{ icon: Home, label: "View Listing", href: "/manager/view-listing" },
+			{ icon: CalendarCheck, label: "Pemesanan", href: "/manager/booking" },
+		],
+	},
+	{
+		section: "CHAT",
+		items: [
+			{ icon: MessageSquare, label: "Chat dengan pemesan", href: "/manager/messages" },
+		],
+	},
+	{
+		section: "LAPORAN",
+		items: [
+			{ icon: ChartLine, label: "Laporan Keuangan", href: "/manager/finance-report" },
 		],
 	},
 ];
 
 export const bottomNavItems: BottomNavItem[] = [
-	{ icon: Calendar, label: "Bookings", href: "/manager", badge: 5 },
-	{ icon: MessageSquare, label: "Messages", href: "/manager/messages", badge: 3 },
-	{ icon: Home, label: "Listing", href: "/manager/listing" },
-	{ icon: BarChart3, label: "Review", href: "/manager/review" },
+	{ icon: Home, label: "Dashboard", href: "/manager" },
+	{ icon: Building2, label: "Properti", href: "/manager/property" },
+	{ icon: CalendarCheck, label: "Pemesanan", href: "/manager/booking", badge: 5 },
+	{ icon: MessageSquare, label: "Chat", href: "/manager/messages", badge: 3 },
+	{ icon: ChartLine, label: "Laporan", href: "/manager/finance-report" },
 ];

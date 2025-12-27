@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Bell } from "lucide-react";
+import { Bell, User } from "lucide-react";
 
 export default function MobileHeader({
 	showNotifications,
@@ -43,7 +43,7 @@ export default function MobileHeader({
 						href="/owner/profile"
 						className="w-9 h-9 bg-linear-to-br from-golden-yellow to-yellow-500 rounded-full flex items-center justify-center text-lg shadow-sm"
 					>
-						👨‍💼
+						<User size={20} />
 					</Link>
 				</div>
 			</div>

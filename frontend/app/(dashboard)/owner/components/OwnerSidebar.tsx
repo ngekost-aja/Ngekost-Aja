@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MenuItem } from "./menuConfig";
-import { LogOut } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 
 export default function OwnerSidebar({
 	menuItems,
@@ -63,11 +63,18 @@ export default function OwnerSidebar({
 				</div>
 			</nav>
 
-			{/* Logout */}
-			<div className="p-4 border-t border-gray-200">
+			{/* Account & Logout */}
+			<div className="p-4 border-t border-gray-200 space-y-1">
+				<Link
+					href="/manager/account"
+					className="flex items-center gap-3 w-full px-3 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+				>
+					<User size={20} />
+					<span className="font-medium text-sm">Akun</span>
+				</Link>
 				<button className="flex items-center gap-3 w-full px-3 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg transition">
 					<LogOut size={20} />
-					<span className="font-medium text-sm">Log Off</span>
+					<span className="font-medium text-sm">Log Out</span>
 				</button>
 			</div>
 		</aside>
