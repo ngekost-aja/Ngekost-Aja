@@ -122,11 +122,10 @@ export default function KostDetailPage() {
                     <button
                       key={idx}
                       onClick={() => setCurrentImageIndex(idx)}
-                      className={`shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition ${
-                        currentImageIndex === idx
-                          ? "border-[#EDCD44]"
+                      className={`shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition ${currentImageIndex === idx
+                          ? "border-golden-yellow"
                           : "border-gray-200"
-                      }`}
+                        }`}
                     >
                       <div className="w-full h-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center text-2xl md:text-3xl">
                         {img}
@@ -172,11 +171,10 @@ export default function KostDetailPage() {
                       <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`pb-3 md:pb-4 text-sm md:text-base font-medium whitespace-nowrap transition ${
-                          activeTab === tab
-                            ? "text-[#EDCD44] border-b-2 border-[#EDCD44]"
+                        className={`pb-3 md:pb-4 text-sm md:text-base font-medium whitespace-nowrap transition ${activeTab === tab
+                            ? "text-golden-yellow border-b-2 border-golden-yellow"
                             : "text-gray-500 hover:text-gray-700"
-                        }`}
+                          }`}
                       >
                         {tab === "description" && "Deskripsi"}
                         {tab === "features" && "Fasilitas"}
@@ -203,7 +201,7 @@ export default function KostDetailPage() {
                       key={idx}
                       className="flex items-center gap-2 md:gap-3 p-3 md:p-4 bg-gray-50 rounded-lg"
                     >
-                      <div className="text-[#EDCD44]">{feature.icon}</div>
+                      <div className="text-golden-yellow">{feature.icon}</div>
                       <span className="text-sm md:text-base font-medium text-gray-700">
                         {feature.name}
                       </span>
@@ -255,7 +253,7 @@ export default function KostDetailPage() {
                   /malam
                 </span>
                 {discount > 0 && (
-                  <span className="bg-[#EDCD44] text-white px-2 py-0.5 rounded text-xs font-bold ml-auto">
+                  <span className="bg-golden-yellow text-white px-2 py-0.5 rounded text-xs font-bold ml-auto">
                     -20%
                   </span>
                 )}
@@ -271,7 +269,7 @@ export default function KostDetailPage() {
                     type="date"
                     value={checkInDate}
                     onChange={(e) => setCheckInDate(e.target.value)}
-                    className="w-full px-2 md:px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-xs md:text-sm"
+                    className="w-full px-2 md:px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-xs md:text-sm"
                   />
                 </div>
                 <div>
@@ -282,7 +280,7 @@ export default function KostDetailPage() {
                     type="date"
                     value={checkOutDate}
                     onChange={(e) => setCheckOutDate(e.target.value)}
-                    className="w-full px-2 md:px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-xs md:text-sm"
+                    className="w-full px-2 md:px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-xs md:text-sm"
                   />
                 </div>
               </div>
@@ -295,7 +293,7 @@ export default function KostDetailPage() {
                 <select
                   value={guests}
                   onChange={(e) => setGuests(e.target.value)}
-                  className="w-full px-2 md:px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EDCD44] text-xs md:text-sm"
+                  className="w-full px-2 md:px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-xs md:text-sm"
                 >
                   <option>1 Dewasa</option>
                   <option>2 Dewasa</option>
@@ -360,7 +358,7 @@ export default function KostDetailPage() {
                   <span className="font-bold text-base md:text-lg text-gray-900">
                     Total Pembayaran
                   </span>
-                  <span className="font-bold text-xl md:text-2xl text-[#EDCD44]">
+                  <span className="font-bold text-xl md:text-2xl text-golden-yellow">
                     Rp {totalPayment.toLocaleString()}
                   </span>
                 </div>
@@ -369,7 +367,7 @@ export default function KostDetailPage() {
               {/* Book Button */}
               <button
                 onClick={handleBookNow}
-                className="w-full bg-[#EDCD44] text-white py-3 md:py-4 rounded-lg font-bold text-sm md:text-base hover:bg-yellow-500 transition shadow-lg hover:shadow-xl"
+                className="w-full bg-golden-yellow text-white py-3 md:py-4 rounded-lg font-bold text-sm md:text-base hover:bg-yellow-500 transition shadow-lg hover:shadow-xl"
               >
                 Pesan Sekarang
               </button>
