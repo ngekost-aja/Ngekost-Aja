@@ -1,2 +1,1 @@
-# Ngekost Aja!
-
+![Ngekost Aja Banner](docs/img/ngekost-aja-long-logo-17-4.png)
