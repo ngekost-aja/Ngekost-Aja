@@ -29,7 +29,7 @@ export const menuItems: MenuSection[] = [
 	{
 		section: "PROPERTI",
 		items: [
-			{ icon: Building2, label: "Kos-kosan", href: "/manager/property" },
+			{ icon: Building2, label: "Kost-kostan", href: "/manager/property" },
 		],
 	},
 	{
