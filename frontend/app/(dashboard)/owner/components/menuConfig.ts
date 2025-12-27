@@ -1,10 +1,15 @@
-import { LucideIcon, Home, Building2, Users, DollarSign, Settings, BarChart3, MessageSquare, HelpCircle, LogOut, Menu, TrendingUp } from "lucide-react";
+import { LucideIcon, Home, Building2, Users, ChartLine } from "lucide-react";
 
 export interface MenuItem {
 	icon: LucideIcon;
 	label: string;
 	href: string;
 	badge?: number;
+}
+
+export interface MenuSection {
+	section: string;
+	items: MenuItem[];
 }
 
 export interface BottomNavItem {
@@ -15,29 +20,41 @@ export interface BottomNavItem {
 	action?: string;
 }
 
-export const menuItems: MenuItem[] = [
-	{ icon: Home, label: "Dashboard", href: "/owner" },
-	{ icon: Building2, label: "My Properties", href: "/owner/properties" },
-	{ icon: Users, label: "Clients", href: "/owner/clients" },
-	{ icon: DollarSign, label: "Transaction", href: "/owner/transaction" },
-	{ icon: BarChart3, label: "Analytics", href: "/owner/analytics" },
+export const menuItems: MenuSection[] = [
 	{
-		icon: MessageSquare,
-		label: "Messages",
-		href: "/owner/messages",
-		badge: 3,
+		section: "DASHBOARD",
+		items: [
+			{ icon: Home, label: "Dashboard", href: "/owner" },
+		],
 	},
-	{ icon: Settings, label: "Settings", href: "/owner/settings" },
+	{
+		section: "PROPERTI",
+		items: [
+			{ icon: Building2, label: "Kost-kostan", href: "/owner/properties" },
+		],
+	},
+	{
+		section: "MANAJER",
+		items: [
+			{ icon: Users, label: "Manajer", href: "/owner/manager" },
+		],
+	},
+	{
+		section: "LAPORAN",
+		items: [
+			{ icon: ChartLine, label: "Laporan Keuangan", href: "/owner/finance-report" },
+		],
+	},
 ];
+
 
 export const bottomNavItems: BottomNavItem[] = [
 	{ icon: Home, label: "Dashboard", href: "/owner" },
 	{ icon: Building2, label: "Properties", href: "/owner/properties" },
-	{ icon: TrendingUp, label: "Analytics", href: "/owner/analytics" },
+	{ icon: Users, label: "Manajer", href: "/owner/manager" },
 	{
-		icon: MessageSquare,
-		label: "Messages",
-		href: "/owner/messages",
-		badge: 3,
+		icon: ChartLine,
+		label: "Laporan",
+		href: "/owner/finance-report",
 	},
 ];

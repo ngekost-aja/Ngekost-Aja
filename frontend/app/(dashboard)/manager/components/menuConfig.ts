@@ -17,7 +17,6 @@ export interface BottomNavItem {
 	label: string;
 	href?: string;
 	badge?: number;
-	action?: string;
 }
 
 export const menuItems: MenuSection[] = [

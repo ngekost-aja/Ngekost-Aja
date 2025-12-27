@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MenuItem } from "./menuConfig";
+import { MenuSection } from "./menuConfig";
 import { LogOut, User } from "lucide-react";
 
 export default function OwnerSidebar({
 	menuItems,
 	pathname
 }: {
-	menuItems: MenuItem[];
+	menuItems: MenuSection[];
 	pathname: string;
 }) {
 	return (
@@ -32,35 +32,42 @@ export default function OwnerSidebar({
 			</div>
 
 			{/* Navigation */}
-			<nav className="flex-1 overflow-y-auto p-4">
-				<div className="space-y-1">
-					{menuItems.map((item, idx) => {
-						const isActive = pathname === item.href;
-						return (
-							<Link
-								key={idx}
-								href={item.href}
-								className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition ${isActive
-									? "bg-gray-900 text-white!"
-									: "text-gray-700 hover:bg-gray-100"
-									}`}
-							>
-								<item.icon size={20} />
-								<span className="font-medium text-sm">{item.label}</span>
-								{item.badge && (
-									<span
-										className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full ${isActive
-											? "bg-white text-gray-900"
-											: "bg-gray-900 text-white"
+			<nav className="flex-1 overflow-y-auto p-4 space-y-6">
+				{menuItems.map((section, idx) => (
+					<div key={idx}>
+						<h3 className="text-xs font-semibold text-gray-400 uppercase mb-3 px-3">
+							{section.section}
+						</h3>
+						<div className="space-y-1">
+							{section.items.map((item, itemIdx) => {
+								const isActive = pathname === item.href;
+								return (
+									<Link
+										key={itemIdx}
+										href={item.href}
+										className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition ${isActive
+											? "bg-gray-900 text-white!"
+											: "text-gray-700 hover:bg-gray-100"
 											}`}
 									>
-										{item.badge}
-									</span>
-								)}
-							</Link>
-						);
-					})}
-				</div>
+										<item.icon size={20} />
+										<span className="font-medium text-sm">{item.label}</span>
+										{item.badge && (
+											<span
+												className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full ${isActive
+													? "bg-white text-gray-900"
+													: "bg-gray-900 text-white"
+													}`}
+											>
+												{item.badge}
+											</span>
+										)}
+									</Link>
+								);
+							})}
+						</div>
+					</div>
+				))}
 			</nav>
 
 			{/* Account & Logout */}

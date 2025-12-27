@@ -12,7 +12,7 @@ export default function ManagerSidebar({
 }) {
 	return (
 		<aside className="hidden lg:flex lg:flex-col w-64 bg-white border-r border-gray-200">
-			{/* Logo & Profile */}
+			{/* Logo */}
 			<div className="p-6 border-b border-gray-200">
 				<div className="flex items-center gap-3">
 					<div className="w-12 h-12 p-0 lg:p-1.5 sm:w-14 sm:h-14 md:w-16 md:h-16">

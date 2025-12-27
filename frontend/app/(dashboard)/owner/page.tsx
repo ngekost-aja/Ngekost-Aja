@@ -1,467 +1,346 @@
 'use client'
 
+import { Building2, Home, TrendingUp, DollarSign, ArrowUp, ArrowDown } from "lucide-react";
 import { useState } from "react";
-import { 
-  Search, 
-  ChevronDown,
-  Heart,
-  MapPin,
-  Bed,
-  Bath,
-  Maximize,
-  TrendingUp,
-  TrendingDown,
-  Users,
-  Building2,
-  DollarSign,
-  Calendar,
-	MessageSquare
-} from "lucide-react";
-import Link from "next/link";
 
 export default function OwnerDashboard() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [priceFilter, setpriceFilter] = useState("Up to $35k");
-  const [amenitiesFilter, setAmenitiesFilter] = useState("Amenities");
-  const [typeFilter, setTypeFilter] = useState("Type");
-  const [moreFilter, setMoreFilter] = useState("More");
+	const [selectedPeriod, setSelectedPeriod] = useState("month");
 
-  const properties = [
-    {
-      id: 1,
-      name: "Sunset Paradise",
-      type: "Bedroom • Center",
-      bedrooms: 2,
-      guests: 4,
-      baths: 1,
-      area: 240,
-      price: 75000,
-      image: "🏢",
-      status: "available",
-      isFavorite: false,
-    },
-    {
-      id: 2,
-      name: "Serenity Heights",
-      type: "Bedroom • Gajah Mada",
-      bedrooms: 2,
-      guests: 4,
-      baths: 1,
-      area: 656,
-      price: 95000,
-      image: "🏠",
-      status: "available",
-      isFavorite: false,
-    },
-    {
-      id: 3,
-      name: "Oakwood Manor",
-      type: "Bedroom • GBU",
-      bedrooms: 2,
-      guests: 4,
-      baths: 1,
-      area: 153,
-      price: 45880,
-      image: "🏘️",
-      status: "rented",
-      isFavorite: false,
-    },
-    {
-      id: 4,
-      name: "Enchanted Gardens",
-      type: "Bedroom • Janti",
-      bedrooms: 2,
-      guests: 4,
-      baths: 1,
-      area: 550,
-      price: 91080,
-      image: "🏛️",
-      status: "available",
-      isFavorite: false,
-    },
-    {
-      id: 5,
-      name: "The Haven Residences",
-      type: "Bedroom • Kaliurang",
-      bedrooms: 1,
-      guests: 2,
-      baths: 1,
-      area: 450,
-      price: 80500,
-      image: "🏢",
-      status: "available",
-      isFavorite: false,
-    },
-    {
-      id: 6,
-      name: "The Manor Residences",
-      type: "Bedroom • Seturan",
-      bedrooms: 2,
-      guests: 3,
-      baths: 1,
-      area: 380,
-      price: 72000,
-      image: "🏗️",
-      status: "maintenance",
-      isFavorite: false,
-    },
-  ];
+	// Mock data - replace with real API calls
+	const kpis = [
+		{
+			id: "total-properties",
+			label: "Total Properti",
+			value: 12,
+			change: "+2",
+			changeType: "increase" as const,
+			icon: Building2,
+			color: "blue",
+		},
+		{
+			id: "total-units",
+			label: "Total Unit",
+			value: 156,
+			change: "+8",
+			changeType: "increase" as const,
+			icon: Home,
+			color: "green",
+		},
+		{
+			id: "occupancy-rate",
+			label: "Tingkat Hunian",
+			value: "82%",
+			change: "+5%",
+			changeType: "increase" as const,
+			icon: TrendingUp,
+			color: "purple",
+		},
+		{
+			id: "estimated-revenue",
+			label: "Estimasi Pendapatan",
+			value: "Rp 128.4M",
+			change: "+12%",
+			changeType: "increase" as const,
+			icon: DollarSign,
+			color: "yellow",
+		},
+	];
 
-  const stats = [
-    {
-      label: "Total Properties",
-      value: "24",
-      change: "+12%",
-      trend: "up",
-      icon: Building2,
-      color: "bg-blue-500",
-    },
-    {
-      label: "Active Tenants",
-      value: "18",
-      change: "+8%",
-      trend: "up",
-      icon: Users,
-      color: "bg-green-500",
-    },
-    {
-      label: "Monthly Income",
-      value: "$45,380",
-      change: "+15%",
-      trend: "up",
-      icon: DollarSign,
-      color: "bg-[#EDCD44]",
-    },
-    {
-      label: "Occupancy Rate",
-      value: "88%",
-      change: "-2%",
-      trend: "down",
-      icon: TrendingUp,
-      color: "bg-purple-500",
-    },
-  ];
+	// Property performance data
+	const propertyPerformance = [
+		{
+			id: 1,
+			name: "Kos Ganesha Premium",
+			location: "Bandung",
+			totalUnits: 24,
+			occupiedUnits: 22,
+			occupancyRate: 92,
+			monthlyRevenue: 33000000,
+			status: "excellent",
+		},
+		{
+			id: 2,
+			name: "Kos Dago Residence",
+			location: "Bandung",
+			totalUnits: 18,
+			occupiedUnits: 14,
+			occupancyRate: 78,
+			monthlyRevenue: 21000000,
+			status: "good",
+		},
+		{
+			id: 3,
+			name: "Kos Sukajadi Indah",
+			location: "Bandung",
+			totalUnits: 30,
+			occupiedUnits: 25,
+			occupancyRate: 83,
+			monthlyRevenue: 37500000,
+			status: "good",
+		},
+		{
+			id: 4,
+			name: "Kos Setiabudi Elite",
+			location: "Bandung",
+			totalUnits: 20,
+			occupiedUnits: 12,
+			occupancyRate: 60,
+			monthlyRevenue: 18000000,
+			status: "average",
+		},
+		{
+			id: 5,
+			name: "Kos Dipatiukur",
+			location: "Bandung",
+			totalUnits: 16,
+			occupiedUnits: 14,
+			occupancyRate: 88,
+			monthlyRevenue: 21000000,
+			status: "excellent",
+		},
+	];
 
-  const recentActivities = [
-    {
-      type: "booking",
-      property: "Sunset Paradise",
-      tenant: "John Doe",
-      date: "2 hours ago",
-      status: "confirmed",
-    },
-    {
-      type: "payment",
-      property: "Serenity Heights",
-      tenant: "Jane Smith",
-      date: "5 hours ago",
-      status: "completed",
-    },
-    {
-      type: "inquiry",
-      property: "Oakwood Manor",
-      tenant: "Mike Johnson",
-      date: "1 day ago",
-      status: "pending",
-    },
-  ];
+	// Mock chart data
+	const revenueData = [
+		{ month: "Jan", revenue: 110 },
+		{ month: "Feb", revenue: 115 },
+		{ month: "Mar", revenue: 108 },
+		{ month: "Apr", revenue: 120 },
+		{ month: "Mei", revenue: 118 },
+		{ month: "Jun", revenue: 128 },
+	];
 
-  const filteredProperties = properties.filter((property) => {
-    if (!searchQuery) return true;
-    return property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           property.type.toLowerCase().includes(searchQuery.toLowerCase());
-  });
+	const occupancyTrendData = [
+		{ month: "Jan", rate: 75 },
+		{ month: "Feb", rate: 78 },
+		{ month: "Mar", rate: 76 },
+		{ month: "Apr", rate: 80 },
+		{ month: "Mei", rate: 79 },
+		{ month: "Jun", rate: 82 },
+	];
 
-  return (
-    <div className="p-4 lg:p-6 space-y-6">
-      {/* Header */}
-      <div className="bg-white rounded-xl p-4 lg:p-6 shadow-sm">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-              Good Morning, <span className="text-golden-yellow">Ahsan</span>
-            </h1>
-            <p className="text-sm text-gray-500 mt-1">
-              📍 414 E Clark street, Vermillion
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="p-2 hover:bg-gray-100 rounded-lg transition">
-              <Search size={20} className="text-gray-600" />
-            </button>
-            <div className="w-10 h-10 bg-linear-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center text-xl">
-              👨‍💼
-            </div>
-            <div className="hidden sm:block">
-              <p className="text-sm font-semibold text-gray-900">Ahsan</p>
-              <button className="text-xs text-gray-500 flex items-center gap-1">
-                Owner <ChevronDown size={12} />
-              </button>
-            </div>
-          </div>
-        </div>
+	const getColorClasses = (color: string) => {
+		const colors = {
+			blue: "bg-blue-50 text-blue-600",
+			green: "bg-green-50 text-green-600",
+			yellow: "bg-yellow-50 text-yellow-600",
+			purple: "bg-purple-50 text-purple-600",
+		};
+		return colors[color as keyof typeof colors] || colors.blue;
+	};
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-3">
-          <select
-            value={priceFilter}
-            onChange={(e) => setpriceFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
-          >
-            <option>Up to $35k</option>
-            <option>$35k - $50k</option>
-            <option>$50k - $75k</option>
-            <option>$75k+</option>
-          </select>
-          <select
-            value={amenitiesFilter}
-            onChange={(e) => setAmenitiesFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
-          >
-            <option>Amenities</option>
-            <option>WiFi</option>
-            <option>AC</option>
-            <option>Parking</option>
-            <option>Kitchen</option>
-          </select>
-          <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-golden-yellow text-sm"
-          >
-            <option>Type</option>
-            <option>Studio</option>
-            <option>1 Bedroom</option>
-            <option>2 Bedrooms</option>
-            <option>3+ Bedrooms</option>
-          </select>
-          <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm font-medium">
-            More
-          </button>
-        </div>
+	const getStatusBadge = (status: string) => {
+		if (status === "excellent") {
+			return <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">Sangat Baik</span>;
+		}
+		if (status === "good") {
+			return <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">Baik</span>;
+		}
+		return <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-medium rounded-full">Cukup</span>;
+	};
 
-        {/* Availability Info */}
-        <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
-          <span>More than 1k house available</span>
-          <span className="text-gray-400">•</span>
-          <button className="text-golden-yellow hover:underline flex items-center gap-1">
-            Last added <ChevronDown size={14} />
-          </button>
-        </div>
-      </div>
+	return (
+		<div className="h-full overflow-y-auto bg-gray-50">
+			<div className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6">
+				{/* Header */}
+				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+					<div>
+						<h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Dashboard Owner</h1>
+						<p className="text-sm text-gray-500 mt-1">Ringkasan performa seluruh properti Anda</p>
+					</div>
+					<div className="flex gap-2">
+						<button
+							onClick={() => setSelectedPeriod("week")}
+							className={`px-4 py-2 text-sm font-medium rounded-lg transition ${selectedPeriod === "week"
+								? "bg-gray-900 text-white"
+								: "bg-white text-gray-700 hover:bg-gray-100"
+								}`}
+						>
+							Minggu Ini
+						</button>
+						<button
+							onClick={() => setSelectedPeriod("month")}
+							className={`px-4 py-2 text-sm font-medium rounded-lg transition ${selectedPeriod === "month"
+								? "bg-gray-900 text-white"
+								: "bg-white text-gray-700 hover:bg-gray-100"
+								}`}
+						>
+							Bulan Ini
+						</button>
+					</div>
+				</div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat, idx) => (
-          <div key={idx} className="bg-white rounded-xl p-4 lg:p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
-              <div className={`${stat.color} w-10 h-10 rounded-lg flex items-center justify-center text-white`}>
-                <stat.icon size={20} />
-              </div>
-              <div className={`flex items-center gap-1 text-sm font-semibold ${
-                stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
-              }`}>
-                {stat.trend === 'up' ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
-                {stat.change}
-              </div>
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</h3>
-            <p className="text-sm text-gray-500">{stat.label}</p>
-          </div>
-        ))}
-      </div>
+				{/* KPI Cards - Desktop Grid */}
+				<div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+					{kpis.map((kpi) => (
+						<div key={kpi.id} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition">
+							<div className="flex items-start justify-between mb-4">
+								<div className={`p-3 rounded-lg ${getColorClasses(kpi.color)}`}>
+									<kpi.icon size={24} />
+								</div>
+								<div className={`flex items-center gap-1 text-sm font-medium ${kpi.changeType === "increase" ? "text-green-600" : "text-red-600"
+									}`}>
+									{kpi.changeType === "increase" ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
+									{kpi.change}
+								</div>
+							</div>
+							<div>
+								<p className="text-sm text-gray-500 mb-1">{kpi.label}</p>
+								<p className="text-3xl font-bold text-gray-900">{kpi.value}</p>
+							</div>
+						</div>
+					))}
+				</div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Properties List */}
-        <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl shadow-sm">
-            <div className="p-4 lg:p-6 border-b border-gray-200 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-gray-900">My Properties</h2>
-              <Link href="/owner/properties" className="text-sm text-golden-yellow hover:underline font-medium">
-                View All
-              </Link>
-            </div>
-            <div className="p-4 space-y-3">
-              {filteredProperties.map((property) => (
-                <div
-                  key={property.id}
-                  className="flex gap-4 p-4 border border-gray-200 rounded-xl hover:shadow-md transition cursor-pointer"
-                >
-                  <div className="w-24 h-24 bg-linear-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center text-4xl shrink-0">
-                    {property.image}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-gray-900 text-base mb-1 truncate">
-                          {property.name}
-                        </h3>
-                        <p className="text-sm text-gray-500 flex items-center gap-1">
-                          <MapPin size={14} />
-                          {property.type}
-                        </p>
-                      </div>
-                      <button className="p-1 hover:bg-gray-100 rounded-full transition shrink-0 ml-2">
-                        <Heart size={18} className="text-gray-400" />
-                      </button>
-                    </div>
-                    <div className="flex items-center gap-3 text-xs text-gray-600 mb-2">
-                      <span className="flex items-center gap-1">
-                        <Bed size={14} />
-                        {property.bedrooms}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Users size={14} />
-                        {property.guests}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Bath size={14} />
-                        {property.baths}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Maximize size={14} />
-                        {property.area} m²
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-lg font-bold text-gray-900">
-                          ${property.price.toLocaleString()}
-                        </p>
-                        <p className="text-xs text-gray-500">per month</p>
-                      </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        property.status === 'available' 
-                          ? 'bg-green-100 text-green-700'
-                          : property.status === 'rented'
-                          ? 'bg-blue-100 text-blue-700'
-                          : 'bg-orange-100 text-orange-700'
-                      }`}>
-                        {property.status}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+				{/* KPI Cards - Mobile Grid */}
+				<div className="sm:hidden grid grid-cols-2 gap-3">
+					{kpis.map((kpi) => (
+						<div key={kpi.id} className="bg-white rounded-xl p-4 shadow-sm">
+							<div className="flex items-start justify-between mb-3">
+								<div className={`p-2 rounded-lg ${getColorClasses(kpi.color)}`}>
+									<kpi.icon size={20} />
+								</div>
+								<div className={`flex items-center gap-1 text-xs font-medium ${kpi.changeType === "increase" ? "text-green-600" : "text-red-600"
+									}`}>
+									{kpi.changeType === "increase" ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
+									{kpi.change}
+								</div>
+							</div>
+							<div>
+								<p className="text-xs text-gray-500 mb-1">{kpi.label}</p>
+								<p className="text-xl font-bold text-gray-900">{typeof kpi.value === 'string' ? kpi.value : kpi.value}</p>
+							</div>
+						</div>
+					))}
+				</div>
 
-        {/* Sidebar */}
-        <div className="space-y-6">
-          {/* Selected Property Preview */}
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-            <div className="h-48 bg-linear-to-br from-orange-200 to-orange-300 flex items-center justify-center text-7xl">
-              🏠
-            </div>
-            <div className="p-4">
-              <h3 className="font-bold text-gray-900 text-lg mb-2">Serenity Heights</h3>
-              <p className="text-sm text-gray-600 mb-3 flex items-center gap-1">
-                <MapPin size={14} />
-                414 E Oak street, Vermillion
-              </p>
-              <div className="grid grid-cols-3 gap-3 mb-4">
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-1 text-gray-600 mb-1">
-                    <Bed size={16} />
-                  </div>
-                  <p className="text-sm font-semibold text-gray-900">2</p>
-                  <p className="text-xs text-gray-500">Bedroom</p>
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-1 text-gray-600 mb-1">
-                    <Bath size={16} />
-                  </div>
-                  <p className="text-sm font-semibold text-gray-900">1</p>
-                  <p className="text-xs text-gray-500">Bathroom</p>
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-1 text-gray-600 mb-1">
-                    <Maximize size={16} />
-                  </div>
-                  <p className="text-sm font-semibold text-gray-900">656</p>
-                  <p className="text-xs text-gray-500">m²</p>
-                </div>
-              </div>
-              <button className="w-full bg-golden-yellow text-white py-2.5 rounded-lg font-semibold hover:bg-yellow-500 transition">
-                Book a tour
-              </button>
-            </div>
-          </div>
+				{/* Charts */}
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+					{/* Revenue Chart */}
+					<div className="bg-white rounded-xl p-6 shadow-sm">
+						<h3 className="text-lg font-bold text-gray-900 mb-4">Tren Pendapatan (Juta)</h3>
+						<div className="h-64 flex items-end justify-between gap-2">
+							{revenueData.map((data, index) => {
+								const maxRevenue = Math.max(...revenueData.map(d => d.revenue));
+								const heightPercent = (data.revenue / maxRevenue) * 100;
+								return (
+									<div key={index} className="flex-1 flex flex-col items-center gap-2">
+										<div className="w-full bg-gray-100 rounded-t-lg relative group cursor-pointer hover:bg-gray-200 transition">
+											<div
+												className="bg-linear-to-t from-green-500 to-green-400 rounded-t-lg transition-all duration-500 flex items-start justify-center pt-2"
+												style={{ height: `${heightPercent * 2}px`, minHeight: "40px" }}
+											>
+												<span className="text-xs font-bold text-white">{data.revenue}</span>
+											</div>
+										</div>
+										<span className="text-xs font-medium text-gray-600">{data.month}</span>
+									</div>
+								);
+							})}
+						</div>
+					</div>
 
-          {/* Income Chart */}
-          <div className="bg-white rounded-xl p-4 shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-gray-900">Monthly Stats</h3>
-              <select className="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-golden-yellow">
-                <option>2024</option>
-                <option>2023</option>
-              </select>
-            </div>
-            <div className="space-y-3">
-              {[
-                { month: 'Jan', amount: 42000, percent: 70 },
-                { month: 'Feb', amount: 38000, percent: 60 },
-                { month: 'Mar', amount: 45000, percent: 75 },
-                { month: 'Apr', amount: 50000, percent: 85 },
-              ].map((data, idx) => (
-                <div key={idx}>
-                  <div className="flex items-center justify-between text-xs mb-1">
-                    <span className="text-gray-600">{data.month}</span>
-                    <span className="font-semibold text-gray-900">${data.amount.toLocaleString()}</span>
-                  </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-golden-yellow rounded-full transition-all"
-                      style={{ width: `${data.percent}%` }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Total Income</span>
-                <span className="text-lg font-bold text-gray-900">$175,000</span>
-              </div>
-            </div>
-          </div>
+					{/* Occupancy Trend Chart */}
+					<div className="bg-white rounded-xl p-6 shadow-sm">
+						<h3 className="text-lg font-bold text-gray-900 mb-4">Tren Tingkat Hunian</h3>
+						<div className="space-y-3">
+							{occupancyTrendData.map((data, index) => (
+								<div key={index} className="flex items-center gap-3">
+									<span className="text-sm font-medium text-gray-600 w-8">{data.month}</span>
+									<div className="flex-1 bg-gray-100 rounded-full h-8 relative overflow-hidden">
+										<div
+											className="bg-linear-to-r from-purple-500 to-purple-600 h-full rounded-full flex items-center justify-end pr-3 transition-all duration-500"
+											style={{ width: `${data.rate}%` }}
+										>
+											<span className="text-xs font-bold text-white">{data.rate}%</span>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
 
-          {/* Recent Activities */}
-          <div className="bg-white rounded-xl p-4 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-4">Recent Activity</h3>
-            <div className="space-y-3">
-              {recentActivities.map((activity, idx) => (
-                <div key={idx} className="flex gap-3 pb-3 border-b border-gray-100 last:border-0">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white shrink-0 ${
-                    activity.type === 'booking' ? 'bg-blue-500' :
-                    activity.type === 'payment' ? 'bg-green-500' :
-                    'bg-orange-500'
-                  }`}>
-                    {activity.type === 'booking' ? <Calendar size={16} /> :
-                     activity.type === 'payment' ? <DollarSign size={16} /> :
-                     <MessageSquare size={16} />}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-900 truncate">
-                      {activity.property}
-                    </p>
-                    <p className="text-xs text-gray-500">{activity.tenant}</p>
-                    <p className="text-xs text-gray-400 mt-1">{activity.date}</p>
-                  </div>
-                  <span className={`text-xs font-semibold px-2 py-1 rounded-full h-fit ${
-                    activity.status === 'confirmed' ? 'bg-blue-100 text-blue-700' :
-                    activity.status === 'completed' ? 'bg-green-100 text-green-700' :
-                    'bg-orange-100 text-orange-700'
-                  }`}>
-                    {activity.status}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+				{/* Property Performance Table */}
+				<div className="bg-white rounded-xl shadow-sm overflow-hidden">
+					<div className="p-6 border-b border-gray-200">
+						<div className="flex items-center justify-between">
+							<h3 className="text-lg font-bold text-gray-900">Performa Properti</h3>
+							<a href="/owner/properties" className="text-sm font-medium text-golden-yellow hover:text-yellow-600 transition">
+								Lihat Semua →
+							</a>
+						</div>
+					</div>
+					<div className="overflow-x-auto">
+						<table className="w-full">
+							<thead className="bg-gray-50 border-b border-gray-200">
+								<tr>
+									<th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+										Nama Properti
+									</th>
+									<th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider hidden md:table-cell">
+										Lokasi
+									</th>
+									<th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider hidden lg:table-cell">
+										Unit Terisi/Total
+									</th>
+									<th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+										Hunian
+									</th>
+									<th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider hidden sm:table-cell">
+										Pendapatan/Bulan
+									</th>
+									<th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+										Status
+									</th>
+								</tr>
+							</thead>
+							<tbody className="divide-y divide-gray-200">
+								{propertyPerformance.map((property) => (
+									<tr key={property.id} className="hover:bg-gray-50 transition cursor-pointer">
+										<td className="px-6 py-4 whitespace-nowrap">
+											<div>
+												<p className="font-medium text-gray-900 text-sm">{property.name}</p>
+												<p className="text-xs text-gray-500 md:hidden">{property.location}</p>
+											</div>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap hidden md:table-cell">
+											<p className="text-sm text-gray-600">{property.location}</p>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap hidden lg:table-cell">
+											<p className="text-sm text-gray-900">
+												{property.occupiedUnits}/{property.totalUnits}
+											</p>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap">
+											<div className="flex items-center gap-2">
+												<div className="flex-1 bg-gray-200 rounded-full h-2 w-16">
+													<div
+														className={`h-full rounded-full ${property.occupancyRate >= 85 ? "bg-green-500" :
+															property.occupancyRate >= 70 ? "bg-blue-500" :
+																"bg-yellow-500"
+															}`}
+														style={{ width: `${property.occupancyRate}%` }}
+													></div>
+												</div>
+												<span className="text-sm font-medium text-gray-900">{property.occupancyRate}%</span>
+											</div>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+											<p className="text-sm font-medium text-gray-900">
+												Rp {(property.monthlyRevenue / 1000000).toFixed(1)}M
+											</p>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap">
+											{getStatusBadge(property.status)}
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
