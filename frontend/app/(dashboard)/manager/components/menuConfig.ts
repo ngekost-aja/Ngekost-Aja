@@ -41,7 +41,7 @@ export const menuItems: MenuSection[] = [
 	{
 		section: "CHAT",
 		items: [
-			{ icon: MessageSquare, label: "Chat dengan pemesan", href: "/manager/messages" },
+			{ icon: MessageSquare, label: "Chat dengan pemesan", href: "/manager/chat" },
 		],
 	},
 	{
@@ -56,6 +56,6 @@ export const bottomNavItems: BottomNavItem[] = [
 	{ icon: Home, label: "Dashboard", href: "/manager" },
 	{ icon: Building2, label: "Properti", href: "/manager/property" },
 	{ icon: CalendarCheck, label: "Pemesanan", href: "/manager/booking", badge: 5 },
-	{ icon: MessageSquare, label: "Chat", href: "/manager/messages", badge: 3 },
+	{ icon: MessageSquare, label: "Chat", href: "/manager/chat", badge: 3 },
 	{ icon: ChartLine, label: "Laporan", href: "/manager/finance-report" },
 ];
