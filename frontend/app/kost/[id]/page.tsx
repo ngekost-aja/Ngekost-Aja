@@ -12,11 +12,9 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import Navbar from "@/app/components/ui/Navbar";
+import { useRouter } from "next/navigation";
 
 export default function KostDetailPage() {
-  const params = useParams();
   const router = useRouter();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [checkInDate, setCheckInDate] = useState("2021-10-07");
@@ -83,13 +81,6 @@ export default function KostDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar
-        showBackButton={true}
-        showTopBar={false}
-        showNavigation={false}
-        showSearch={true}
-      />
-
       <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Left Content */}
@@ -123,8 +114,8 @@ export default function KostDetailPage() {
                       key={idx}
                       onClick={() => setCurrentImageIndex(idx)}
                       className={`shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition ${currentImageIndex === idx
-                          ? "border-golden-yellow"
-                          : "border-gray-200"
+                        ? "border-golden-yellow"
+                        : "border-gray-200"
                         }`}
                     >
                       <div className="w-full h-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center text-2xl md:text-3xl">
@@ -172,8 +163,8 @@ export default function KostDetailPage() {
                         key={tab}
                         onClick={() => setActiveTab(tab)}
                         className={`pb-3 md:pb-4 text-sm md:text-base font-medium whitespace-nowrap transition ${activeTab === tab
-                            ? "text-golden-yellow border-b-2 border-golden-yellow"
-                            : "text-gray-500 hover:text-gray-700"
+                          ? "text-golden-yellow border-b-2 border-golden-yellow"
+                          : "text-gray-500 hover:text-gray-700"
                           }`}
                       >
                         {tab === "description" && "Deskripsi"}

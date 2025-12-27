@@ -13,9 +13,7 @@ import {
   Users,
   X,
   Loader2,
-  Search,
 } from "lucide-react";
-import Navbar from "../components/ui/Navbar";
 
 interface Property {
   id: string;
@@ -69,7 +67,7 @@ export default function SearchPage() {
 
     try {
       const params = new URLSearchParams();
-      
+
       if (searchQuery) params.append("search", searchQuery);
       if (category && category !== "house") params.append("type", category);
       params.append("minPrice", priceRange[0].toString());
@@ -92,7 +90,7 @@ export default function SearchPage() {
       }
 
       const data = await response.json();
-      
+
       // Adjust based on your API response structure
       const propertiesData = Array.isArray(data) ? data : data.data || [];
       const total = data.total || data.meta?.total || propertiesData.length;
@@ -157,13 +155,6 @@ export default function SearchPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar
-        showBackButton={false}
-        showTopBar={false}
-        showNavigation={true}
-        showSearch={true}
-      />
-
       <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
         <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
           {/* Sidebar Filters - Desktop */}
@@ -181,11 +172,10 @@ export default function SearchPage() {
                     <button
                       key={cat.id}
                       onClick={() => setCategory(cat.id)}
-                      className={`p-3 rounded-lg border-2 transition flex flex-col items-center gap-2 ${
-                        category === cat.id
+                      className={`p-3 rounded-lg border-2 transition flex flex-col items-center gap-2 ${category === cat.id
                           ? "border-golden-yellow bg-yellow-50"
                           : "border-gray-200 hover:border-gray-300"
-                      }`}
+                        }`}
                     >
                       <span className="text-2xl">{cat.icon}</span>
                       <span className="text-xs font-medium">{cat.name}</span>
@@ -325,21 +315,19 @@ export default function SearchPage() {
                   <div className="hidden md:flex items-center gap-1 border border-gray-300 rounded-lg p-1">
                     <button
                       onClick={() => setViewMode("grid")}
-                      className={`p-2 rounded ${
-                        viewMode === "grid"
+                      className={`p-2 rounded ${viewMode === "grid"
                           ? "bg-golden-yellow text-white"
                           : "text-gray-600 hover:bg-gray-100"
-                      }`}
+                        }`}
                     >
                       <Grid3x3 size={18} />
                     </button>
                     <button
                       onClick={() => setViewMode("list")}
-                      className={`p-2 rounded ${
-                        viewMode === "list"
+                      className={`p-2 rounded ${viewMode === "list"
                           ? "bg-golden-yellow text-white"
                           : "text-gray-600 hover:bg-gray-100"
-                      }`}
+                        }`}
                     >
                       <List size={18} />
                     </button>
@@ -379,11 +367,10 @@ export default function SearchPage() {
                           <button
                             key={cat.id}
                             onClick={() => setCategory(cat.id)}
-                            className={`p-3 rounded-lg border-2 transition flex flex-col items-center gap-2 ${
-                              category === cat.id
+                            className={`p-3 rounded-lg border-2 transition flex flex-col items-center gap-2 ${category === cat.id
                                 ? "border-golden-yellow bg-yellow-50"
                                 : "border-gray-200"
-                            }`}
+                              }`}
                           >
                             <span className="text-2xl">{cat.icon}</span>
                             <span className="text-xs font-medium">
@@ -485,7 +472,7 @@ export default function SearchPage() {
                       key={property.id}
                       className="bg-white rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100"
                     >
-                      <div className="relative h-48 md:h-56 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                      <div className="relative h-48 md:h-56 bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                         {property.images && property.images.length > 0 ? (
                           <img
                             src={property.images[0]}
@@ -563,11 +550,10 @@ export default function SearchPage() {
                         <button
                           key={page}
                           onClick={() => handlePageChange(page)}
-                          className={`px-4 py-2 rounded-lg transition text-sm ${
-                            page === currentPage
+                          className={`px-4 py-2 rounded-lg transition text-sm ${page === currentPage
                               ? "bg-golden-yellow text-white"
                               : "border border-gray-300 hover:bg-gray-50"
-                          }`}
+                            }`}
                         >
                           {page}
                         </button>

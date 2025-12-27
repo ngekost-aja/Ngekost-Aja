@@ -74,7 +74,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-yellow-400 via-yellow-300 to-orange-300 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-golden-yellow flex items-center justify-center p-4">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10"></div>
 
@@ -117,7 +117,7 @@ export default function LoginPage() {
             {/* Error Message */}
             {error && (
               <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl">
-                <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={20} />
+                <AlertCircle className="text-red-500 shrink-0 mt-0.5" size={20} />
                 <p className="text-sm text-red-700">{error}</p>
               </div>
             )}

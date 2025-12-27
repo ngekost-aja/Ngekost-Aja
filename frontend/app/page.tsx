@@ -6,7 +6,7 @@ import Newsletter from "./components/Newsletter";
 import { Category } from "./types/category";
 import { Property } from "./types/property";
 import BannerPromo from "./components/BannerPromo";
-import Navbar from "./components/ui/Navbar";
+import Header from "./components/ui/Header";
 
 export default function Home() {
   const categories: Category[] = [
@@ -51,14 +51,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <Navbar
-        showBackButton={false}
-        showTopBar={true}
-        showNavigation={true}
-        showSearch={true}
-      />
-
       <BannerPromo />
 
       {/* Browse by Category */}
@@ -103,8 +95,6 @@ export default function Home() {
 
       {/* Newsletter */}
       <Newsletter />
-
-      <Footer />
     </div>
   );
 }

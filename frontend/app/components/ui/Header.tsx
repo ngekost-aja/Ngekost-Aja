@@ -3,56 +3,31 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
-  MapPin,
   Heart,
   User,
   ShoppingCart,
-  Phone,
   Menu,
   X,
   ArrowLeft,
 } from "lucide-react";
 import SearchBar from "../SearchBar";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
-export default function Navbar({
-  showBackButton = false,
-  showTopBar = true,
-  showNavigation = true,
+export default function Header({
   showSearch = true,
 }: {
-  showBackButton?: boolean;
-  showTopBar?: boolean;
-  showNavigation?: boolean;
   showSearch?: boolean;
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
 
+  const pathname = usePathname();
+  const showNavigation = pathname === "/";
+  const showBackButton = pathname !== "/";
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      {/* Top Bar - Hidden on mobile */}
-      {showTopBar && (
-        <div className="hidden md:block bg-gray-100 py-2 px-4">
-          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-2 text-gray-600">
-                <MapPin size={16} />
-                Lokasi Kos
-              </span>
-            </div>
-            <div className="flex items-center gap-4 text-gray-600">
-              <span className="flex items-center gap-1">
-                <Phone size={16} />
-                0800 332 65-66
-              </span>
-              <span className="text-xs">Butuh bantuan?</span>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Main Header */}
       <div className="py-3 md:py-4 px-4 border-b">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 md:gap-4">
