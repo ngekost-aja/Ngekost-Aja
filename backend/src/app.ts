@@ -18,6 +18,7 @@ app.use(logger);
 app.use(cors({
   origin: config.webFrontend.url,
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 }));
 
 RegisterRoutes(app);
