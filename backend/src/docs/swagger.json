@@ -7,7 +7,7 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Review": {
+			"ReviewResponse": {
 				"properties": {
 					"id": {
 						"type": "number",
@@ -17,7 +17,7 @@
 						"type": "number",
 						"format": "double"
 					},
-					"houseId": {
+					"propertyId": {
 						"type": "number",
 						"format": "double"
 					},
@@ -29,13 +29,14 @@
 						"type": "string"
 					},
 					"createdAt": {
-						"type": "string"
+						"type": "string",
+						"format": "date-time"
 					}
 				},
 				"required": [
 					"id",
 					"userId",
-					"houseId",
+					"propertyId",
 					"rating",
 					"comment",
 					"createdAt"
@@ -43,17 +44,13 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Partial_Review_": {
+			"CreateReviewRequest": {
 				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
 					"userId": {
 						"type": "number",
 						"format": "double"
 					},
-					"houseId": {
+					"propertyId": {
 						"type": "number",
 						"format": "double"
 					},
@@ -63,15 +60,53 @@
 					},
 					"comment": {
 						"type": "string"
+					}
+				},
+				"required": [
+					"userId",
+					"propertyId",
+					"rating"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateReviewRequest": {
+				"properties": {
+					"rating": {
+						"type": "number",
+						"format": "double"
 					},
-					"createdAt": {
+					"comment": {
 						"type": "string"
 					}
 				},
 				"type": "object",
-				"description": "Make all properties in T optional"
+				"additionalProperties": false
 			},
-			"Payment": {
+			"ReviewStatsResponse": {
+				"properties": {
+					"propertyId": {
+						"type": "number",
+						"format": "double"
+					},
+					"averageRating": {
+						"type": "number",
+						"format": "double"
+					},
+					"totalReviews": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"propertyId",
+					"averageRating",
+					"totalReviews"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PaymentResponse": {
 				"properties": {
 					"id": {
 						"type": "number",
@@ -81,67 +116,135 @@
 						"type": "number",
 						"format": "double"
 					},
-					"paymentMethod": {
-						"type": "string"
-					},
 					"amount": {
 						"type": "number",
 						"format": "double"
 					},
+					"paymentMethod": {
+						"type": "string"
+					},
 					"status": {
 						"type": "string"
 					},
-					"transactionDate": {
-						"type": "string"
+					"paidAt": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
 					}
 				},
 				"required": [
 					"id",
 					"bookingId",
-					"paymentMethod",
 					"amount",
+					"paymentMethod",
 					"status",
-					"transactionDate"
+					"paidAt"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Message": {
+			"CreatePaymentRequest": {
+				"properties": {
+					"bookingId": {
+						"type": "number",
+						"format": "double"
+					},
+					"amount": {
+						"type": "number",
+						"format": "double"
+					},
+					"paymentMethod": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"bookingId",
+					"amount",
+					"paymentMethod"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdatePaymentRequest": {
+				"properties": {
+					"status": {
+						"type": "string",
+						"enum": [
+							"pending",
+							"paid",
+							"failed"
+						]
+					},
+					"paidAt": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ActivityLogResponse": {
 				"properties": {
 					"id": {
 						"type": "number",
 						"format": "double"
 					},
-					"senderId": {
+					"userId": {
 						"type": "number",
 						"format": "double"
 					},
-					"receiverId": {
+					"action": {
+						"type": "string"
+					},
+					"entityType": {
+						"type": "string"
+					},
+					"entityId": {
 						"type": "number",
 						"format": "double"
 					},
-					"messageText": {
-						"type": "string"
-					},
-					"sentAt": {
-						"type": "string"
-					},
-					"isRead": {
-						"type": "boolean"
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
 					}
 				},
 				"required": [
 					"id",
-					"senderId",
-					"receiverId",
-					"messageText",
-					"sentAt",
-					"isRead"
+					"userId",
+					"action",
+					"entityType",
+					"entityId",
+					"createdAt"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"House": {
+			"CreateActivityLogRequest": {
+				"properties": {
+					"userId": {
+						"type": "number",
+						"format": "double"
+					},
+					"action": {
+						"type": "string"
+					},
+					"entityType": {
+						"type": "string"
+					},
+					"entityId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"userId",
+					"action",
+					"entityType",
+					"entityId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PropertyResponse": {
 				"properties": {
 					"id": {
 						"type": "number",
@@ -150,60 +253,50 @@
 					"name": {
 						"type": "string"
 					},
-					"description": {
-						"type": "string"
-					},
-					"location": {
-						"type": "string"
-					},
-					"pricePerMonth": {
-						"type": "number",
-						"format": "double"
-					},
-					"facilities": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": {
-						"type": "string"
-					},
-					"images": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"managerId": {
-						"type": "number",
-						"format": "double"
-					},
 					"ownerId": {
 						"type": "number",
 						"format": "double"
+					},
+					"managerId": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"addressId": {
+						"type": "number",
+						"format": "double"
+					},
+					"latitude": {
+						"type": "number",
+						"format": "double"
+					},
+					"longitude": {
+						"type": "number",
+						"format": "double"
+					},
+					"genderType": {
+						"type": "string"
 					},
 					"status": {
 						"type": "string"
 					},
 					"createdAt": {
-						"type": "string"
+						"type": "string",
+						"format": "date-time"
 					},
 					"updatedAt": {
-						"type": "string"
+						"type": "string",
+						"format": "date-time"
 					}
 				},
 				"required": [
 					"id",
 					"name",
-					"description",
-					"location",
-					"pricePerMonth",
-					"facilities",
-					"type",
-					"images",
-					"managerId",
 					"ownerId",
+					"addressId",
+					"latitude",
+					"longitude",
+					"genderType",
 					"status",
 					"createdAt",
 					"updatedAt"
@@ -211,45 +304,112 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Partial_House_": {
+			"CreatePropertyRequest": {
 				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
-					"description": {
-						"type": "string"
-					},
-					"location": {
-						"type": "string"
-					},
-					"pricePerMonth": {
+					"ownerId": {
 						"type": "number",
 						"format": "double"
-					},
-					"facilities": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": {
-						"type": "string"
-					},
-					"images": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
 					},
 					"managerId": {
 						"type": "number",
 						"format": "double"
 					},
-					"ownerId": {
+					"addressId": {
+						"type": "number",
+						"format": "double"
+					},
+					"latitude": {
+						"type": "number",
+						"format": "double"
+					},
+					"longitude": {
+						"type": "number",
+						"format": "double"
+					},
+					"genderType": {
+						"type": "string",
+						"enum": [
+							"male",
+							"female",
+							"mixed"
+						]
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"active",
+							"inactive"
+						]
+					}
+				},
+				"required": [
+					"name",
+					"ownerId",
+					"addressId",
+					"latitude",
+					"longitude",
+					"genderType"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdatePropertyRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"managerId": {
+						"type": "number",
+						"format": "double"
+					},
+					"addressId": {
+						"type": "number",
+						"format": "double"
+					},
+					"latitude": {
+						"type": "number",
+						"format": "double"
+					},
+					"longitude": {
+						"type": "number",
+						"format": "double"
+					},
+					"genderType": {
+						"type": "string",
+						"enum": [
+							"male",
+							"female",
+							"mixed"
+						]
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"active",
+							"inactive"
+						]
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RoomResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"propertyId": {
+						"type": "number",
+						"format": "double"
+					},
+					"roomNumber": {
+						"type": "string"
+					},
+					"price": {
 						"type": "number",
 						"format": "double"
 					},
@@ -257,19 +417,132 @@
 						"type": "string"
 					},
 					"createdAt": {
-						"type": "string"
+						"type": "string",
+						"format": "date-time"
 					},
 					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"propertyId",
+					"roomNumber",
+					"price",
+					"status",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateRoomRequest": {
+				"properties": {
+					"propertyId": {
+						"type": "number",
+						"format": "double"
+					},
+					"roomNumber": {
 						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"available",
+							"occupied",
+							"maintenance"
+						]
+					}
+				},
+				"required": [
+					"propertyId",
+					"roomNumber",
+					"price"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateRoomRequest": {
+				"properties": {
+					"roomNumber": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"available",
+							"occupied",
+							"maintenance"
+						]
 					}
 				},
 				"type": "object",
-				"description": "Make all properties in T optional"
+				"additionalProperties": false
+			},
+			"FacilityResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateFacilityRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AddPropertyFacilityRequest": {
+				"properties": {
+					"propertyId": {
+						"type": "number",
+						"format": "double"
+					},
+					"facilityId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"propertyId",
+					"facilityId"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"RegisterResponse": {
 				"properties": {
 					"message": {
 						"type": "string"
+					},
+					"userId": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
@@ -285,11 +558,27 @@
 					},
 					"password": {
 						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string",
+						"enum": [
+							"owner",
+							"manager",
+							"user"
+						]
 					}
 				},
 				"required": [
 					"email",
-					"password"
+					"password",
+					"name",
+					"phone"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -301,11 +590,16 @@
 					},
 					"role": {
 						"type": "string"
+					},
+					"userId": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
 					"token",
-					"role"
+					"role",
+					"userId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -377,6 +671,278 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"UserResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"email",
+					"phone",
+					"role",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateUserRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string",
+						"enum": [
+							"owner",
+							"manager",
+							"user"
+						]
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"phone",
+					"role",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateUserRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string",
+						"enum": [
+							"owner",
+							"manager",
+							"user"
+						]
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"MessageResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"senderId": {
+						"type": "number",
+						"format": "double"
+					},
+					"receiverId": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					},
+					"isRead": {
+						"type": "boolean"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"senderId",
+					"receiverId",
+					"message",
+					"isRead",
+					"createdAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateMessageRequest": {
+				"properties": {
+					"senderId": {
+						"type": "number",
+						"format": "double"
+					},
+					"receiverId": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"senderId",
+					"receiverId",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ConversationSummary": {
+				"properties": {
+					"participantId": {
+						"type": "number",
+						"format": "double"
+					},
+					"lastMessage": {
+						"$ref": "#/components/schemas/MessageResponse"
+					},
+					"unreadCount": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"participantId",
+					"lastMessage",
+					"unreadCount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BookingResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"studentId": {
+						"type": "number",
+						"format": "double"
+					},
+					"roomId": {
+						"type": "number",
+						"format": "double"
+					},
+					"startDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"status": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"studentId",
+					"roomId",
+					"startDate",
+					"endDate",
+					"status",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateBookingRequest": {
+				"properties": {
+					"studentId": {
+						"type": "number",
+						"format": "double"
+					},
+					"roomId": {
+						"type": "number",
+						"format": "double"
+					},
+					"startDate": {
+						"type": "string"
+					},
+					"endDate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"studentId",
+					"roomId",
+					"startDate",
+					"endDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateBookingRequest": {
+				"properties": {
+					"startDate": {
+						"type": "string"
+					},
+					"endDate": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"pending",
+							"approved",
+							"rejected",
+							"cancelled"
+						]
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -400,18 +966,15 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Review"
+										"$ref": "#/components/schemas/ReviewResponse"
 									},
 									"type": "array"
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request"
 					}
 				},
-				"description": "List reviews with optional filters\r\nExample: GET /reviews?houseId=1&userId=2&minRating=3&page=1&limit=20",
+				"description": "List reviews with filters",
 				"tags": [
 					"Review"
 				],
@@ -419,7 +982,7 @@
 				"parameters": [
 					{
 						"in": "query",
-						"name": "houseId",
+						"name": "propertyId",
 						"required": false,
 						"schema": {
 							"format": "double",
@@ -483,7 +1046,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Review"
+									"$ref": "#/components/schemas/ReviewResponse"
 								}
 							}
 						}
@@ -492,7 +1055,7 @@
 						"description": "Bad Request"
 					}
 				},
-				"description": "Create a review for a house (ideally after booking)\r\nBody: { userId, houseId, rating, comment, createdAt? }\r\nNote: This uses a lightweight validation. In a real app verify booking/payment.",
+				"description": "Create a review",
 				"tags": [
 					"Review"
 				],
@@ -503,32 +1066,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"properties": {
-									"createdAt": {
-										"type": "string"
-									},
-									"comment": {
-										"type": "string"
-									},
-									"rating": {
-										"type": "number",
-										"format": "double"
-									},
-									"houseId": {
-										"type": "number",
-										"format": "double"
-									},
-									"userId": {
-										"type": "number",
-										"format": "double"
-									}
-								},
-								"required": [
-									"rating",
-									"houseId",
-									"userId"
-								],
-								"type": "object"
+								"$ref": "#/components/schemas/CreateReviewRequest"
 							}
 						}
 					}
@@ -544,7 +1082,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Review"
+									"$ref": "#/components/schemas/ReviewResponse"
 								}
 							}
 						}
@@ -553,7 +1091,7 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Get single review by id",
+				"description": "Get review by ID",
 				"tags": [
 					"Review"
 				],
@@ -578,7 +1116,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Review"
+									"$ref": "#/components/schemas/ReviewResponse"
 								}
 							}
 						}
@@ -590,7 +1128,7 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Update a review (user can edit their review)",
+				"description": "Update review",
 				"tags": [
 					"Review"
 				],
@@ -611,15 +1149,13 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Partial_Review_"
+								"$ref": "#/components/schemas/UpdateReviewRequest"
 							}
 						}
 					}
 				}
-			}
-		},
-		"/reviews/{id}/delete": {
-			"post": {
+			},
+			"delete": {
 				"operationId": "Remove",
 				"responses": {
 					"200": {
@@ -644,7 +1180,7 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Delete a review (removes entry)",
+				"description": "Delete review",
 				"tags": [
 					"Review"
 				],
@@ -662,35 +1198,16 @@
 				]
 			}
 		},
-		"/reviews/house/{houseId}/stats": {
+		"/reviews/property/{propertyId}/stats": {
 			"get": {
-				"operationId": "HouseStats",
+				"operationId": "GetPropertyStats",
 				"responses": {
 					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
 								"schema": {
-									"properties": {
-										"count": {
-											"type": "number",
-											"format": "double"
-										},
-										"averageRating": {
-											"type": "number",
-											"format": "double"
-										},
-										"houseId": {
-											"type": "number",
-											"format": "double"
-										}
-									},
-									"required": [
-										"count",
-										"averageRating",
-										"houseId"
-									],
-									"type": "object"
+									"$ref": "#/components/schemas/ReviewStatsResponse"
 								}
 							}
 						}
@@ -699,7 +1216,7 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Get review stats for a house (average rating and count)\r\nExample: GET /reviews/house/1/stats",
+				"description": "Get review statistics for a property",
 				"tags": [
 					"Review"
 				],
@@ -707,7 +1224,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "houseId",
+						"name": "propertyId",
 						"required": true,
 						"schema": {
 							"format": "double",
@@ -727,18 +1244,15 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Payment"
+										"$ref": "#/components/schemas/PaymentResponse"
 									},
 									"type": "array"
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request"
 					}
 				},
-				"description": "List payments with optional filters",
+				"description": "List payments with filters",
 				"tags": [
 					"Payment"
 				],
@@ -758,7 +1272,12 @@
 						"name": "status",
 						"required": false,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"enum": [
+								"pending",
+								"paid",
+								"failed"
+							]
 						}
 					},
 					{
@@ -799,7 +1318,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Payment"
+									"$ref": "#/components/schemas/PaymentResponse"
 								}
 							}
 						}
@@ -808,7 +1327,7 @@
 						"description": "Bad Request"
 					}
 				},
-				"description": "Create (simulate) a payment\r\nBody: { bookingId, paymentMethod, amount }",
+				"description": "Create a payment",
 				"tags": [
 					"Payment"
 				],
@@ -819,25 +1338,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"properties": {
-									"amount": {
-										"type": "number",
-										"format": "double"
-									},
-									"paymentMethod": {
-										"type": "string"
-									},
-									"bookingId": {
-										"type": "number",
-										"format": "double"
-									}
-								},
-								"required": [
-									"amount",
-									"paymentMethod",
-									"bookingId"
-								],
-								"type": "object"
+								"$ref": "#/components/schemas/CreatePaymentRequest"
 							}
 						}
 					}
@@ -853,7 +1354,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Payment"
+									"$ref": "#/components/schemas/PaymentResponse"
 								}
 							}
 						}
@@ -862,7 +1363,7 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Get payment by id",
+				"description": "Get payment by ID",
 				"tags": [
 					"Payment"
 				],
@@ -878,29 +1379,62 @@
 						}
 					}
 				]
-			}
-		},
-		"/payments/{id}/refund": {
-			"post": {
-				"operationId": "Refund",
+			},
+			"put": {
+				"operationId": "Update",
 				"responses": {
 					"200": {
-						"description": "Refunded",
+						"description": "Updated",
 						"content": {
 							"application/json": {
 								"schema": {
-									"properties": {
-										"payment": {
-											"$ref": "#/components/schemas/Payment"
-										},
-										"success": {
-											"type": "boolean"
-										}
-									},
-									"required": [
-										"success"
-									],
-									"type": "object"
+									"$ref": "#/components/schemas/PaymentResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Update payment",
+				"tags": [
+					"Payment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdatePaymentRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/payments/{id}/process": {
+			"post": {
+				"operationId": "Process",
+				"responses": {
+					"200": {
+						"description": "Processed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaymentResponse"
 								}
 							}
 						}
@@ -912,7 +1446,7 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Refund a payment (simulate)",
+				"description": "Process payment (mark as paid)",
 				"tags": [
 					"Payment"
 				],
@@ -930,7 +1464,7 @@
 				]
 			}
 		},
-		"/messages": {
+		"/activity-logs": {
 			"get": {
 				"operationId": "List",
 				"responses": {
@@ -940,26 +1474,23 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Message"
+										"$ref": "#/components/schemas/ActivityLogResponse"
 									},
 									"type": "array"
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request"
 					}
 				},
-				"description": "List messages with optional filters\r\nExample: GET /messages?senderId=1&receiverId=2&unreadOnly=true&page=1&limit=20",
+				"description": "List activity logs with filters",
 				"tags": [
-					"Message"
+					"ActivityLog"
 				],
 				"security": [],
 				"parameters": [
 					{
 						"in": "query",
-						"name": "senderId",
+						"name": "userId",
 						"required": false,
 						"schema": {
 							"format": "double",
@@ -968,28 +1499,19 @@
 					},
 					{
 						"in": "query",
-						"name": "receiverId",
+						"name": "entityType",
 						"required": false,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					},
 					{
 						"in": "query",
-						"name": "conversationWith",
+						"name": "entityId",
 						"required": false,
 						"schema": {
 							"format": "double",
 							"type": "number"
-						}
-					},
-					{
-						"in": "query",
-						"name": "unreadOnly",
-						"required": false,
-						"schema": {
-							"type": "boolean"
 						}
 					},
 					{
@@ -1022,18 +1544,15 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Message"
+									"$ref": "#/components/schemas/ActivityLogResponse"
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request"
 					}
 				},
-				"description": "Send a message (student <-> manager)\r\nBody: { senderId, receiverId, messageText, sentAt? }",
+				"description": "Create activity log",
 				"tags": [
-					"Message"
+					"ActivityLog"
 				],
 				"security": [],
 				"parameters": [],
@@ -1042,120 +1561,16 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"properties": {
-									"sentAt": {
-										"type": "string"
-									},
-									"messageText": {
-										"type": "string"
-									},
-									"receiverId": {
-										"type": "number",
-										"format": "double"
-									},
-									"senderId": {
-										"type": "number",
-										"format": "double"
-									}
-								},
-								"required": [
-									"messageText",
-									"receiverId",
-									"senderId"
-								],
-								"type": "object"
+								"$ref": "#/components/schemas/CreateActivityLogRequest"
 							}
 						}
 					}
 				}
 			}
 		},
-		"/messages/{id}": {
-			"get": {
-				"operationId": "GetById",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Message"
-								}
-							}
-						}
-					},
-					"404": {
-						"description": "Not Found"
-					}
-				},
-				"description": "Get single message by id",
-				"tags": [
-					"Message"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"format": "double",
-							"type": "number"
-						}
-					}
-				]
-			}
-		},
-		"/messages/{id}/read": {
-			"post": {
-				"operationId": "MarkAsRead",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"properties": {
-										"message": {
-											"$ref": "#/components/schemas/Message"
-										},
-										"success": {
-											"type": "boolean"
-										}
-									},
-									"required": [
-										"success"
-									],
-									"type": "object"
-								}
-							}
-						}
-					},
-					"404": {
-						"description": "Not Found"
-					}
-				},
-				"description": "Mark a message as read",
-				"tags": [
-					"Message"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"format": "double",
-							"type": "number"
-						}
-					}
-				]
-			}
-		},
-		"/messages/{id}/delete": {
-			"post": {
-				"operationId": "Remove",
+		"/activity-logs/cleanup": {
+			"delete": {
+				"operationId": "Cleanup",
 				"responses": {
 					"200": {
 						"description": "Deleted",
@@ -1163,90 +1578,32 @@
 							"application/json": {
 								"schema": {
 									"properties": {
-										"success": {
-											"type": "boolean"
+										"deletedCount": {
+											"type": "number",
+											"format": "double"
 										}
 									},
 									"required": [
-										"success"
+										"deletedCount"
 									],
 									"type": "object"
 								}
 							}
 						}
-					},
-					"404": {
-						"description": "Not Found"
 					}
 				},
-				"description": "Delete a message (soft deletion not implemented; this removes the entry)",
+				"description": "Delete old activity logs",
 				"tags": [
-					"Message"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"format": "double",
-							"type": "number"
-						}
-					}
-				]
-			}
-		},
-		"/messages/conversations": {
-			"get": {
-				"operationId": "Conversations",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"properties": {
-											"unreadCount": {
-												"type": "number",
-												"format": "double"
-											},
-											"lastMessage": {
-												"$ref": "#/components/schemas/Message"
-											},
-											"participantId": {
-												"type": "number",
-												"format": "double"
-											}
-										},
-										"required": [
-											"unreadCount",
-											"lastMessage",
-											"participantId"
-										],
-										"type": "object"
-									},
-									"type": "array"
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad Request"
-					}
-				},
-				"description": "List conversation summaries for a given user\r\nExample: GET /messages/conversations?userId=2\r\nReturns: [{ participantId, lastMessage, unreadCount }]",
-				"tags": [
-					"Message"
+					"ActivityLog"
 				],
 				"security": [],
 				"parameters": [
 					{
 						"in": "query",
-						"name": "userId",
+						"name": "daysOld",
 						"required": false,
 						"schema": {
+							"default": 90,
 							"format": "double",
 							"type": "number"
 						}
@@ -1254,7 +1611,7 @@
 				]
 			}
 		},
-		"/houses": {
+		"/properties": {
 			"get": {
 				"operationId": "List",
 				"responses": {
@@ -1264,20 +1621,17 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/House"
+										"$ref": "#/components/schemas/PropertyResponse"
 									},
 									"type": "array"
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Bad Request"
 					}
 				},
-				"description": "Browse / Search boarding houses\r\nExample: GET /houses?location=Jakarta&minPrice=500000&maxPrice=2000000&type=kos_putri&page=1&limit=10",
+				"description": "Browse / Search properties",
 				"tags": [
-					"BoardingHouse"
+					"Property"
 				],
 				"security": [],
 				"parameters": [
@@ -1317,10 +1671,27 @@
 					},
 					{
 						"in": "query",
-						"name": "type",
+						"name": "genderType",
 						"required": false,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"enum": [
+								"male",
+								"female",
+								"mixed"
+							]
+						}
+					},
+					{
+						"in": "query",
+						"name": "status",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"active",
+								"inactive"
+							]
 						}
 					},
 					{
@@ -1353,7 +1724,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/House"
+									"$ref": "#/components/schemas/PropertyResponse"
 								}
 							}
 						}
@@ -1362,9 +1733,9 @@
 						"description": "Bad Request"
 					}
 				},
-				"description": "Manager: Add new boarding house",
+				"description": "Create new property",
 				"tags": [
-					"BoardingHouse"
+					"Property"
 				],
 				"security": [],
 				"parameters": [],
@@ -1373,14 +1744,14 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Partial_House_"
+								"$ref": "#/components/schemas/CreatePropertyRequest"
 							}
 						}
 					}
 				}
 			}
 		},
-		"/houses/{id}": {
+		"/properties/{id}": {
 			"get": {
 				"operationId": "GetById",
 				"responses": {
@@ -1389,7 +1760,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/House"
+									"$ref": "#/components/schemas/PropertyResponse"
 								}
 							}
 						}
@@ -1398,9 +1769,9 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Get boarding house details",
+				"description": "Get property details",
 				"tags": [
-					"BoardingHouse"
+					"Property"
 				],
 				"security": [],
 				"parameters": [
@@ -1409,7 +1780,8 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"format": "double",
+							"type": "number"
 						}
 					}
 				]
@@ -1422,7 +1794,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/House"
+									"$ref": "#/components/schemas/PropertyResponse"
 								}
 							}
 						}
@@ -1431,9 +1803,9 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Manager: Update boarding house",
+				"description": "Update property",
 				"tags": [
-					"BoardingHouse"
+					"Property"
 				],
 				"security": [],
 				"parameters": [
@@ -1442,7 +1814,8 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"format": "double",
+							"type": "number"
 						}
 					}
 				],
@@ -1451,15 +1824,13 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Partial_House_"
+								"$ref": "#/components/schemas/UpdatePropertyRequest"
 							}
 						}
 					}
 				}
-			}
-		},
-		"/houses/{id}/delete": {
-			"post": {
+			},
+			"delete": {
 				"operationId": "Remove",
 				"responses": {
 					"200": {
@@ -1484,9 +1855,9 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Manager: Delete boarding house",
+				"description": "Delete property",
 				"tags": [
-					"BoardingHouse"
+					"Property"
 				],
 				"security": [],
 				"parameters": [
@@ -1495,34 +1866,93 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"format": "double",
+							"type": "number"
 						}
 					}
 				]
 			}
 		},
-		"/booking/{id}/book": {
-			"post": {
-				"operationId": "Book",
+		"/rooms": {
+			"get": {
+				"operationId": "List",
 				"responses": {
-					"201": {
-						"description": "Booking Requested",
+					"200": {
+						"description": "OK",
 						"content": {
 							"application/json": {
 								"schema": {
-									"properties": {
-										"status": {
-											"type": "string"
-										},
-										"bookingId": {
-											"type": "string"
-										}
+									"items": {
+										"$ref": "#/components/schemas/RoomResponse"
 									},
-									"required": [
-										"status",
-										"bookingId"
-									],
-									"type": "object"
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "List rooms for a property",
+				"tags": [
+					"Room"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "propertyId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RoomResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Create new room",
+				"tags": [
+					"Room"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateRoomRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rooms/{id}": {
+			"get": {
+				"operationId": "GetById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RoomResponse"
 								}
 							}
 						}
@@ -1531,9 +1961,9 @@
 						"description": "Not Found"
 					}
 				},
-				"description": "Student: Book a boarding house\r\nBody: { userId, startDate, endDate, note }",
+				"description": "Get room by ID",
 				"tags": [
-					"Booking"
+					"Room"
 				],
 				"security": [],
 				"parameters": [
@@ -1542,7 +1972,42 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "Update",
+				"responses": {
+					"200": {
+						"description": "Updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RoomResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Update room",
+				"tags": [
+					"Room"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
 						}
 					}
 				],
@@ -1551,73 +2016,118 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"properties": {
-									"note": {
-										"type": "string"
-									},
-									"endDate": {
-										"type": "string"
-									},
-									"startDate": {
-										"type": "string"
-									},
-									"userId": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"startDate",
-									"userId"
-								],
-								"type": "object"
+								"$ref": "#/components/schemas/UpdateRoomRequest"
 							}
 						}
 					}
 				}
+			},
+			"delete": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"success": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"success"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Delete room",
+				"tags": [
+					"Room"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		},
-		"/booking/{id}/bookings": {
+		"/facilities": {
 			"get": {
-				"operationId": "Bookings",
+				"operationId": "List",
 				"responses": {
 					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
 								"schema": {
-									"items": {},
+									"items": {
+										"$ref": "#/components/schemas/FacilityResponse"
+									},
 									"type": "array"
 								}
 							}
 						}
-					},
-					"404": {
-						"description": "Not Found"
 					}
 				},
-				"description": "Manager: View bookings for a house",
+				"description": "List all facilities",
 				"tags": [
-					"Booking"
+					"Facility"
 				],
 				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
+				"parameters": []
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FacilityResponse"
+								}
+							}
 						}
 					}
-				]
+				},
+				"description": "Create new facility",
+				"tags": [
+					"Facility"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateFacilityRequest"
+							}
+						}
+					}
+				}
 			}
 		},
-		"/booking/{id}/bookings/{bookingId}/confirm": {
+		"/facilities/property": {
 			"post": {
-				"operationId": "ConfirmBooking",
+				"operationId": "AddToProperty",
 				"responses": {
-					"200": {
-						"description": "Confirmed",
+					"201": {
+						"description": "Added",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1633,42 +2143,32 @@
 								}
 							}
 						}
-					},
-					"404": {
-						"description": "Not Found"
 					}
 				},
-				"description": "Manager: Confirm a booking",
+				"description": "Add facility to property",
 				"tags": [
-					"Booking"
+					"Facility"
 				],
 				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "path",
-						"name": "bookingId",
-						"required": true,
-						"schema": {
-							"type": "string"
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddPropertyFacilityRequest"
+							}
 						}
 					}
-				]
+				}
 			}
 		},
-		"/booking/{id}/bookings/{bookingId}/reject": {
-			"post": {
-				"operationId": "RejectBooking",
+		"/facilities/property/{propertyId}/{facilityId}": {
+			"delete": {
+				"operationId": "RemoveFromProperty",
 				"responses": {
 					"200": {
-						"description": "Rejected",
+						"description": "Removed",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1684,31 +2184,66 @@
 								}
 							}
 						}
-					},
-					"404": {
-						"description": "Not Found"
 					}
 				},
-				"description": "Manager: Reject a booking",
+				"description": "Remove facility from property",
 				"tags": [
-					"Booking"
+					"Facility"
 				],
 				"security": [],
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
+						"name": "propertyId",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"format": "double",
+							"type": "number"
 						}
 					},
 					{
 						"in": "path",
-						"name": "bookingId",
+						"name": "facilityId",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/facilities/property/{propertyId}": {
+			"get": {
+				"operationId": "GetPropertyFacilities",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/FacilityResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get facilities for a property",
+				"tags": [
+					"Facility"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "propertyId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
 						}
 					}
 				]
@@ -1806,7 +2341,7 @@
 				"operationId": "VerifyToken",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Token verified",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1868,6 +2403,818 @@
 						}
 					}
 				}
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/UserResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get all users",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Create a new user",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateUserRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"operationId": "GetUserById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Get user by ID",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdateUser",
+				"responses": {
+					"200": {
+						"description": "Updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Update user",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateUserRequest"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteUser",
+				"responses": {
+					"200": {
+						"description": "Deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"success": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"success"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Delete user",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/messages": {
+			"get": {
+				"operationId": "List",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/MessageResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "List messages with filters",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "senderId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "receiverId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "conversationWith",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "unreadOnly",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 50,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MessageResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Send a message",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMessageRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/messages/{id}": {
+			"get": {
+				"operationId": "GetById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MessageResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Get message by ID",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"success": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"success"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Delete message",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/messages/{id}/read": {
+			"post": {
+				"operationId": "MarkAsRead",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MessageResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Mark message as read",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/messages/conversations/{userId}": {
+			"get": {
+				"operationId": "GetConversations",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/ConversationSummary"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get conversation summaries for a user",
+				"tags": [
+					"Message"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/bookings": {
+			"get": {
+				"operationId": "List",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/BookingResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "List bookings with filters",
+				"tags": [
+					"Booking"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "studentId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "roomId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "propertyId",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "status",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"pending",
+								"approved",
+								"rejected",
+								"cancelled"
+							]
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 20,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BookingResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Create a new booking",
+				"tags": [
+					"Booking"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateBookingRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/bookings/{id}": {
+			"get": {
+				"operationId": "GetById",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BookingResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Get booking by ID",
+				"tags": [
+					"Booking"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "Update",
+				"responses": {
+					"200": {
+						"description": "Updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BookingResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Update booking",
+				"tags": [
+					"Booking"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateBookingRequest"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"success": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"success"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Delete booking",
+				"tags": [
+					"Booking"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/bookings/{id}/confirm": {
+			"post": {
+				"operationId": "Confirm",
+				"responses": {
+					"200": {
+						"description": "Confirmed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BookingResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Confirm (approve) a booking",
+				"tags": [
+					"Booking"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/bookings/{id}/reject": {
+			"post": {
+				"operationId": "Reject",
+				"responses": {
+					"200": {
+						"description": "Rejected",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BookingResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Reject a booking",
+				"tags": [
+					"Booking"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/bookings/{id}/cancel": {
+			"post": {
+				"operationId": "Cancel",
+				"responses": {
+					"200": {
+						"description": "Cancelled",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BookingResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"description": "Cancel a booking",
+				"tags": [
+					"Booking"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		}
 	},

@@ -1,22 +1,22 @@
 {
-    "entryFile": "src/server.ts",
-    "noImplicitAdditionalProperties": "throw-on-extras",
-    "controllerPathGlobs": [
-        "src/controllers/**/*Controller.ts"
-    ],
-    "spec": {
-        "outputDirectory": "src/docs",
-        "specVersion": 3
-    },
-    "routes": {
-        "routesDir": "src/routes"
-    },
-    "compilerOptions": {
-        "baseUrl": "src",
-        "paths": {
-            "@/*": [
-                "*"
-            ]
-        }
-    }
+	"entryFile": "src/server.ts",
+	"noImplicitAdditionalProperties": "throw-on-extras",
+	"controllerPathGlobs": [
+		"src/modules/**/*.controller.ts"
+	],
+	"spec": {
+		"outputDirectory": "src/docs",
+		"specVersion": 3
+	},
+	"routes": {
+		"routesDir": "src/routes"
+	},
+	"compilerOptions": {
+		"baseUrl": "src",
+		"paths": {
+			"@/*": [
+				"*"
+			]
+		}
+	}
 }
