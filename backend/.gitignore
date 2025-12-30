@@ -10,5 +10,6 @@
 
 # env files
 .env
+.env.test
 
 /src/generated/prisma
