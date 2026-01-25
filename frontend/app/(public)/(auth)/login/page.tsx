@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Eye, EyeOff, ArrowLeft, Mail, Lock, AlertCircle } from "lucide-react";
-import Image from "next/image";
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Eye, EyeOff, ArrowLeft, Mail, Lock, AlertCircle } from 'lucide-react';
+import Image from 'next/image';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -20,12 +20,12 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setError('');
 
     try {
       const res = await fetch(`${apiUrl}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
         signal: AbortSignal.timeout(10000), // 10 second timeout
       });
@@ -33,46 +33,54 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "Login failed. Please try again.");
+        setError(data.message || 'Login failed. Please try again.');
         setIsLoading(false);
         return;
       }
 
-      localStorage.setItem("token", data.token);
+      // Store token in localStorage
+      localStorage.setItem('token', data.token);
 
-      switch (data.role) {
-        case "student":
-          router.push("/");
-          break;
-        case "manager":
-					router.push("/manager");
-					break;
-        case "owner":
-          router.push("/owner");
-          break;
-      }
+      // Store user info for easy access
+      const userInfo = {
+        userId: data.userId,
+        email: data.email || email,
+        role: data.role,
+        name: data.name || '',
+      };
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+      // Store token in cookie for middleware
+      document.cookie = `token=${data.token}; path=/; max-age=${60 * 60 * 24}`; // 24 hours
+
+      // Redirect all roles to unified dashboard
+      router.push('/dashboard');
     } catch (err) {
       setIsLoading(false);
 
       if (err instanceof Error) {
-        if (err.name === "TimeoutError") {
-          setError("Request timeout. Please check your connection and try again.");
-        } else if (err.message.includes("fetch")) {
-          setError("Unable to connect to server. Please check if the server is active.");
+        if (err.name === 'TimeoutError') {
+          setError(
+            'Request timeout. Please check your connection and try again.',
+          );
+        } else if (err.message.includes('fetch')) {
+          setError(
+            'Unable to connect to server. Please check if the server is active.',
+          );
         } else {
-          setError("Network error. Please check your internet connection.");
+          setError('Network error. Please check your internet connection.');
         }
       } else {
-        setError("An unexpected error occurred. Please try again later.");
+        setError('An unexpected error occurred. Please try again later.');
       }
 
-      console.error("Login error:", err);
+      console.error('Login error:', err);
     }
   };
 
   const handleGoogleLogin = () => {
     // Handle Google login logic here
-    console.log("Google login");
+    console.log('Google login');
   };
 
   return (
@@ -115,11 +123,17 @@ export default function LoginPage() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5"
+          >
             {/* Error Message */}
             {error && (
               <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl">
-                <AlertCircle className="text-red-500 shrink-0 mt-0.5" size={20} />
+                <AlertCircle
+                  className="text-red-500 shrink-0 mt-0.5"
+                  size={20}
+                />
                 <p className="text-sm text-red-700">{error}</p>
               </div>
             )}
@@ -156,7 +170,7 @@ export default function LoginPage() {
                   size={20}
                 />
                 <input
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter Password"
@@ -200,7 +214,10 @@ export default function LoginPage() {
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <svg
+                    className="animate-spin h-5 w-5"
+                    viewBox="0 0 24 24"
+                  >
                     <circle
                       className="opacity-25"
                       cx="12"
@@ -219,7 +236,7 @@ export default function LoginPage() {
                   Signing In...
                 </span>
               ) : (
-                "Sign In"
+                'Sign In'
               )}
             </button>
           </form>
@@ -236,7 +253,10 @@ export default function LoginPage() {
             onClick={handleGoogleLogin}
             className="w-full flex items-center justify-center gap-3 py-3 border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition font-medium text-gray-700"
           >
-            <svg className="w-5 h-5" viewBox="0 0 24 24">
+            <svg
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
               <path
                 fill="#4285F4"
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -259,7 +279,7 @@ export default function LoginPage() {
 
           {/* Sign Up Link */}
           <p className="text-center text-sm text-gray-600 mt-6">
-            Don't have an account?{" "}
+            Don't have an account?{' '}
             <Link
               href="/register"
               className="text-golden-yellow hover:text-yellow-600 font-semibold transition"
