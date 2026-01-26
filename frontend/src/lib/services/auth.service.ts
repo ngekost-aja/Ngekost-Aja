@@ -42,26 +42,40 @@ export function getToken(): string | null {
 }
 
 /**
- * Store JWT token in localStorage
+ * Store JWT token in localStorage and cookies
+ * Cookies are needed for server-side middleware access
  */
 export function setToken(token: string): void {
   if (typeof window === 'undefined') return;
   try {
+    // Store in localStorage for client-side access
     localStorage.setItem(TOKEN_KEY, token);
+
+    // Store in cookies for server-side middleware access
+    // Set cookie with 7 days expiration (matching typical JWT expiration)
+    const expirationDays = 7;
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + expirationDays);
+
+    document.cookie = `${TOKEN_KEY}=${token}; path=/; expires=${expirationDate.toUTCString()}; SameSite=Strict`;
   } catch (error) {
-    console.error('Error storing token in localStorage:', error);
+    console.error('Error storing token:', error);
   }
 }
 
 /**
- * Remove JWT token from localStorage
+ * Remove JWT token from localStorage and cookies
  */
 export function removeToken(): void {
   if (typeof window === 'undefined') return;
   try {
+    // Remove from localStorage
     localStorage.removeItem(TOKEN_KEY);
+
+    // Remove from cookies by setting expiration to past date
+    document.cookie = `${TOKEN_KEY}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Strict`;
   } catch (error) {
-    console.error('Error removing token from localStorage:', error);
+    console.error('Error removing token:', error);
   }
 }
 
@@ -149,6 +163,48 @@ export function isTokenExpired(token: string): boolean {
   const decoded = decodeToken(token);
   if (!decoded) return true;
 
+  const now = Math.floor(Date.now() / 1000);
+  return decoded.exp < now;
+}
+
+/**
+ * Decode JWT token (server-side compatible, for middleware)
+ * Note: This does NOT verify the token signature
+ * Use this in middleware/server components where Buffer is available
+ */
+export function decodeTokenServer(token: string): DecodedToken | null {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+
+    const base64Url = parts[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+
+    // Use Buffer for server-side (Node.js)
+    if (typeof Buffer !== 'undefined') {
+      const jsonPayload = Buffer.from(base64, 'base64').toString('utf-8');
+      return JSON.parse(jsonPayload) as DecodedToken;
+    }
+
+    // Fallback to atob for client-side
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join(''),
+    );
+    return JSON.parse(jsonPayload) as DecodedToken;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+}
+
+/**
+ * Check if decoded token is expired
+ */
+export function isDecodedTokenExpired(decoded: DecodedToken | null): boolean {
+  if (!decoded || !decoded.exp) return true;
   const now = Math.floor(Date.now() / 1000);
   return decoded.exp < now;
 }
@@ -394,7 +450,9 @@ const AuthService = {
 
   // Token utilities
   decodeToken,
+  decodeTokenServer,
   isTokenExpired,
+  isDecodedTokenExpired,
   getUserRole,
   getUserId,
 

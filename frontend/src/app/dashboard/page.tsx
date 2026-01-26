@@ -17,15 +17,15 @@ export default function DashboardPage() {
         const authenticated = await isAuthenticated();
 
         if (!authenticated) {
-          setLoading(false); // Set loading to false before redirect
-          router.replace('/login'); // Use replace instead of push
+          setLoading(false);
+          router.replace('/login');
           return;
         }
 
         const userRole = getUserRole();
         if (!userRole) {
-          setLoading(false); // Set loading to false before redirect
-          router.replace('/login'); // Use replace instead of push
+          setLoading(false);
+          router.replace('/login');
           return;
         }
 
@@ -33,8 +33,8 @@ export default function DashboardPage() {
         setLoading(false);
       } catch (error) {
         console.error('Authentication check failed:', error);
-        setLoading(false); // Set loading to false before redirect
-        router.replace('/login'); // Use replace instead of push
+        setLoading(false);
+        router.replace('/login');
       }
     }
 

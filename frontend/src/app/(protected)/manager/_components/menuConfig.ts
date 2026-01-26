@@ -34,15 +34,11 @@ export const menuItems: MenuSection[] = [
   },
   {
     section: 'PROPERTI',
-    items: [
-      { icon: Building2, label: 'Kost-kostan', href: '/manager/property' },
-    ],
+    items: [{ icon: Building2, label: 'Kost-kostan', href: '/property' }],
   },
   {
     section: 'PEMESANAN',
-    items: [
-      { icon: CalendarCheck, label: 'Pemesanan', href: '/manager/booking' },
-    ],
+    items: [{ icon: CalendarCheck, label: 'Pemesanan', href: '/booking' }],
   },
   {
     section: 'CHAT',
@@ -50,7 +46,7 @@ export const menuItems: MenuSection[] = [
       {
         icon: MessageSquare,
         label: 'Chat dengan pemesan',
-        href: '/manager/chat',
+        href: '/chat',
       },
     ],
   },
@@ -60,21 +56,21 @@ export const menuItems: MenuSection[] = [
       {
         icon: ChartLine,
         label: 'Laporan Keuangan',
-        href: '/manager/finance-report',
+        href: '/finance-report',
       },
     ],
   },
 ];
 
 export const bottomNavItems: BottomNavItem[] = [
-  { icon: Home, label: 'Dashboard', href: '/manager' },
-  { icon: Building2, label: 'Properti', href: '/manager/property' },
+  { icon: Home, label: 'Dashboard', href: '/dashboard' },
+  { icon: Building2, label: 'Properti', href: '/property' },
   {
     icon: CalendarCheck,
     label: 'Pemesanan',
-    href: '/manager/booking',
+    href: '/booking',
     badge: 5,
   },
-  { icon: MessageSquare, label: 'Chat', href: '/manager/chat', badge: 3 },
-  { icon: ChartLine, label: 'Laporan', href: '/manager/finance-report' },
+  { icon: MessageSquare, label: 'Chat', href: '/chat', badge: 3 },
+  { icon: ChartLine, label: 'Laporan', href: '/finance-report' },
 ];
