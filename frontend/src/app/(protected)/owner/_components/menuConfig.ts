@@ -24,7 +24,7 @@ export const menuItems: MenuSection[] = [
 	{
 		section: "DASHBOARD",
 		items: [
-			{ icon: Home, label: "Dashboard", href: "/owner" },
+			{ icon: Home, label: "Dashboard", href: "/dashboard" },
 		],
 	},
 	{

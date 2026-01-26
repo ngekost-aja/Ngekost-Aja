@@ -76,7 +76,7 @@ export default function ManagerSidebar({
       {/* Account & Logout */}
       <div className="p-4 border-t border-gray-200 space-y-1">
         <Link
-          href="/manager/account"
+          href="/profile"
           className="flex items-center gap-3 w-full px-3 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg transition"
         >
           <User size={20} />

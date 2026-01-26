@@ -30,7 +30,7 @@ export interface BottomNavItem {
 export const menuItems: MenuSection[] = [
   {
     section: 'DASHBOARD',
-    items: [{ icon: Home, label: 'Dashboard', href: '/manager' }],
+    items: [{ icon: Home, label: 'Dashboard', href: '/dashboard' }],
   },
   {
     section: 'PROPERTI',
