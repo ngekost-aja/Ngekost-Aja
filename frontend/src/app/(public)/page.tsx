@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import Footer from '../_components/ui/Footer';
+import Footer from '../_components/base/Footer';
 import CardCategory from '../_components/CardCategory';
 import CardBoardingHouse from '../_components/CardBoardingHouse';
 import Newsletter from '../_components/Newsletter';
 import { Category } from '../../lib/types/category';
 import { Property } from '../../lib/types/property';
 import BannerPromo from '../_components/BannerPromo';
-import Header from '../_components/ui/Header';
+import Header from '../_components/base/Header';
 
 export default function Home() {
   const categories: Category[] = [
