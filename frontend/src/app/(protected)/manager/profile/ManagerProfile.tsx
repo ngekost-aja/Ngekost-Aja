@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { logout, getUserInfo } from '@/lib/services/auth.service';
 import { useEffect, useState } from 'react';
 
-export default function OwnerProfilePage() {
+export default function ManagerProfile() {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState<{
     name?: string;
@@ -68,9 +68,9 @@ export default function OwnerProfilePage() {
             {/* User Details */}
             <div className="text-center mb-6">
               <h2 className="text-xl font-bold text-gray-900 mb-1">
-                {userInfo?.name || 'Owner'}
+                {userInfo?.name || 'Manager'}
               </h2>
-              <p className="text-sm text-gray-500">Panel Pemilik</p>
+              <p className="text-sm text-gray-500">Panel Manajer</p>
             </div>
 
             {/* Info Items */}
@@ -85,7 +85,7 @@ export default function OwnerProfilePage() {
                 <div className="flex-1">
                   <p className="text-xs text-gray-500">Email</p>
                   <p className="text-sm font-medium text-gray-900">
-                    {userInfo?.email || 'owner@example.com'}
+                    {userInfo?.email || 'manager@example.com'}
                   </p>
                 </div>
               </div>
@@ -100,7 +100,7 @@ export default function OwnerProfilePage() {
                 <div className="flex-1">
                   <p className="text-xs text-gray-500">Role</p>
                   <p className="text-sm font-medium text-gray-900 capitalize">
-                    {userInfo?.role || 'Owner'}
+                    {userInfo?.role || 'Manager'}
                   </p>
                 </div>
               </div>

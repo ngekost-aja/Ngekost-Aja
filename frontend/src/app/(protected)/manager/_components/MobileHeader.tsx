@@ -41,7 +41,7 @@ export default function MobileHeader({
           </button>
           {/* Profile */}
           <Link
-            href="/manager/profile"
+            href="/profile"
             className="w-9 h-9 bg-linear-to-br from-golden-yellow to-yellow-500 rounded-full flex items-center justify-center text-lg shadow-sm"
           >
             <User
