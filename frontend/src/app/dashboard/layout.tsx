@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '@/app/globals.css';
 import { getUserRole } from '@/lib/services/auth.service';
-import OwnerNavigation from '@/app/(protected)/owner/_components/OwnerNavigation';
-import ManagerNavigation from '@/app/(protected)/manager/_components/ManagerNavigation';
+import OwnerNavigation from '@/app/(protected)/(owner)/_components/OwnerNavigation';
+import ManagerNavigation from '@/app/(protected)/(manager)/_components/ManagerNavigation';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

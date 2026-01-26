@@ -56,7 +56,7 @@ export const menuItems: MenuSection[] = [
       {
         icon: ChartLine,
         label: 'Laporan Keuangan',
-        href: '/finance-report',
+        href: '/manager-finance-report',
       },
     ],
   },
@@ -72,5 +72,5 @@ export const bottomNavItems: BottomNavItem[] = [
     badge: 5,
   },
   { icon: MessageSquare, label: 'Chat', href: '/chat', badge: 3 },
-  { icon: ChartLine, label: 'Laporan', href: '/finance-report' },
+  { icon: ChartLine, label: 'Laporan', href: '/manager-finance-report' },
 ];

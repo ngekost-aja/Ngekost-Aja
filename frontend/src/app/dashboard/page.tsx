@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getUserRole, isAuthenticated } from '@/lib/services/auth.service';
-import OwnerDashboard from '@/app/(protected)/owner/dashboard/OwnerDashboard';
-import ManagerDashboard from '@/app/(protected)/manager/dashboard/ManagerDashboard';
+import OwnerDashboard from '@/app/(protected)/(owner)/dashboard/OwnerDashboard';
+import ManagerDashboard from '@/app/(protected)/(manager)/dashboard/ManagerDashboard';
 
 export default function DashboardPage() {
   const [role, setRole] = useState<string | null>(null);

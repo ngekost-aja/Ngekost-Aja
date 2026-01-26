@@ -27,16 +27,16 @@ export const menuItems: MenuSection[] = [
   },
   {
     section: 'PROPERTI',
-    items: [{ icon: Building2, label: 'Kost-kostan', href: '/owner/properties' }],
+    items: [{ icon: Building2, label: 'Kost-kostan', href: '/properties' }],
   },
   {
     section: 'MANAJER',
-    items: [{ icon: Users, label: 'Manajer', href: '/owner/manager' }],
+    items: [{ icon: Users, label: 'Manajer', href: '/manager' }],
   },
   {
     section: 'LAPORAN',
     items: [
-      { icon: ChartLine, label: 'Laporan Keuangan', href: '/owner/finance-report' },
+      { icon: ChartLine, label: 'Laporan Keuangan', href: '/finance-report' },
     ],
   },
 ];

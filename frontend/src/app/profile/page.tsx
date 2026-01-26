@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getUserRole, isAuthenticated } from '@/lib/services/auth.service';
-import OwnerProfile from '@/app/(protected)/owner/profile/OwnerProfile';
-import ManagerProfile from '@/app/(protected)/manager/profile/ManagerProfile';
+import OwnerProfile from '@/app/(protected)/(owner)/profile/OwnerProfile';
+import ManagerProfile from '@/app/(protected)/(manager)/profile/ManagerProfile';
 
 export default function ProfilePage() {
   const [role, setRole] = useState<string | null>(null);
