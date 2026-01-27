@@ -244,6 +244,64 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"FacilityResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RoomResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"propertyId": {
+						"type": "number",
+						"format": "double"
+					},
+					"roomNumber": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"status": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"propertyId",
+					"roomNumber",
+					"price",
+					"status",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"PropertyResponse": {
 				"properties": {
 					"id": {
@@ -287,6 +345,30 @@
 					"updatedAt": {
 						"type": "string",
 						"format": "date-time"
+					},
+					"totalRooms": {
+						"type": "number",
+						"format": "double"
+					},
+					"occupiedRooms": {
+						"type": "number",
+						"format": "double"
+					},
+					"availableRooms": {
+						"type": "number",
+						"format": "double"
+					},
+					"facilities": {
+						"items": {
+							"$ref": "#/components/schemas/FacilityResponse"
+						},
+						"type": "array"
+					},
+					"rooms": {
+						"items": {
+							"$ref": "#/components/schemas/RoomResponse"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -396,47 +478,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"RoomResponse": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"propertyId": {
-						"type": "number",
-						"format": "double"
-					},
-					"roomNumber": {
-						"type": "string"
-					},
-					"price": {
-						"type": "number",
-						"format": "double"
-					},
-					"status": {
-						"type": "string"
-					},
-					"createdAt": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"updatedAt": {
-						"type": "string",
-						"format": "date-time"
-					}
-				},
-				"required": [
-					"id",
-					"propertyId",
-					"roomNumber",
-					"price",
-					"status",
-					"createdAt",
-					"updatedAt"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"CreateRoomRequest": {
 				"properties": {
 					"propertyId": {
@@ -485,23 +526,6 @@
 						]
 					}
 				},
-				"type": "object",
-				"additionalProperties": false
-			},
-			"FacilityResponse": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"id",
-					"name"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -692,12 +716,20 @@
 					"userId": {
 						"type": "number",
 						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"token",
 					"role",
-					"userId"
+					"userId",
+					"name",
+					"email"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1749,6 +1781,42 @@
 						}
 					}
 				}
+			}
+		},
+		"/properties/owner/{ownerId}": {
+			"get": {
+				"operationId": "GetByOwner",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/PropertyResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get properties by owner ID",
+				"tags": [
+					"Property"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "ownerId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		},
 		"/properties/{id}": {

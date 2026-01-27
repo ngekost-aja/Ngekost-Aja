@@ -2,8 +2,6 @@ import { prisma } from "@/lib/prisma";
 import type { Property, Room, Facility, PropertyFacility, Prisma } from "@/generated/prisma/client";
 
 export class PropertyRepository {
-	// ============ PROPERTY OPERATIONS ============
-
 	/**
 	 * Find properties with filters
 	 */
@@ -81,8 +79,6 @@ export class PropertyRepository {
 		});
 	}
 
-	// ============ ROOM OPERATIONS ============
-
 	/**
 	 * Find rooms by property ID
 	 */
@@ -143,8 +139,6 @@ export class PropertyRepository {
 			where: { id },
 		});
 	}
-
-	// ============ FACILITY OPERATIONS ============
 
 	/**
 	 * Find all facilities

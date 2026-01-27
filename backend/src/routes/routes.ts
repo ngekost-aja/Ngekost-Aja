@@ -129,6 +129,29 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "FacilityResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "name": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "RoomResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "propertyId": {"dataType":"double","required":true},
+            "roomNumber": {"dataType":"string","required":true},
+            "price": {"dataType":"double","required":true},
+            "status": {"dataType":"string","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "PropertyResponse": {
         "dataType": "refObject",
         "properties": {
@@ -143,6 +166,11 @@ const models: TsoaRoute.Models = {
             "status": {"dataType":"string","required":true},
             "createdAt": {"dataType":"datetime","required":true},
             "updatedAt": {"dataType":"datetime","required":true},
+            "totalRooms": {"dataType":"double"},
+            "occupiedRooms": {"dataType":"double"},
+            "availableRooms": {"dataType":"double"},
+            "facilities": {"dataType":"array","array":{"dataType":"refObject","ref":"FacilityResponse"}},
+            "rooms": {"dataType":"array","array":{"dataType":"refObject","ref":"RoomResponse"}},
         },
         "additionalProperties": false,
     },
@@ -176,20 +204,6 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "RoomResponse": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"dataType":"double","required":true},
-            "propertyId": {"dataType":"double","required":true},
-            "roomNumber": {"dataType":"string","required":true},
-            "price": {"dataType":"double","required":true},
-            "status": {"dataType":"string","required":true},
-            "createdAt": {"dataType":"datetime","required":true},
-            "updatedAt": {"dataType":"datetime","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateRoomRequest": {
         "dataType": "refObject",
         "properties": {
@@ -207,15 +221,6 @@ const models: TsoaRoute.Models = {
             "roomNumber": {"dataType":"string"},
             "price": {"dataType":"double"},
             "status": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["available"]},{"dataType":"enum","enums":["occupied"]},{"dataType":"enum","enums":["maintenance"]}]},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "FacilityResponse": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"dataType":"double","required":true},
-            "name": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -302,6 +307,8 @@ const models: TsoaRoute.Models = {
             "token": {"dataType":"string","required":true},
             "role": {"dataType":"string","required":true},
             "userId": {"dataType":"double","required":true},
+            "name": {"dataType":"string","required":true},
+            "email": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -896,6 +903,36 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'list',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsPropertyController_getByOwner: Record<string, TsoaRoute.ParameterSchema> = {
+                ownerId: {"in":"path","name":"ownerId","required":true,"dataType":"double"},
+        };
+        app.get('/properties/owner/:ownerId',
+            ...(fetchMiddlewares<RequestHandler>(PropertyController)),
+            ...(fetchMiddlewares<RequestHandler>(PropertyController.prototype.getByOwner)),
+
+            async function PropertyController_getByOwner(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsPropertyController_getByOwner, request, response });
+
+                const controller = new PropertyController();
+
+              await templateService.apiHandler({
+                methodName: 'getByOwner',
                 controller,
                 response,
                 next,
