@@ -1,0 +1,75 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { getUserRole, isAuthenticated } from '@/lib/services/auth.service';
+import OwnerProfile from '@/app/(protected)/(owner)/profile/OwnerProfile';
+import ManagerProfile from '@/app/(protected)/(manager)/profile/ManagerProfile';
+
+export default function ProfilePage() {
+  const [role, setRole] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const authenticated = await isAuthenticated();
+
+        if (!authenticated) {
+          setLoading(false); // Set loading to false before redirect
+          router.replace('/login'); // Use replace instead of push
+          return;
+        }
+
+        const userRole = getUserRole();
+        if (!userRole) {
+          setLoading(false); // Set loading to false before redirect
+          router.replace('/login'); // Use replace instead of push
+          return;
+        }
+
+        setRole(userRole);
+        setLoading(false);
+      } catch (error) {
+        console.error('Authentication check failed:', error);
+        setLoading(false); // Set loading to false before redirect
+        router.replace('/login'); // Use replace instead of push
+      }
+    }
+
+    checkAuth();
+  }, [router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-golden-yellow"></div>
+          <p className="mt-4 text-gray-600">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Render role-specific profile
+  if (role === 'owner') {
+    return <OwnerProfile />;
+  }
+
+  if (role === 'manager') {
+    return <ManagerProfile />;
+  }
+
+  // Fallback for unknown roles
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
+        <p className="text-gray-600">
+          Your role does not have access to this profile.
+        </p>
+      </div>
+    </div>
+  );
+}

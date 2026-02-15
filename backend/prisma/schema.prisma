@@ -1,0 +1,291 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// =========================
+// ENUMS
+// =========================
+
+enum UserRole {
+  owner
+  manager
+  user
+}
+
+enum GenderType {
+  male
+  female
+  mixed
+}
+
+enum PropertyStatus {
+  active
+  inactive
+}
+
+enum RoomStatus {
+  available
+  occupied
+  maintenance
+}
+
+enum BookingStatus {
+  pending
+  approved
+  rejected
+  cancelled
+}
+
+enum PaymentStatus {
+  pending
+  paid
+  failed
+}
+
+enum CityType {
+  kabupaten
+  kota
+}
+
+// =========================
+// MASTER DATA
+// =========================
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String   @db.VarChar(255)
+  email        String   @unique @db.VarChar(255)
+  phone        String   @unique @db.VarChar(20)
+  role         UserRole
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  ownedProperties   Property[]    @relation("PropertyOwner")
+  managedProperties Property[]    @relation("PropertyManager")
+  bookings          Booking[]
+  sentMessages      Message[]     @relation("SentMessages")
+  receivedMessages  Message[]     @relation("ReceivedMessages")
+  activityLogs      ActivityLog[]
+
+  @@map("users")
+}
+
+model Property {
+  id         Int            @id @default(autoincrement())
+  ownerId    Int            @map("owner_id")
+  managerId  Int?           @map("manager_id")
+  addressId  Int            @map("address_id")
+  name       String         @db.VarChar(255)
+  latitude   Decimal        @db.Decimal(10, 8)
+  longitude  Decimal        @db.Decimal(11, 8)
+  genderType GenderType     @map("gender_type")
+  status     PropertyStatus @default(active)
+  createdAt  DateTime       @default(now()) @map("created_at")
+  updatedAt  DateTime       @updatedAt @map("updated_at")
+
+  // Relations
+  owner              User               @relation("PropertyOwner", fields: [ownerId], references: [id])
+  manager            User?              @relation("PropertyManager", fields: [managerId], references: [id])
+  address            Address            @relation(fields: [addressId], references: [id])
+  rooms              Room[]
+  propertyFacilities PropertyFacility[]
+
+  @@index([ownerId])
+  @@index([managerId])
+  @@index([addressId])
+  @@map("properties")
+}
+
+model Room {
+  id         Int        @id @default(autoincrement())
+  propertyId Int        @map("properties_id")
+  roomNumber String     @map("room_number") @db.VarChar(50)
+  price      Decimal    @db.Decimal(15, 2)
+  status     RoomStatus @default(available)
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  property Property  @relation(fields: [propertyId], references: [id])
+  bookings Booking[]
+
+  @@index([propertyId])
+  @@map("rooms")
+}
+
+model Facility {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  // Relations
+  propertyFacilities PropertyFacility[]
+
+  @@map("facilities")
+}
+
+model PropertyFacility {
+  propertyId Int @map("properties_id")
+  facilityId Int @map("facility_id")
+
+  // Relations
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  facility Facility @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+
+  @@id([propertyId, facilityId])
+  @@index([propertyId])
+  @@index([facilityId])
+  @@map("properties_facilities")
+}
+
+// =========================
+// TRANSACTIONAL DATA
+// =========================
+
+model Booking {
+  id        Int           @id @default(autoincrement())
+  studentId Int           @map("student_id")
+  roomId    Int           @map("room_id")
+  startDate DateTime      @map("start_date") @db.Date
+  endDate   DateTime      @map("end_date") @db.Date
+  status    BookingStatus @default(pending)
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  student  User      @relation(fields: [studentId], references: [id])
+  room     Room      @relation(fields: [roomId], references: [id])
+  payments Payment[]
+
+  @@index([studentId])
+  @@index([roomId])
+  @@map("bookings")
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  senderId   Int      @map("sender_id")
+  receiverId Int      @map("receiver_id")
+  message    String   @db.Text
+  isRead     Boolean  @default(false) @map("is_read")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  sender   User @relation("SentMessages", fields: [senderId], references: [id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id])
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@map("messages")
+}
+
+model Payment {
+  id            Int           @id @default(autoincrement())
+  bookingId     Int           @map("booking_id")
+  amount        Decimal       @db.Decimal(15, 2)
+  paymentMethod String        @map("payment_method") @db.VarChar(100)
+  status        PaymentStatus @default(pending)
+  paidAt        DateTime?     @map("paid_at")
+
+  // Relations
+  booking Booking @relation(fields: [bookingId], references: [id])
+
+  @@index([bookingId])
+  @@map("payments")
+}
+
+model ActivityLog {
+  id         Int      @id @default(autoincrement())
+  userId     Int      @map("user_id")
+  action     String   @db.VarChar(255)
+  entityType String   @map("entity_type") @db.VarChar(100)
+  entityId   Int      @map("entity_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@map("activity_logs")
+}
+
+// =========================
+// REFERENCE DATA
+// =========================
+
+model Province {
+  id   Int    @id @default(autoincrement())
+  code String @db.VarChar(10)
+  name String @db.VarChar(255)
+
+  // Relations
+  cities City[]
+
+  @@map("provinces")
+}
+
+model City {
+  id         Int      @id @default(autoincrement())
+  provinceId Int      @map("province_id")
+  name       String   @db.VarChar(255)
+  type       CityType
+
+  // Relations
+  province  Province   @relation(fields: [provinceId], references: [id])
+  districts District[]
+
+  @@index([provinceId])
+  @@map("cities")
+}
+
+model District {
+  id     Int    @id @default(autoincrement())
+  cityId Int    @map("city_id")
+  name   String @db.VarChar(255)
+
+  // Relations
+  city     City      @relation(fields: [cityId], references: [id])
+  villages Village[]
+
+  @@index([cityId])
+  @@map("districts")
+}
+
+model Village {
+  id         Int    @id @default(autoincrement())
+  districtId Int    @map("district_id")
+  name       String @db.VarChar(255)
+
+  // Relations
+  district  District  @relation(fields: [districtId], references: [id])
+  addresses Address[]
+
+  @@index([districtId])
+  @@map("villages")
+}
+
+model Address {
+  id         Int     @id @default(autoincrement())
+  villageId  Int     @map("village_id")
+  street     String  @db.VarChar(255)
+  postalCode String  @map("postal_code") @db.VarChar(10)
+  latitude   Decimal @db.Decimal(10, 8)
+  longitude  Decimal @db.Decimal(11, 8)
+
+  // Relations
+  village    Village    @relation(fields: [villageId], references: [id])
+  properties Property[]
+
+  @@index([villageId])
+  @@map("addresses")
+}

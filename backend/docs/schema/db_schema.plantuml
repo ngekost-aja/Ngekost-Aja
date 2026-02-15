@@ -1,0 +1,178 @@
+@startuml
+' =========================
+' GLOBAL SETTINGS
+' =========================
+hide circle
+skinparam linetype ortho
+
+' =========================
+' MASTER DATA
+' =========================
+
+entity users {
+  +id : int <<PK>>
+  --
+  name : varchar
+  email : varchar
+  phone : varchar
+  role : enum('owner', 'manager', 'user')
+  password_hash : varchar
+  created_at : datetime
+  updated_at : datetime
+}
+
+entity properties {
+  +id : int <<PK>>
+  --
+  owner_id : int <<FK>>
+  manager_id : int <<FK>>
+  address_id : int <<FK>>
+  name : varchar
+  latitude : decimal
+  longitude : decimal
+  gender_type : enum('male', 'female', 'mixed')
+  status : enum('active', 'inactive')
+  created_at : datetime
+  updated_at : datetime
+}
+
+entity rooms {
+  +id : int <<PK>>
+  --
+  properties_id : int <<FK>>
+  room_number : varchar
+  price : decimal
+  status : enum('available', 'occupied', 'maintenance')
+  created_at : datetime
+	updated_at : datetime
+}
+
+entity facilities {
+  +id : int <<PK>>
+  --
+  name : varchar
+}
+
+entity properties_facilities {
+  properties_id : int <<FK>>
+  facility_id : int <<FK>>
+}
+
+' =========================
+' TRANSACTIONAL DATA
+' =========================
+
+entity bookings {
+  +id : int <<PK>>
+  --
+  student_id : int <<FK>>
+  room_id : int <<FK>>
+  start_date : date
+  end_date : date
+  status : enum('pending', 'approved', 'rejected', 'cancelled')
+  created_at : datetime
+  updated_at : datetime
+}
+
+entity messages {
+  +id : int <<PK>>
+  --
+  sender_id : int <<FK>>
+  receiver_id : int <<FK>>
+  message : text
+  is_read : boolean
+  created_at : datetime
+}
+
+entity payments {
+  +id : int <<PK>>
+  --
+  booking_id : int <<FK>>
+  amount : decimal
+  payment_method : varchar
+  status : enum('pending', 'paid', 'failed')
+  paid_at : datetime
+}
+
+entity activity_logs {
+  +id : int <<PK>>
+  --
+  user_id : int <<FK>>
+  action : varchar
+  entity_type : varchar
+  entity_id : int
+  created_at : datetime
+}
+
+' =========================
+' REFERENCES DATA
+' =========================
+
+entity provinces {
+  +id : int <<PK>>
+  --
+  code : varchar
+  name : varchar
+}
+
+entity cities {
+  +id : int <<PK>>
+  --
+  province_id : int <<FK>>
+  name : varchar
+  type : enum
+}
+
+entity districts {
+  +id : int <<PK>>
+  --
+  city_id : int <<FK>>
+  name : varchar
+}
+
+entity villages {
+  +id : int <<PK>>
+  --
+  district_id : int <<FK>>
+  name : varchar
+}
+
+entity addresses {
+  +id : int <<PK>>
+  --
+  village_id : int <<FK>>
+  street : varchar
+  postal_code : varchar
+  latitude : decimal
+  longitude : decimal
+}
+
+' =========================
+' RELATIONSHIPS
+' =========================
+
+users ||--o{ properties : owns
+users ||--o{ properties : manages
+
+
+provinces ||--o{ cities : has
+cities ||--o{ districts : has
+districts ||--o{ villages : has
+villages ||--o{ addresses : has
+addresses ||--o{ properties : has
+
+properties ||--o{ rooms : contains
+properties ||--o{ properties_facilities : has
+facilities ||--o{ properties_facilities : assigned
+
+rooms ||--o{ bookings : booked_for
+users ||--o{ bookings : makes
+
+users ||--o{ messages : sends
+users ||--o{ messages : receives
+
+bookings ||--o{ payments : has
+
+users ||--o{ activity_logs : performs
+
+@enduml
